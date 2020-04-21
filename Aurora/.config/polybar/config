@@ -1,0 +1,151 @@
+; define some colors
+[colors]
+clear-black = #B3000000
+dark-brown = #3D1D29
+dark-white = #D8D8D8
+yellow = #F3EC98
+red = #CF6462
+light-dark-brown=#6C2C39
+blue = #32A39A
+
+; define base bar for all monitors
+[bar/base]
+override-redirect = true
+width = 100%:-60
+offset-x = 30
+height = 30
+offset-y = 15
+background = ${colors.clear-black}
+foreground = ${colors.dark-white}
+modules-left = i3
+modules-right =  sep5 ip sep4 filesystem sep3 alsa sep2 date sep1 time
+font-0 = "Noto Mono for Powerline:pixelsize=12;3"
+font-1 = "Noto Mono for Powerline:pixelsize=20;5"
+font-2 = "TerminessTTF Nerd Font Mono:pixelsize=35;8"
+bottom = true
+
+; copy bar for each monitor
+[bar/DP1]
+inherit=bar/base
+monitor = ${env:MONITOR:DP-1}
+[bar/DP2]
+inherit=bar/base
+monitor = ${env:MONITOR:DP-2}
+[bar/HDMI1]
+inherit=bar/base
+monitor = ${env:MONITOR:HDMI-1}
+
+[module/filesystem]
+type=internal/fs
+mount-0=/
+fixed-values=true
+format-mounted= <label-mounted>
+label-mounted= " %percentage_used%% "
+label-mounted-background=${colors.yellow}
+label-mounted-foreground = ${colors.dark-brown}
+
+[module/date]
+type = internal/date
+interval=1.0
+date = %Y-%m-%d%
+label=  " %date% "
+format-background= ${colors.light-dark-brown}
+format-foreground=${colors.yellow}
+
+[module/ip]
+type=internal/network
+interface=enp2s0
+format-connected = <label-connected>
+format-disconnected= ""
+label-connected= " %local_ip% "
+label-connected-background=${colors.blue}
+label-connected-foreground=${colors.dark-brown}
+
+[module/sep]
+type=custom/text
+content=""
+content-font=2
+label-font=2
+
+[module/sep1]
+inherits=module/sep
+content-background =${colors.light-dark-brown}
+content-foreground=${colors.dark-brown}
+
+[module/sep2]
+inherits=module/sep
+content-background = ${colors.red}
+content-foreground=${colors.light-dark-brown}
+
+[module/sep3]
+inherits=module/sep
+content-background = ${colors.yellow}
+content-foreground=${colors.red}
+
+[module/sep4]
+inherits=module/sep
+content-foreground=${colors.yellow}
+content-background = ${colors.blue}
+
+[module/sep5]
+inherits=module/sep
+content-foreground=${colors.blue}
+content-background =${colors.clear-black}
+
+[module/alsa]
+type=internal/alsa
+master-soundcard=default
+speaker-soundcard=default
+headphone-soundcard=default
+label-volume=" %percentage%% "
+interval=5
+
+format-volume= <label-volume>
+label-volume-foreground = ${colors.dark-brown}
+label-volume-background = ${colors.red}
+
+[module/time]
+type = internal/date
+interval=1.0
+time = %I:%M
+
+label= " %time% "
+format-background = ${colors.dark-brown}
+format-foreground = ${colors.yellow}
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+enable-click = true
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+label-mode-foreground = ${colors.dark-white}
+label-mode-background = ${colors.yellow}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${colors.dark-brown}
+label-focused-foreground = ${colors.dark-white}
+label-focused-padding = 1
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = 1
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${colors.dark-brown}
+label-visible-foreground = ${colors.dark-white}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.blue}
+label-urgent-padding = 2
+
+[settings]
+screenchange-reload = true
+pseudo-transparency = true
