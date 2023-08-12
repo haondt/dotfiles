@@ -1,0 +1,2158 @@
+{
+    "nightTab": true,
+    "version": "7.3.0",
+    "state": {
+        "layout": {
+            "alignment": "center-center",
+            "order": "header-bookmark",
+            "padding": 40,
+            "gutter": 20,
+            "width": 80,
+            "title": "New Tab",
+            "size": 100,
+            "direction": "vertical",
+            "scrollbar": "auto",
+            "overscroll": false,
+            "area": {
+                "header": {
+                    "width": 100,
+                    "justify": "center"
+                },
+                "bookmark": {
+                    "width": 100,
+                    "justify": "center"
+                }
+            },
+            "breakpoint": "md",
+            "favicon": ""
+        },
+        "header": {
+            "item": {
+                "justify": "left"
+            },
+            "clock": {
+                "separator": {
+                    "show": true,
+                    "text": ":"
+                },
+                "meridiem": {
+                    "show": true
+                },
+                "hour24": {
+                    "show": false
+                },
+                "size": 100,
+                "newLine": false,
+                "hour": {
+                    "show": true,
+                    "display": "number"
+                },
+                "minute": {
+                    "show": true,
+                    "display": "number"
+                },
+                "second": {
+                    "show": true,
+                    "display": "number"
+                }
+            },
+            "date": {
+                "day": {
+                    "show": true,
+                    "display": "word",
+                    "weekStart": "monday",
+                    "length": "long"
+                },
+                "date": {
+                    "show": true,
+                    "display": "number",
+                    "ordinal": true
+                },
+                "month": {
+                    "show": true,
+                    "display": "word",
+                    "length": "long",
+                    "ordinal": true
+                },
+                "year": {
+                    "show": false,
+                    "display": "number"
+                },
+                "separator": {
+                    "show": true,
+                    "text": "/"
+                },
+                "format": "date-month",
+                "size": 100,
+                "newLine": false
+            },
+            "search": {
+                "show": true,
+                "width": {
+                    "by": "auto",
+                    "size": 30
+                },
+                "engine": {
+                    "selected": "google",
+                    "custom": {
+                        "url": "",
+                        "name": "",
+                        "queryName": ""
+                    }
+                },
+                "text": {
+                    "justify": "center"
+                },
+                "size": 100,
+                "newLine": false,
+                "newTab": false
+            },
+            "greeting": {
+                "show": false,
+                "type": "good",
+                "name": "",
+                "size": 100,
+                "newLine": false,
+                "custom": ""
+            },
+            "transitional": {
+                "show": false,
+                "type": "time-and-date",
+                "size": 100,
+                "newLine": false
+            },
+            "order": [
+                "clock",
+                "date",
+                "search",
+                "toolbar"
+            ],
+            "edit": false
+        },
+        "bookmark": {
+            "show": true,
+            "add": false,
+            "edit": false,
+            "style": "block",
+            "orientation": "bottom",
+            "url": {
+                "show": true
+            },
+            "line": {
+                "show": true
+            },
+            "shadow": {
+                "show": true
+            },
+            "hoverScale": {
+                "show": true
+            },
+            "size": 100,
+            "item": {}
+        },
+        "group": {
+            "area": {
+                "justify": "left"
+            },
+            "name": {
+                "size": 100
+            },
+            "order": "header-body",
+            "add": false,
+            "edit": false,
+            "toolbar": {
+                "size": 100
+            }
+        },
+        "toolbar": {
+            "location": "header",
+            "position": "bottom-right",
+            "size": 100,
+            "accent": {
+                "show": true
+            },
+            "add": {
+                "show": true
+            },
+            "edit": {
+                "show": true
+            },
+            "newLine": false
+        },
+        "theme": {
+            "accent": {
+                "random": {
+                    "active": false,
+                    "style": "any"
+                },
+                "rgb": {
+                    "r": 101,
+                    "g": 248,
+                    "b": 189
+                },
+                "cycle": {
+                    "active": false,
+                    "speed": 200,
+                    "step": 10
+                },
+                "hsl": {
+                    "h": 155.9183673469388,
+                    "s": 91.30434782608695,
+                    "l": 68.43137254901961
+                }
+            },
+            "style": "dark",
+            "radius": 20,
+            "color": {
+                "contrast": {
+                    "start": 16,
+                    "end": 96
+                },
+                "shades": 14,
+                "range": {
+                    "primary": {
+                        "h": 222,
+                        "s": 14
+                    }
+                }
+            },
+            "font": {
+                "display": {
+                    "name": "",
+                    "weight": 400,
+                    "style": "normal"
+                },
+                "ui": {
+                    "name": "",
+                    "weight": 400,
+                    "style": "normal"
+                }
+            },
+            "custom": {
+                "all": [
+                    {
+                        "name": "My custom theme",
+                        "color": {
+                            "range": {
+                                "primary": {
+                                    "h": 222,
+                                    "s": 14
+                                }
+                            },
+                            "contrast": {
+                                "start": 16,
+                                "end": 96
+                            }
+                        },
+                        "accent": {
+                            "hsl": {
+                                "h": 155.9183673469388,
+                                "s": 91.30434782608695,
+                                "l": 68.43137254901961
+                            },
+                            "rgb": {
+                                "r": 101,
+                                "g": 248,
+                                "b": 189
+                            }
+                        },
+                        "font": {
+                            "display": {
+                                "name": "",
+                                "weight": 400,
+                                "style": "normal"
+                            },
+                            "ui": {
+                                "name": "",
+                                "weight": 400,
+                                "style": "normal"
+                            }
+                        },
+                        "background": {
+                            "color": {
+                                "rgb": {
+                                    "r": 0,
+                                    "g": 0,
+                                    "b": 0
+                                },
+                                "hsl": {
+                                    "h": 0,
+                                    "s": 0,
+                                    "l": 0
+                                }
+                            },
+                            "gradient": {
+                                "angle": 160,
+                                "start": {
+                                    "hsl": {
+                                        "h": 206,
+                                        "s": 16,
+                                        "l": 40
+                                    },
+                                    "rgb": {
+                                        "r": 86,
+                                        "g": 104,
+                                        "b": 118
+                                    }
+                                },
+                                "end": {
+                                    "hsl": {
+                                        "h": 219,
+                                        "s": 28,
+                                        "l": 12
+                                    },
+                                    "rgb": {
+                                        "r": 22,
+                                        "g": 28,
+                                        "b": 39
+                                    }
+                                }
+                            },
+                            "type": "theme",
+                            "image": {
+                                "url": "",
+                                "blur": 0,
+                                "opacity": 100,
+                                "scale": 100,
+                                "grayscale": 0,
+                                "accent": 0,
+                                "vignette": {
+                                    "opacity": 0,
+                                    "start": 90,
+                                    "end": 70
+                                }
+                            },
+                            "video": {
+                                "url": "",
+                                "blur": 0,
+                                "opacity": 100,
+                                "scale": 100,
+                                "grayscale": 0,
+                                "accent": 0,
+                                "vignette": {
+                                    "opacity": 0,
+                                    "start": 90,
+                                    "end": 70
+                                }
+                            }
+                        },
+                        "radius": 20,
+                        "shadow": 100,
+                        "style": "dark",
+                        "shade": {
+                            "opacity": 40,
+                            "blur": 0
+                        },
+                        "opacity": {
+                            "general": 100
+                        },
+                        "layout": {
+                            "color": {
+                                "by": "theme",
+                                "opacity": 10,
+                                "hsl": {
+                                    "h": 0,
+                                    "s": 0,
+                                    "l": 0
+                                },
+                                "rgb": {
+                                    "r": 0,
+                                    "g": 0,
+                                    "b": 0
+                                },
+                                "blur": 0
+                            },
+                            "divider": {
+                                "size": 0
+                            }
+                        },
+                        "header": {
+                            "color": {
+                                "by": "theme",
+                                "opacity": 95,
+                                "hsl": {
+                                    "h": 0,
+                                    "s": 0,
+                                    "l": 0
+                                },
+                                "rgb": {
+                                    "r": 0,
+                                    "g": 0,
+                                    "b": 0
+                                }
+                            },
+                            "search": {
+                                "opacity": 100
+                            }
+                        },
+                        "bookmark": {
+                            "color": {
+                                "by": "theme",
+                                "opacity": 10,
+                                "hsl": {
+                                    "h": 0,
+                                    "s": 0,
+                                    "l": 0
+                                },
+                                "rgb": {
+                                    "r": 0,
+                                    "g": 0,
+                                    "b": 0
+                                }
+                            },
+                            "item": {
+                                "border": 0,
+                                "opacity": 100
+                            }
+                        },
+                        "group": {
+                            "toolbar": {
+                                "opacity": 100
+                            }
+                        },
+                        "toolbar": {
+                            "opacity": 100
+                        }
+                    }
+                ],
+                "edit": false
+            },
+            "shadow": 100,
+            "shade": {
+                "opacity": 40,
+                "blur": 0
+            },
+            "opacity": {
+                "general": 100
+            },
+            "group": {
+                "toolbar": {
+                    "opacity": 100
+                }
+            },
+            "toolbar": {
+                "opacity": 100
+            },
+            "layout": {
+                "color": {
+                    "by": "theme",
+                    "opacity": 10,
+                    "hsl": {
+                        "h": 0,
+                        "s": 0,
+                        "l": 0
+                    },
+                    "rgb": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0
+                    },
+                    "blur": 0
+                },
+                "divider": {
+                    "size": 0
+                }
+            },
+            "header": {
+                "color": {
+                    "by": "theme",
+                    "opacity": 95,
+                    "hsl": {
+                        "h": 0,
+                        "s": 0,
+                        "l": 0
+                    },
+                    "rgb": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0
+                    }
+                },
+                "search": {
+                    "opacity": 100
+                }
+            },
+            "bookmark": {
+                "color": {
+                    "by": "theme",
+                    "opacity": 10,
+                    "hsl": {
+                        "h": 0,
+                        "s": 0,
+                        "l": 0
+                    },
+                    "rgb": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0
+                    }
+                },
+                "item": {
+                    "border": 0,
+                    "opacity": 100
+                }
+            },
+            "background": {
+                "color": {
+                    "rgb": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0
+                    },
+                    "hsl": {
+                        "h": 0,
+                        "s": 0,
+                        "l": 0
+                    }
+                },
+                "gradient": {
+                    "angle": 160,
+                    "start": {
+                        "hsl": {
+                            "h": 206,
+                            "s": 16,
+                            "l": 40
+                        },
+                        "rgb": {
+                            "r": 86,
+                            "g": 104,
+                            "b": 118
+                        }
+                    },
+                    "end": {
+                        "hsl": {
+                            "h": 219,
+                            "s": 28,
+                            "l": 12
+                        },
+                        "rgb": {
+                            "r": 22,
+                            "g": 28,
+                            "b": 39
+                        }
+                    }
+                },
+                "type": "theme",
+                "image": {
+                    "url": "",
+                    "blur": 0,
+                    "opacity": 100,
+                    "scale": 100,
+                    "grayscale": 0,
+                    "accent": 0,
+                    "vignette": {
+                        "opacity": 0,
+                        "start": 90,
+                        "end": 70
+                    }
+                },
+                "video": {
+                    "url": "",
+                    "blur": 0,
+                    "opacity": 100,
+                    "scale": 100,
+                    "grayscale": 0,
+                    "accent": 0,
+                    "vignette": {
+                        "opacity": 0,
+                        "start": 90,
+                        "end": 70
+                    }
+                }
+            }
+        },
+        "search": false
+    },
+    "bookmark": [
+        {
+            "name": {
+                "show": true,
+                "text": "Server"
+            },
+            "items": [
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "letter",
+                            "letter": {
+                                "text": "PXMX"
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "",
+                                "prefix": "",
+                                "label": ""
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "Proxmox",
+                            "size": 9
+                        }
+                    },
+                    "url": "https://pve.:8006",
+                    "accent": {
+                        "by": "custom",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 225,
+                            "g": 122,
+                            "b": 47
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1564446444383,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "letter",
+                            "letter": {
+                                "text": "GUAC"
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "",
+                                "prefix": "",
+                                "label": ""
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "Guacamole",
+                            "size": 9
+                        }
+                    },
+                    "url": "http://192.168.1.89:8080/guacamole/#/",
+                    "accent": {
+                        "by": "custom",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 71,
+                            "g": 149,
+                            "b": 49
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1564446582400,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "letter",
+                            "letter": {
+                                "text": "PT"
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "",
+                                "prefix": "",
+                                "label": ""
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "Portainer",
+                            "size": 9
+                        }
+                    },
+                    "url": "http://192.168.1.65:9000/#/home",
+                    "accent": {
+                        "by": "custom",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 61,
+                            "g": 74,
+                            "b": 173
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1564446622915,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "letter",
+                            "letter": {
+                                "text": "RNCHR"
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "",
+                                "prefix": "",
+                                "label": ""
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "Rancher",
+                            "size": 9
+                        }
+                    },
+                    "url": "https://192.168.1.65/g/clusters",
+                    "accent": {
+                        "by": "custom",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 81,
+                            "g": 90,
+                            "b": 153
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1564446657580,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "icon",
+                            "letter": {
+                                "text": "BKSTK"
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "book-open",
+                                "prefix": "fas",
+                                "label": "Book Open"
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "BookStack",
+                            "size": 9
+                        }
+                    },
+                    "url": "http://bookstack./",
+                    "accent": {
+                        "by": "custom",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 94,
+                            "g": 174,
+                            "b": 255
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1564531160324,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "letter",
+                            "letter": {
+                                "text": "III"
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "",
+                                "prefix": "",
+                                "label": ""
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "Firefly III",
+                            "size": 9
+                        }
+                    },
+                    "url": "http://192.168.1.65:21670",
+                    "accent": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1566072195795,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "icon",
+                            "letter": {
+                                "text": ""
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "warehouse",
+                                "prefix": "fas",
+                                "label": "Warehouse"
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "Snipe-IT",
+                            "size": 9
+                        }
+                    },
+                    "url": "http://192.168.1.65:17820/",
+                    "accent": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1566088094774,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "icon",
+                            "letter": {
+                                "text": ""
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "mug-hot",
+                                "prefix": "fas",
+                                "label": "Mug Hot"
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "Gitea",
+                            "size": 9
+                        }
+                    },
+                    "url": "http://192.168.1.65:42536/",
+                    "accent": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1566443488727,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "icon",
+                            "letter": {
+                                "text": ""
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "grip-lines",
+                                "prefix": "fas",
+                                "label": "Grip Lines"
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "Concourse CI",
+                            "size": 9
+                        }
+                    },
+                    "url": "http://192.168.1.78:8080/",
+                    "accent": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1566531275347,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "icon",
+                            "letter": {
+                                "text": ""
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "raspberry-pi",
+                                "prefix": "fab",
+                                "label": "Raspberry Pi"
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "Pi-hole",
+                            "size": 9
+                        }
+                    },
+                    "url": "http://192.168.1.69/admin/",
+                    "accent": {
+                        "by": "custom",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 217,
+                            "g": 38,
+                            "b": 38
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1566148088978,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "icon",
+                            "letter": {
+                                "text": ""
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "network-wired",
+                                "prefix": "fas",
+                                "label": "Wired Network"
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "Router",
+                            "size": 9
+                        }
+                    },
+                    "url": "http://192.168.0.1/",
+                    "accent": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1575696928867,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "url": "http://docker-monitoring.:9000/",
+                    "display": {
+                        "alignment": "center-center",
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "gutter": 25,
+                        "name": {
+                            "show": true,
+                            "text": "Portainer",
+                            "size": 7
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "icon",
+                            "size": 25,
+                            "letter": {
+                                "text": ""
+                            },
+                            "icon": {
+                                "name": "docker",
+                                "prefix": "fab",
+                                "label": "Docker"
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "shadow": {
+                                "size": 0
+                            }
+                        }
+                    },
+                    "accent": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    },
+                    "timestamp": 1671068466408
+                }
+            ],
+            "toolbar": {
+                "openAll": {
+                    "show": true
+                },
+                "collapse": {
+                    "show": true
+                }
+            }
+        },
+        {
+            "name": {
+                "show": true,
+                "text": "Plex"
+            },
+            "items": [
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "icon",
+                            "letter": {
+                                "text": "PLX"
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "chevron-right",
+                                "prefix": "fas",
+                                "label": "chevron-right"
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "Plex",
+                            "size": 9
+                        }
+                    },
+                    "url": "https://plex.tv/web",
+                    "accent": {
+                        "by": "custom",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 235,
+                            "g": 169,
+                            "b": 33
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1564446515854,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "icon",
+                            "letter": {
+                                "text": "_PLX"
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "chevron-right",
+                                "prefix": "fas",
+                                "label": "chevron-right"
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "Plex Raw",
+                            "size": 9
+                        }
+                    },
+                    "url": "http://plex.:32400/web/index.html",
+                    "accent": {
+                        "by": "custom",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 196,
+                            "g": 98,
+                            "b": 0
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1569187579906,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "letter",
+                            "letter": {
+                                "text": "RDRR"
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "",
+                                "prefix": "",
+                                "label": ""
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "Radarr",
+                            "size": 9
+                        }
+                    },
+                    "url": "http://radarr.:7878/",
+                    "accent": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1575696121152,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "letter",
+                            "letter": {
+                                "text": "SNRR"
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "",
+                                "prefix": "",
+                                "label": ""
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "Sonarr",
+                            "size": 9
+                        }
+                    },
+                    "url": "http://sonarr.:8989/",
+                    "accent": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1575698883350,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "letter",
+                            "letter": {
+                                "text": "JKTT"
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "",
+                                "prefix": "",
+                                "label": ""
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "Jackett",
+                            "size": 9
+                        }
+                    },
+                    "url": "http://jackett.:9117/UI/Dashboard",
+                    "accent": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1575697851939,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "icon",
+                            "letter": {
+                                "text": ""
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "chart-line",
+                                "prefix": "fas",
+                                "label": "Line Chart"
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "Tautulli",
+                            "size": 9
+                        }
+                    },
+                    "url": "http://tautulli:8181/home",
+                    "accent": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1575750814101,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                },
+                {
+                    "display": {
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "alignment": "center-center",
+                        "gutter": 20,
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "icon",
+                            "letter": {
+                                "text": "T"
+                            },
+                            "image": {
+                                "url": ""
+                            },
+                            "icon": {
+                                "name": "arrow-down",
+                                "prefix": "fas",
+                                "label": "arrow-down"
+                            },
+                            "shadow": {
+                                "size": 0
+                            },
+                            "size": 30
+                        },
+                        "name": {
+                            "show": true,
+                            "text": "QBittorrent",
+                            "size": 9
+                        }
+                    },
+                    "url": "http://deluge.:8080/",
+                    "accent": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 100
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "timestamp": 1591970254688,
+                    "border": 0,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    }
+                }
+            ],
+            "toolbar": {
+                "openAll": {
+                    "show": true
+                },
+                "collapse": {
+                    "show": true
+                }
+            }
+        }
+    ]
+}
