@@ -1,0 +1,114 @@
+configuration {
+  kb-row-up: "Alt+k";
+  kb-row-down: "Alt+j";
+  kb-mode-next: "Alt-l";
+  kb-mode-previous: "Alt-h";
+}
+
+* {
+  foregroundColor: #f3c6b1;
+  backgroundColor: #0b0708;
+  cursorColor: #f3c6b1;
+
+  color0: #8e6c51;
+  color8: #b89f8b;
+
+  color1: #d44e45;
+  color9: #cc6666;
+
+  color2: #8d479e;
+  color10: #ad73bb;
+
+  color3: #fcb685;
+  color11: #fcd1b3;
+
+  color4: #c46692;
+  color12: #dfa0bd;
+
+  color5: #7b3a66;
+  color13: #7b3a66;
+
+  color6: #d98887;
+  color14: #f3afaf;
+
+  color7: #3e2d34;
+  color15: #eacfda;
+  
+  color7Transparent: #3e2d3480;
+  color12Transparent: #dfa0bd30;
+  color6Underline: underline #d98887;
+  color9Underline: underline #cc6666;
+}
+
+window {
+  background-color: var(color7Transparent);
+  border: 1;
+  padding: 0;
+  border-color: var(color9);
+  transparency: "real";
+}
+
+mainbox {
+  spacing: 0;
+}
+
+inputbar, prompt {
+  text-color: var(color6);
+}
+
+inputbar {
+  background-color: #0b070850;
+}
+
+textbox-prompt-colon {
+  str: "~";
+}
+
+entry {
+  placeholder-color: var(color9);
+  text-color: var(color14);
+}
+
+num-rows, num-filtered-rows, textbox-num-sep {
+  enabled: false;
+}
+
+scrollbar {
+  handle-color: var(color7);
+}
+
+listview, scrollbar {
+  background-color: #00000000;
+}
+
+listview {
+  border: 0;
+  padding: 0 2px 2px;
+  cursor: text;
+}
+
+element-text, inputbar {
+  padding: 7px 10px;
+}
+
+element.normal.normal,
+element.alternate.normal,
+element.selected.normal,
+element.alternate.active,
+element.normal.active,
+element.selected.active {
+  background-color: #00000000;
+}
+
+element-text {
+  highlight: var(color9Underline);
+  text-color: var(foregroundColor);
+  background-color: #00000000;
+}
+
+
+element-text.selected { 
+  background-color: var(color7);
+}
+
+
