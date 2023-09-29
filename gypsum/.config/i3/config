@@ -197,7 +197,8 @@ bar {
 # Custom Startups #
 ###################
 
-exec --no-startup-id picom -b --experimental-backends
+exec --no-startup-id ~/.screenlayout/default.sh
+exec --no-startup-id nitrogen --restore; sleep 1; picom -b --experimental-backends
 
 #######################
 # a e s t h e t i c s #
