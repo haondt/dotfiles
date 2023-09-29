@@ -1,0 +1,30 @@
+[
+	{
+		"command": ":q",
+		"description": "quit",
+		"tags": [
+			"quit",
+			"exit"
+		]
+	},
+	{
+		"command": ":w",
+		"description": "write / save",
+		"tags": [
+			"save",
+			"write"
+		]
+	},
+	{
+		"command": ":wq",
+		"description": "save and quit",
+		"tags": [
+			"save",
+			"quit",
+			"exit",
+			"write"
+		]
+	}
+]
+
+

@@ -1,0 +1,7 @@
+[
+	{
+		"command": "~/.config/i3/config",
+		"description": "i3 configuration",
+		"tags": []
+	}
+]

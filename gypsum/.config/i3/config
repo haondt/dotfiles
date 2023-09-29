@@ -233,7 +233,7 @@ client.unfocused $color0 $color7 $color0
 ################
 
 # help
-bindsym $mod+space exec /home/noah/Projects/cheats/cheat.sh
+bindsym $mod+space exec ~/dotfiles/gypsum/cheat/cheat.sh
 
 # window switching
 bindsym $mod+Tab exec "rofi -show window -display-window '[window]'"
