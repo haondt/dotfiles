@@ -225,8 +225,10 @@ set_from_resource $color13    color13
 set_from_resource $color14    color14
 set_from_resource $color15    color15
 
-client.focused $color0 $color6 $color0 $color12
-client.unfocused $color0 $color7 $color0
+# class			border	backgr.	text	indic.
+client.focused 		$color0	$color6	$color0	$color12
+client.unfocused 	$color0	$color7	$color0 $color7
+client.focused_inactive $color0	$color7	$color0	$color7
 
 ################
 # Custom Binds #
