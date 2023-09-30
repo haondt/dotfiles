@@ -20,6 +20,10 @@ colors:
     green:   '0xad73bb'
     yellow:  '0xfcd1b3'
     blue:    '0xdfa0bd'
-    magenta: '0x7b3a66'
+    magenta: '0xa15488'
     cyan:    '0xf3afaf'
     white:   '0xeacfda'
+font:
+  normal:
+    family: MesloLGS NF
+  size: 12

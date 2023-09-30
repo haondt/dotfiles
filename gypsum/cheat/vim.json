@@ -24,6 +24,11 @@
 			"exit",
 			"write"
 		]
+	},
+	{
+		"command": "s",
+		"description": "delete character under cursor and switch to insert mode",
+		"tags": []
 	}
 ]
 

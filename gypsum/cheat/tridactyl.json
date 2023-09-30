@@ -68,6 +68,15 @@
 		"command": "gT",
 		"description": "go to previous tab",
 		"tags": []
+	},
+	{
+		"command": "t",
+		"description": "type in a url and open in new tab",
+		"tags": []
+	},
+	{
+		"command": "T",
+		"description": "edit the current url and open in new tab",
+		"tags": []
 	}
-
 ]

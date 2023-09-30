@@ -3,7 +3,9 @@ configuration {
   kb-row-down: "Alt+j";
   kb-mode-next: "Alt-l";
   kb-mode-previous: "Alt-h";
+  font: "MesloLGS NF 13";
 }
+
 
 * {
   foregroundColor: #f3c6b1;
@@ -61,7 +63,7 @@ inputbar {
 }
 
 textbox-prompt-colon {
-  str: "~";
+  str: " ~ ";
 }
 
 entry {

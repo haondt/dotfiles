@@ -1,0 +1,16 @@
+[user]
+	name = Noah Burghardt
+	email = burghardtnoah@gmail.com
+[color]
+	ui = true
+	status = true
+[core]
+	editor = vim
+[color "status"]
+	changed = brightmagenta
+	untracked = magenta
+	added = brightblack
+
+	remoteBranch = black bold
+	localBranch = brightcyan bold
+
