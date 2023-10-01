@@ -1,0 +1,4 @@
+requirements:
+
+- ripgrep
+- packer
