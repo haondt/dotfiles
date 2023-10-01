@@ -75,6 +75,7 @@ function ColorMyPencils(palette)
 	vim.api.nvim_set_hl(0, "TelescopeTitle", { fg = palette.fg  })
 	vim.api.nvim_set_hl(0, "TelescopePromptCounter", { fg = palette.color10 })
     vim.api.nvim_set_hl(0, "TelescopeResultsComment", { fg = palette.color0})
+    vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = palette.color9, underline = true })
 
 end
 
