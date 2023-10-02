@@ -6,3 +6,4 @@ ln -s ~/dotfiles/gypsum/.config/rofi ~/.config/rofi
 ln -s ~/dotfiles/gypsum/.oh-my-zsh/custom/themes/haondt.zsh-theme ~/.oh-my-zsh/custom/themes/haondt.zsh-theme
 ln -s ~/dotfiles/gypsum/.gitconfig ~/.gitconfig
 ln -s ~/dotfiles/gypsum/.config/nvim ~/.config/nvim
+ln -s ~/dotfiles/gypsum/.zshrc ~/.zshrc
