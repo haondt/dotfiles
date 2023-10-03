@@ -79,5 +79,140 @@
         "command": "gi",
         "description": "go to implementations",
         "tags": []
+    },
+    {
+        "command": "ctrl+w+w",
+        "description": "cycle between open windows",
+        "tags": ["toggle"]
+    },
+    {
+        "command": "w",
+        "description": "go to beginning of next word",
+        "tags": []
+    },
+    {
+        "command": "b",
+        "description": "go to beginning of previous word",
+        "tags": []
+    },
+    {
+        "command": "ctrl+r",
+        "description": "redo last command",
+        "tags": []
+    },
+    {
+        "command": "_",
+        "description": "go to (indented) beginning of line",
+        "tags": []
+    },
+    {
+        "command": "''",
+        "description": "go to position before last jump",
+        "tags": []
+    },
+    {
+        "command": ";",
+        "description": "repeat latest f/F/t/T [count] times",
+        "tags": []
+    },
+    {
+        "command": ",",
+        "description": "repeat latest f/F/t/T [count] times in opposit direction",
+        "tags": []
+    },
+    {
+        "command": "I",
+        "description": "go to beginning of line and switch to insert mode",
+        "tags": []
+    },
+    {
+        "command": "A",
+        "description": "go to end of line and switch to insert mode",
+        "tags": []
+    },
+    {
+        "command": "{",
+        "description": "go to beginning of paragraph",
+        "tags": []
+    },
+    {
+        "command": "}",
+        "description": "go to end of paragraph",
+        "tags": []
+    },
+    {
+        "command": "ctrl+u",
+        "description": "jump up half a page",
+        "tags": []
+    },
+    {
+        "command": "ctrl+d",
+        "description": "jump down half a page",
+        "tags": []
+    },
+    {
+        "command": "*",
+        "description": "go to next occurrence of word under cursor",
+        "tags": []
+    },
+    {
+        "command": "<octothorpe>",
+        "description": "go to previous occurrence of word under cursor",
+        "tags": []
+    },
+    {
+        "command": "vi( / vi[ / vi{ / vi\" / vi'",
+        "description": "select from first '(' to matching ')'. Use with number for outer group(s)",
+        "tags": []
+    },
+    {
+        "command": "vip / vap",
+        "description": "select surrounding paragraph ",
+        "tags": []
+    },
+    {
+        "command": "va( / va[ / va{ / va\" / va'",
+        "description": "select from first '(' to matching ')', including (). Use with number for outer group(s)",
+        "tags": []
+    },
+    {
+        "command": "viw / viW",
+        "description": "select word under cursor",
+        "tags": []
+    },
+    {
+        "command": "ge / gE",
+        "description": "go to end of previous word",
+        "tags": []
+    },
+    {
+        "command": "F+space",
+        "description": "go to space after previous word",
+        "tags": ["combo"]
+    },
+    {
+        "command": "space+p",
+        "description": "paste without copying to buffer",
+        "tags": ["remap"]
+    },
+    {
+        "command": "=",
+        "description": "fix indentation of higlighted text",
+        "tags": []
+    },
+    {
+        "command": "o",
+        "description": "toggle between either end of highlighted text",
+        "tags": []
+    },
+    {
+        "command": "J / K",
+        "description": "move highlighted text",
+        "tags": ["remap"]
+    },
+    {
+        "command": "ctrl+^",
+        "description": "toggle between current and last file",
+        "tags": []
     }
 ]

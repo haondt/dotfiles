@@ -19,5 +19,5 @@ vim.keymap.set("x", "p", "\"_dP")
 
 -- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
-
+-- view file tree (netrw)
 vim.keymap.set("n", "<leader>pv", ":Ex<CR>")

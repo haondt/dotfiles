@@ -52,3 +52,4 @@ return function(opts)
 
     return builtin.live_grep(opts)
 end
+
