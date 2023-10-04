@@ -32,6 +32,11 @@ function M.stick_current(target_idx)
     filter_filetype()
     local file_name = utils.current_relative_path()
     local project_key = utils.current_project_key()
+
+    if file_name == nil or file_name == "" or project_key == nil or project_key == "" then
+        return
+    end
+
     local project = sticky.get_project(project_key)
     local marks = project.mark.marks
 
