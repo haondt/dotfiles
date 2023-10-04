@@ -78,8 +78,9 @@ function ColorMyPencils(palette)
     vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = palette.color9, underline = true })
 
     -- sticky
-    vim.api.nvim_set_hl(0, "StickyWindow", { bg = palette.color9 })
-    vim.api.nvim_set_hl(0, "StickyBorder", { fg = palette.color2 })
+    vim.api.nvim_set_hl(0, "StickyWindow", { bg = palette.none })
+    vim.api.nvim_set_hl(0, "StickyTitle", { fg = palette.fg })
+    vim.api.nvim_set_hl(0, "StickyBorder", { fg = palette.color10, bg = palette.none })
 
 end
 

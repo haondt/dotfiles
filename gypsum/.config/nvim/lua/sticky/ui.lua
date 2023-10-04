@@ -1,5 +1,6 @@
 local popup = require("plenary.popup")
 local utils = require("sticky.utils")
+local mark = require("sticky.mark")
 
 local M = {}
 
@@ -39,7 +40,6 @@ local function create_window()
     local win_id, win = popup.create(bufnr, {
         title = "Sticky",
         highlight = "StickyWindow",
-        borderhighlight = "StickyBorder2",
         titlehighlight = "StickyTitle",
         line = math.floor(((vim.o.lines - height) / 2) - 1),
         col = math.floor(((vim.o.columns - width) / 2)),
@@ -66,24 +66,24 @@ function M.toggle_quick_menu()
         return
     end
 
-    local curr_file = utils.normalize_path(vim.api.nvim_buf_get_name(0))
+    local current = utils.current_relative_path()
 
     local win_info = create_window()
-    local contents = {}
-    -- local global_config = harpoon.get_global_settings()
-
     Sticky_win_id = win_info.win_id
     Sticky_bufh = win_info.bufnr
 
-    contents[1] = "foo"
-    contents[2] = "bar"
-    contents[3] = "baz"
+    local contents = {}
+    local marks = mark.list()
+    for idx, _mark in ipairs(marks) do
+        contents[idx] = string.format("%s", _mark.filename or "")
+    end
 
     vim.api.nvim_win_set_option(Sticky_win_id, "number", true)
     vim.api.nvim_buf_set_name(Sticky_bufh, "sticky-menu")
     vim.api.nvim_buf_set_lines(Sticky_bufh, 0, #contents, false, contents)
     vim.api.nvim_buf_set_option(Sticky_bufh, "filetype", "sticky")
-    vim.api.nvim_buf_set_option(Sticky_bufh, "buftype", "acwrite")
+    vim.api.nvim_buf_set_option(Sticky_bufh, "buftype", "nofile")
+    vim.api.nvim_buf_set_option(Sticky_bufh, "modifiable", false)
     vim.api.nvim_buf_set_option(Sticky_bufh, "bufhidden", "delete")
     vim.api.nvim_buf_set_keymap(
         Sticky_bufh,
