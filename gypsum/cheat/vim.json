@@ -214,5 +214,20 @@
         "command": "ctrl+^",
         "description": "toggle between current and last file",
         "tags": []
+    },
+    {
+        "command": "space+sa",
+        "description": "toggle sticky menu",
+        "tags": ["remap"]
+    },
+    {
+        "command": "space+s1 / space+s2 / ...",
+        "description": "stick buffer to slot n",
+        "tags": ["remap", "sticky"]
+    },
+    {
+        "command": "space+1 / space+2 / ...",
+        "description": "open buffer in slot n",
+        "tags": ["remap", "sticky"]
     }
 ]

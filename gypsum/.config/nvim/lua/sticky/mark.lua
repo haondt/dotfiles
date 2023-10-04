@@ -20,7 +20,7 @@ local function get_index_of(file_name, marks)
     return nil
 end
 
-local function is_valid_index(idx, marks)
+function M.is_valid_index(idx, marks)
     local settings = sticky.get_settings()
     return idx ~= nil and idx >= 1 and idx <= settings.num_slots
 end
@@ -41,7 +41,7 @@ function M.stick_current(target_idx)
     local marks = project.mark.marks
 
     --local current_idx = get_index_of(file_name, marks)
-    if is_valid_index(target_idx, marks) then
+    if M.is_valid_index(target_idx, marks) then
         local cursor_pos = vim.api.nvim_win_get_cursor(0)
         marks[target_idx] = {
             filename = file_name,

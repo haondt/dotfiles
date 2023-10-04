@@ -68,6 +68,7 @@ function ColorMyPencils(palette)
 	vim.api.nvim_set_hl(0, "Normal", { bg = palette.bg, fg = palette.fg  })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = palette.bg })
 	vim.api.nvim_set_hl(0, "Visual", { bg = palette.selected })
+	vim.api.nvim_set_hl(0, "Cursorline", { bg = palette.color7 })
 
     -- telescope
 	vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = palette.none, fg = palette.fg  })
@@ -81,6 +82,7 @@ function ColorMyPencils(palette)
     vim.api.nvim_set_hl(0, "StickyWindow", { bg = palette.none })
     vim.api.nvim_set_hl(0, "StickyTitle", { fg = palette.fg })
     vim.api.nvim_set_hl(0, "StickyBorder", { fg = palette.color10, bg = palette.none })
+    vim.api.nvim_set_hl(0, "StickyCurrentFile", { fg = palette.color9 })
 
 end
 
