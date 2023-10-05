@@ -63,14 +63,6 @@ local theme = {
         y = { bg = palette.color2, fg = palette.color15 },
         z = { bg = palette.color5, fg = palette.color15 }
     },
-    _visual = {
-        a = { bg = palette.color11, fg = palette.color7, gui = 'bold' },
-        b = { bg = palette.color8, fg = palette.color5, gui = 'bold' },
-        c = { bg = palette.bg, fg = palette.color15 },
-        x = { bg = palette.bg, fg = palette.color15, gui = 'bold' },
-        y = { bg = palette.color3, fg = palette.color7 },
-        z = { bg = palette.color7, fg = palette.color8 }
-    },
     insert = {
         a = { bg = palette.color0, fg = palette.color11, gui = 'bold' },
         b = { bg = palette.color8, fg = palette.color7 },

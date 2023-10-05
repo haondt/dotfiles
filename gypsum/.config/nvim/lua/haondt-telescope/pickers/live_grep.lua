@@ -11,8 +11,17 @@ local make_entry_from_vimgrep = make_entry.gen_from_vimgrep()
 return function(opts)
     -- default values
     opts = opts or {}
-    opts.hidden = opts.hidden or false
     opts.separator = opts.separator or " "
+    opts.vimgrep_arguments = {
+        "rg",
+        "--hidden",
+        "--color=never",
+        "--no-heading",
+        "--with-filename",
+        "--line-number",
+        "--column",
+        "--smart-case"
+    }
 
     opts.entry_maker = function(line)
         local entry = make_entry_from_vimgrep(line)

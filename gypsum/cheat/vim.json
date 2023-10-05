@@ -229,5 +229,10 @@
         "command": "space+1 / space+2 / ...",
         "description": "open buffer in slot n",
         "tags": ["remap", "sticky"]
+    },
+    {
+        "command": ":TSPlaygroundToggle",
+        "description": "see lsp syntax tree",
+        "tags": ["ast", "highlight"]
     }
 ]

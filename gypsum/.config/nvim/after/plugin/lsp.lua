@@ -22,12 +22,16 @@ require('mason-lspconfig').setup({
 	ensure_installed = {
 		'lua_ls',
 		'rust_analyzer',
-		'jedi_language_server'
+		'jedi_language_server',
+        'omnisharp'
 	},
 	handlers = {
 		lsp.default_setup
 	}
 })
+
+local lspconfig = require('lspconfig')
+lspconfig.omnisharp.setup({})
 
 local cmp = require('cmp')
 local cmp_action = lsp.cmp_action()

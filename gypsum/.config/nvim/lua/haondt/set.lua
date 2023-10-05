@@ -6,7 +6,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
-vim. opt.smartindent = true
+vim.opt.smartindent = true
 vim.opt.wrap = false
 
 vim.opt.swapfile = false
@@ -22,5 +22,5 @@ vim.cmd('highlight SignColumn ctermbg=NONE guibg=NONE')
 
 vim.opt.updatetime = 50
 --vim.opt.colorcolumn = "80"
-
-
+vim.cmd('autocmd Filetype help setlocal number')
+vim.cmd("let g:netrw_bufsettings = 'noma nomod nu nowrap ro robl'")
