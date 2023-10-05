@@ -40,7 +40,8 @@ telescope.setup({
                 width = { padding = 6 },
                 height = { padding = 3 },
                 prompt_position = 'top',
-                mirror = true
+                mirror = true,
+                preview_cutoff = 3
             },
             flex = {
                 flip_columns = 100,

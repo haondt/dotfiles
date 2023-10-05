@@ -4,7 +4,7 @@ local reloader = require("plenary.reload")
 vim.keymap.set('n', '<A-Tab>', builtin.buffers, {})
 vim.keymap.set('n', '<leader><leader>', builtin.help_tags, {})
 
-vim.keymap.set('n', 'gr', builtin.lsp_references, {})
+vim.keymap.set('n', 'gr', function() builtin.lsp_references({ initial_mode = "normal" }) end, {})
 vim.keymap.set('n', 'gi', builtin.lsp_implementations, {})
 
 vim.keymap.set('n', '<leader>pg', builtin.git_files);
