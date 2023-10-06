@@ -1,4 +1,5 @@
 ln -s ~/dotfiles/gypsum/.config/i3/config ~/.config/i3/config
+ln -s ~/dotfiles/gypsum/.config/i3/polybar.sh ~/.config/i3/polybar.sh
 ln -s ~/dotfiles/gypsum/.config/alacritty ~/.config/alacritty
 ln -s ~/dotfiles/gypsum/.config/picom.conf ~/.config/picom.conf
 ln -s ~/dotfiles/gypsum/.Xresources ~/.Xresources
@@ -7,3 +8,4 @@ ln -s ~/dotfiles/gypsum/.oh-my-zsh/custom/themes/haondt.zsh-theme ~/.oh-my-zsh/c
 ln -s ~/dotfiles/gypsum/.gitconfig ~/.gitconfig
 ln -s ~/dotfiles/gypsum/.config/nvim ~/.config/nvim
 ln -s ~/dotfiles/gypsum/.zshrc ~/.zshrc
+ln -s ~/dotfiles/gypsum/.config/polybar ~/.config/polybar
