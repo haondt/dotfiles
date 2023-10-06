@@ -30,3 +30,7 @@ alias gr='git reset'
 alias la='ls -a'
 alias ll='ls -l'
 alias lla='ls -la'
+
+hash -d vs="$HOME/dotfiles/gypsum/.config/nvim"
+hash -d vl="$HOME/.local/state/nvim"
+hash -d p="$HOME/projects"

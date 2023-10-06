@@ -61,7 +61,7 @@ M.palette = {
 
     selected = { bg = M.colors.color7 },
     popup_border = { fg = M.colors.color10 },
-    search = { bg = M.colors.color5 },
+    search = { bg = M.colors.color9, fg = M.colors.color7 },
     error = { fg = M.colors.color15, bg = M.colors.color1 },
 }
 

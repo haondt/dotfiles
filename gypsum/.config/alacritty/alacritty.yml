@@ -2,6 +2,10 @@ window:
   opacity: 0.5
 
 colors:
+  primary:
+    #foreground: '0xeacfda' # bright white
+    foreground:  '0xfcd1b3' # bright yellow
+    #foreground:   '0xb89f8b' # bright black
   # Normal colors
   normal:
     black:   '0x8e6c51'
@@ -25,5 +29,9 @@ colors:
     white:   '0xeacfda'
 font:
   normal:
-    family: MesloLGS NF
+    family: Ubuntu Mono derivative Powerline
   size: 12
+  offset:
+    x: 0
+    y: 0
+

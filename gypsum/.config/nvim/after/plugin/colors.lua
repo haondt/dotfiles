@@ -57,7 +57,7 @@ vim.api.nvim_set_hl(0, "String", { fg = palette.color9 })
 vim.api.nvim_set_hl(0, "@lsp.type.parameter", { fg = palette.color10 })
 
 -- // comment
-vim.api.nvim_set_hl(0, "Comment", { fg = palette.color13 })
+vim.api.nvim_set_hl(0, "Comment", { fg = palette.fg })
 
 -- Method()
 vim.api.nvim_set_hl(0, "Function", { fg = palette.color4, bold = true })
@@ -71,11 +71,15 @@ vim.api.nvim_set_hl(0, "Constant", { fg = palette.color11, bold = true })
 -- 0, 1.2
 vim.api.nvim_set_hl(0, "Number", { fg = palette.color11, bold = true })
 
+-- using
+vim.api.nvim_set_hl(0, "PreProc", { fg = palette.color8 })
 
-vim.api.nvim_set_hl(0, "Typedef", { fg = palette.color14 })
+-- This.Is.The.Namespace
+vim.api.nvim_set_hl(0, "@lsp.type.namespace", { fg = palette.color0 })
 
 
---vim.api.nvim_set_hl(0, "String", { fg = palette. })
+--vim.api.nvim_set_hl(0, "Typedef", { fg = palette.color15 })
+
 
 -- telescope
 vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = palette.none, fg = palette.fg  })
