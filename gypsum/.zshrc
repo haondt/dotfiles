@@ -21,6 +21,7 @@ alias sz='. ~/.zshrc'
 alias md='medea'
 alias clip='xclip -selection clipboard'
 alias vim=nvim
+alias py='python3'
 
 alias gs='git status --short -b'
 alias ga='git add'
