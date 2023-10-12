@@ -35,3 +35,10 @@ alias lla='ls -la'
 hash -d vs="$HOME/dotfiles/gypsum/.config/nvim"
 hash -d vl="$HOME/.local/state/nvim"
 hash -d p="$HOME/projects"
+
+# bun completions
+[ -s "/home/noah/.bun/_bun" ] && source "/home/noah/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

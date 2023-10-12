@@ -23,7 +23,18 @@ require('mason-lspconfig').setup({
 		'lua_ls',
 		'rust_analyzer',
 		'jedi_language_server',
-        'omnisharp'
+        'omnisharp',
+        'ansiblels',
+        'cssls',
+        'dockerls',
+        'docker_compose_language_service',
+        'eslint',
+        'html',
+        'jsonls',
+        'tsserver',
+        'marksman',
+        'taplo',
+        'yamlls'
 	},
 	handlers = {
 		lsp.default_setup
