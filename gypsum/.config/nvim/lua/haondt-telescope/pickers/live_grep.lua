@@ -20,7 +20,9 @@ return function(opts)
         "--with-filename",
         "--line-number",
         "--column",
-        "--smart-case"
+        "--smart-case",
+        "-g",
+        "!.git/"
     }
 
     opts.entry_maker = function(line)
