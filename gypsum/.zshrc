@@ -42,3 +42,6 @@ hash -d p="$HOME/projects"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+## python ##
+VIRTUAL_ENV_DISABLE_PROMPT=1

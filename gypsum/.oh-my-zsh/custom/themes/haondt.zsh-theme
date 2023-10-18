@@ -7,10 +7,16 @@ haondt_prompt_leader() {
   echo -n " %{%B%}~%{%f%k%b%} "
 }
 
+haondt_virtual_env() {
+  if [[ -n ${VIRTUAL_ENV} ]] || return
+  echo -n " %{%F{yellow}%B%}~%{%f%k%b%}"
+}
+
 haondt_build_prompt() {
   HAONDT_RETVAL=$?
   echo -n "%{%B%F{6}%2c%b%f%}"
   echo -n "$(git_prompt_info)"
+  echo -n "$(haondt_virtual_env)"
   haondt_prompt_leader
 }
   
