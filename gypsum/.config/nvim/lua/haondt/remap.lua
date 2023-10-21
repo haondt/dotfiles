@@ -1,5 +1,4 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 
 -- highlight move highlighted text with J and K
@@ -15,7 +14,11 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- paste without copying pasted text
-vim.keymap.set("x", "p", "\"_dP")
+-- vim.keymap.set("x", "p", "\"_dP")
+
+-- copy and paste from system clipboard
+vim.keymap.set("v", "<leader>yy", "\"+y")
+vim.keymap.set("n", "<leader>pp", "\"+p")
 
 -- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 

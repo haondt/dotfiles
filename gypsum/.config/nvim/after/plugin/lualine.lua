@@ -2,32 +2,34 @@ local lualine = require('lualine')
 local Path = require("plenary.path")
 local palette = require("haondt.colors").palette
 
-local lsp_progress = {
-    'lsp_progress',
-    display_components = {
-        --'lsp_client_name',
-        'spinner'
-    },
-    colors = { use = false },
-    separators = {
-        component = '',
-        lsp_client_name = { pre = '', post = '' },
-        spinner = { pre = '', post = ''}
-    },
-    timer = {
-        progress_enddelay = 0,
-        spinner = 250,
-        lsp_client_name_enddelay = 0,
-        attached_delay = 0
-    },
-	--spinner_symbols = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█', '▇', '▆', '▅', '▄', '▃', '▁' }
-    --spinner_symbols = { '\\', '|', '/', '-' }
-    --spinner_symbols = {'⠁', '⠂', '⠄', '⡀', '⢀', '⠠', '⠐', '⠈'}
-    spinner_symbols = { '⢎⡰', '⢎⡡', '⢎⡑', '⢎⠱', '⠎⡱', '⢊⡱', '⢌⡱', '⢆⡱' }
-}
-
 local function normalized_path()
     return Path:new(vim.api.nvim_buf_get_name(0)):make_relative(vim.loop.cwd())
+end
+
+local function lsp_status()
+    local s = ""
+    s = '?'
+    local client = vim.lsp.get_active_clients({
+        bufnr=vim.api.nvim_get_current_buf()
+    })[1]
+    if client ~= nil then
+        s = client.name
+        if not client.initialized then
+            s = '+' .. s
+        end
+
+        local has_pending = false
+        for k,v in pairs(client.requests) do
+            if v.type and v.type == "pending" then
+                has_pending = true
+                break
+            end
+        end
+        if has_pending then
+            s = '*' .. s
+        end
+    end
+    return s
 end
 
 local theme = {
@@ -90,9 +92,9 @@ lualine.setup {
     },
     sections = {
         lualine_a = { 'mode' },
-        lualine_b = { lsp_progress, normalized_path },
+        lualine_b = { normalized_path },
         lualine_c = { 'diagnostics' },
-        lualine_x = {},
+        lualine_x = { lsp_status },
         lualine_y = { vim.loop.cwd },
         lualine_z = { 'progress' },
     },
