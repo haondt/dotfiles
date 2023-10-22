@@ -17,8 +17,8 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- vim.keymap.set("x", "p", "\"_dP")
 
 -- copy and paste from system clipboard
-vim.keymap.set("v", "<leader>yy", "\"+y")
-vim.keymap.set("n", "<leader>pp", "\"+p")
+vim.keymap.set("v", "<leader>cy", "\"+y")
+vim.keymap.set("n", "<leader>cp", "\"+p")
 
 -- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 

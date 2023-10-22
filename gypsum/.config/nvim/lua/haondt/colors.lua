@@ -63,6 +63,8 @@ M.palette = {
     popup_border = { fg = M.colors.color10 },
     search = { bg = M.colors.color9, fg = M.colors.color7 },
     error = { fg = M.colors.color15, bg = M.colors.color1 },
+    add = { fg = "#7daf69" },
+    remove = {fg = M.colors.color9 },
 }
 
 return M

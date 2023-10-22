@@ -1,13 +1,26 @@
 local builtin = require('telescope.builtin')
 local reloader = require("plenary.reload")
 
+local function in_normal(fn)
+    return function()
+        return fn({ initial_mode = "normal"})
+    end
+end
+
 vim.keymap.set('n', '<A-Tab>', builtin.buffers, {})
 vim.keymap.set('n', '<leader><leader>', builtin.help_tags, {})
 
-vim.keymap.set('n', 'gr', function() builtin.lsp_references({ initial_mode = "normal" }) end, {})
-vim.keymap.set('n', 'gi', builtin.lsp_implementations, {})
+vim.keymap.set('n', 'gr', in_normal(builtin.lsp_references), {})
+vim.keymap.set('n', 'gi', in_normal(builtin.lsp_implementations), {})
+vim.keymap.set('n', 'gc', builtin.lsp_incoming_calls, {})
+vim.keymap.set('n', 'gd', in_normal(builtin.lsp_definitions), {})
+vim.keymap.set('n', 'gt', in_normal(builtin.lsp_type_definitions), {})
 
 vim.keymap.set('n', '<leader>pg', builtin.git_files);
+vim.keymap.set('n', '<leader>pm', builtin.lsp_workspace_symbols, {})
+
+vim.keymap.set('n', '<leader>gs', in_normal(builtin.git_status), {})
+vim.keymap.set('n', '<leader>gl', in_normal(builtin.git_bcommits), {})
 
 local function haondt_map()
     local haondt = require('telescope').extensions.haondt

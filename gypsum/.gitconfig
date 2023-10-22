@@ -6,11 +6,18 @@
 	status = true
 [core]
 	editor = vim
+
+# see man git-config --> color.status.<slot>
 [color "status"]
-	changed = brightmagenta
-	untracked = magenta
-	added = brightblack
+	changed = yellow
+	untracked = brightwhite
+	added = "#7daf69"
 
 	remoteBranch = black bold
 	localBranch = brightcyan bold
+# see man git-config --> color.diff.<slot>
+[color "diff"]
+    old = brightred
+    new = "#7daf69"
+    meta = brightgreen
 
