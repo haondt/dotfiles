@@ -7,26 +7,38 @@ local function normalized_path()
 end
 
 local function lsp_status()
-    local s = ""
+    local s = ''
     s = '?'
-    local client = vim.lsp.get_active_clients({
+    local clients = vim.lsp.get_active_clients({
         bufnr=vim.api.nvim_get_current_buf()
-    })[1]
-    if client ~= nil then
-        s = client.name
-        if not client.initialized then
-            s = '+' .. s
-        end
+    })
+    if clients ~= nil and #clients > 0 then
+        s = ''
+        for _, client in ipairs(clients) do
+            local cs = client.name
+            if not client.initialized then
+                cs = '+' .. cs
+            else
+                local has_pending = false
+                for _,v in pairs(client.requests) do
+                    if v.type and v.type == "pending" then
+                        has_pending = true
+                        break
+                    end
+                end
 
-        local has_pending = false
-        for k,v in pairs(client.requests) do
-            if v.type and v.type == "pending" then
-                has_pending = true
-                break
+                if has_pending then
+                    cs = '*' .. cs
+                else
+                    cs = ' ' .. cs
+                end
             end
-        end
-        if has_pending then
-            s = '*' .. s
+
+            if #s > 0 then
+                s = s .. ' ' .. cs
+            else
+                s = cs
+            end
         end
     end
     return s

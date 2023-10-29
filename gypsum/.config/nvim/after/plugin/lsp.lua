@@ -30,6 +30,7 @@ require('mason-lspconfig').setup({
 		'lua_ls',
 		'rust_analyzer',
 		'jedi_language_server',
+        'pyright',
         'omnisharp',
         'ansiblels',
         'cssls',
