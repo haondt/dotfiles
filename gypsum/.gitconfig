@@ -1,23 +1,63 @@
 [user]
-	name = Noah Burghardt
-	email = burghardtnoah@gmail.com
+    name = Noah Burghardt
+    email = burghardtnoah@gmail.com
 [color]
-	ui = true
-	status = true
+    ui = true
+    status = true
 [core]
-	editor = vim
+    editor = nvim
+    pager = delta
 
 # see man git-config --> color.status.<slot>
 [color "status"]
-	changed = yellow
-	untracked = brightwhite
-	added = "#7daf69"
+    changed = yellow
+    untracked = brightwhite
 
-	remoteBranch = black bold
-	localBranch = brightcyan bold
+    remoteBranch = black bold
+    localBranch = brightcyan bold
 # see man git-config --> color.diff.<slot>
 [color "diff"]
     old = brightred
-    new = "#7daf69"
+    new = brightgreen
     meta = brightgreen
 
+
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+    light = false
+    side-by-side  = true
+    syntax-theme = none
+
+    minus-emph-style = brightred bold normal
+    minus-non-emph-style = brightred normal
+    minus-style = brightred normal
+    minus-empty-line-marker-style = brightred normal
+    line-numbers-minus-style = brightred normal
+
+    plus-emph-style = brightgreen bold normal
+    plus-non-emph-style = brightgreen normal
+    plus-style = brightgreen normal
+    plus-empty-line-marker-style = green normal
+    line-numbers-plus-style = brightgreen normal
+
+    line-numbers-zero-style = black normal
+
+    #hunk-header-decoration-style = brightmagenta ul ol normal
+    hunk-header-file-style = brightblue normal
+    hunk-header-line-number-styke = blue normal
+    hunk-header-style = file
+    hunk-header-decoration-style = brightmagenta ul normal
+    hunk-label = " "
+
+    file-style = omit
+    grep-separator-symbol = " "
+
+    navigate = true
+    paging = always # important to show up in telescope new_termopen_previewer correctly
+
+[merge]
+    conflictstyle = diff3
+[diff]
+    colorMoved = default

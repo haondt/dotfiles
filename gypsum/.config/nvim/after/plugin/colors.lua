@@ -54,7 +54,7 @@ vim.api.nvim_set_hl(0, "StorageClass", { fg = palette.color8 })
 vim.api.nvim_set_hl(0, "String", { fg = palette.color9 })
 
 -- argumentVariable
-vim.api.nvim_set_hl(0, "@lsp.type.parameter", { fg = palette.color10 })
+vim.api.nvim_set_hl(0, "@lsp.type.parameter", { fg = palette.color13 })
 
 -- // comment
 vim.api.nvim_set_hl(0, "Comment", { fg = palette.fg })
@@ -85,13 +85,13 @@ vim.api.nvim_set_hl(0, "@lsp.type.namespace", { fg = palette.color0 })
 vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = palette.none, fg = palette.fg  })
 vim.api.nvim_set_hl(0, "TelescopeBorder", palette.popup_border)
 vim.api.nvim_set_hl(0, "TelescopeTitle", { fg = palette.fg  })
-vim.api.nvim_set_hl(0, "TelescopePromptCounter", { fg = palette.color10 })
+vim.api.nvim_set_hl(0, "TelescopePromptCounter", { fg = palette.color12 })
 vim.api.nvim_set_hl(0, "TelescopeResultsComment", { fg = palette.color0})
 vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = palette.color9, underline = true })
 vim.api.nvim_set_hl(0, "TelescopePreviewLine", palette.search)
-vim.api.nvim_set_hl(0, "TelescopeResultsDiffAdd", palette.add)
+vim.api.nvim_set_hl(0, "TelescopeResultsDiffAdd", { fg = palette.add.fg, bold = true })
 vim.api.nvim_set_hl(0, "TelescopeResultsDiffChange", { fg = palette.color3 })
-vim.api.nvim_set_hl(0, "TelescopeResultsDiffDelete", palette.remove)
+vim.api.nvim_set_hl(0, "TelescopeResultsDiffDelete", { fg = palette.remove.fg, bold = true })
 vim.api.nvim_set_hl(0, "TelescopeResultsDiffUntracked", { fg = palette.color15 })
 
 vim.api.nvim_set_hl(0, "diffAdded", palette.add)

@@ -71,10 +71,10 @@ local theme = {
     },
     command = {
         a = { bg = palette.color13, fg = palette.color15 , gui = 'bold' },
-        b = { bg = palette.color10, fg = palette.color7 },
+        b = { bg = palette.color5, fg = palette.color15 },
         c = { bg = palette.bg, fg = palette.color15 },
         x = { bg = palette.bg, fg = palette.color15, gui = 'bold' },
-        y = { bg = palette.color2, fg = palette.color15 },
+        y = { bg = palette.color12, fg = palette.color7 },
         z = { bg = palette.color5, fg = palette.color15 }
     },
     insert = {

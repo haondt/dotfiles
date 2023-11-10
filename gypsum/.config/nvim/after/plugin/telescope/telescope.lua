@@ -1,4 +1,5 @@
 local telescope = require('telescope')
+local builtin = require('telescope.builtin')
 local haondt = telescope.extensions.haondt
 
 local function getKeys(t)
@@ -10,6 +11,7 @@ end
 
 telescope.setup({
     defaults = {
+        scroll_strategy = "limit",
         file_sorter = haondt.sorters.file_substr_matcher,
         dynamic_preview_title = true,
         prompt_prefix = '~ ',
@@ -49,3 +51,4 @@ telescope.setup({
         },
         sorting_strategy = 'ascending', }
 })
+

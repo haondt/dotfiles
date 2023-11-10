@@ -14,8 +14,8 @@ M.colors = {
     color9 = "#cc6666",
 
     -- green
-    color2 = "#8d479e",
-    color10 = "#ad73bb",
+    color2 = "#4f5040",
+    color10 = "#7daf69",
 
     -- yellow
     color3 = "#fcb685",
@@ -26,8 +26,8 @@ M.colors = {
     color12 = "#dfa0bd",
 
     -- magenta
-    color5 = "#7b3a66",
-    color13 = "#a15488",
+    color5 = "#8d479e",
+    color13 = "#ad73be",
 
     -- cyan
     color6 = "#d98887",
@@ -60,8 +60,9 @@ M.palette = {
     color15 = M.colors.color15,
 
     selected = { bg = M.colors.color7 },
-    popup_border = { fg = M.colors.color10 },
+    popup_border = { fg = M.colors.color13 },
     search = { bg = M.colors.color9, fg = M.colors.color7 },
+
     error = { fg = M.colors.color15, bg = M.colors.color1 },
     add = { fg = "#7daf69" },
     remove = {fg = M.colors.color9 },

@@ -25,6 +25,7 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 require('mason').setup({})
+local lspconfig = require('lspconfig')
 require('mason-lspconfig').setup({
 	ensure_installed = {
 		'lua_ls',
@@ -45,12 +46,24 @@ require('mason-lspconfig').setup({
         'yamlls'
 	},
 	handlers = {
-		lsp.default_setup
+		lsp.default_setup,
+        omnisharp = function()
+            lspconfig.omnisharp.setup({})
+        end,
+        pyright = function()
+            lspconfig.pyright.setup({
+                settings = {
+                    python = {
+                        analysis = {
+                            diagnosticMode = "workspace"
+                        }
+                    }
+                }
+            })
+        end
 	}
 })
 
-local lspconfig = require('lspconfig')
-lspconfig.omnisharp.setup({})
 
 local cmp = require('cmp')
 local cmp_action = lsp.cmp_action()

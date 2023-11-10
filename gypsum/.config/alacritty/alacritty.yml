@@ -10,10 +10,10 @@ colors:
   normal:
     black:   '0x8e6c51'
     red:     '0xd44e45'
-    green:   '0x8d479e'
+    green:   '0x4f5040'
     yellow:  '0xfcb685'
     blue:    '0xc46692'
-    magenta: '0x7b3a66'
+    magenta: '0x8d479e'
     cyan:    '0xd98887'
     white:   '0x3e2d34'
 
@@ -21,10 +21,10 @@ colors:
   bright:
     black:   '0xb89f8b'
     red:     '0xcc6666'
-    green:   '0xad73bb'
+    green:   '0x7daf69'
     yellow:  '0xfcd1b3'
     blue:    '0xdfa0bd'
-    magenta: '0xa15488'
+    magenta: '0xad73bb'
     cyan:    '0xf3afaf'
     white:   '0xeacfda'
 font:

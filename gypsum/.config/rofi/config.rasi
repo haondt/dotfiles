@@ -18,8 +18,8 @@ configuration {
   color1: #d44e45;
   color9: #cc6666;
 
-  color2: #8d479e;
-  color10: #ad73bb;
+  color2: #4f5040;
+  color10: #7daf69;
 
   color3: #fcb685;
   color11: #fcd1b3;
@@ -27,8 +27,8 @@ configuration {
   color4: #c46692;
   color12: #dfa0bd;
 
-  color5: #7b3a66;
-  color13: #7b3a66;
+  color5: "#8d479e";
+  color13: "#ad73be";
 
   color6: #d98887;
   color14: #f3afaf;
