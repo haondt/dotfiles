@@ -40,7 +40,6 @@ return function (opts)
             if entry.status and (entry.status == '??' or entry.status == 'A ') then
                 return { 'less', entry.path }
             end
-            --return { 'git', 'diff', entry.path }
             return {'git', 'diff', 'HEAD', '--', entry.path}
         end
     })

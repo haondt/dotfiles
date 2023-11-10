@@ -25,9 +25,6 @@ function M.is_valid_index(idx, marks)
     return idx ~= nil and idx >= 1 and idx <= settings.num_slots
 end
 
-    --local mark = marks[idx]
-    --return mark and mark.filename and mark.filename ~= ""
-
 function M.stick_current(target_idx)
     filter_filetype()
     local file_name = utils.current_relative_path()
