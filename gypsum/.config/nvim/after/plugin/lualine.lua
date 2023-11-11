@@ -6,6 +6,10 @@ local function normalized_path()
     return Path:new(vim.api.nvim_buf_get_name(0)):make_relative(vim.loop.cwd())
 end
 
+local function current_file()
+    return vim.fn.expand('%:t')
+end
+
 local function lsp_status()
     local s = ''
     s = '?'
@@ -104,7 +108,7 @@ lualine.setup {
     },
     sections = {
         lualine_a = { 'mode' },
-        lualine_b = { normalized_path },
+        lualine_b = { current_file },
         lualine_c = { 'diagnostics' },
         lualine_x = { lsp_status },
         lualine_y = { vim.loop.cwd },
@@ -112,7 +116,7 @@ lualine.setup {
     },
     inactive_sections = {
         lualine_a = { function() return " " end },
-        lualine_b = { normalized_path },
+        lualine_b = { current_file },
         lualine_c = {},
         lualine_x = {},
         lualine_y = { vim.loop.cwd },

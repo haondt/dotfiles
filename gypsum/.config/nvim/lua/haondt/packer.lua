@@ -16,13 +16,22 @@ return require('packer').startup(function(use)
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
     use('nvim-treesitter/playground')
-    -- use('theprimeagen/harpoon')
     use('mbbill/undotree')
     use('tpope/vim-fugitive')
     use('nvim-treesitter/nvim-treesitter-context')
     use{
         'nvim-lualine/lualine.nvim',
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    }
+
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons', -- optional
+        }
+    }
+    use{
+        'haondt/nvim-tree.lua-float-preview'
     }
 
     use {

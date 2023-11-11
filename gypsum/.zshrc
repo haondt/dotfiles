@@ -20,6 +20,7 @@ alias sz='. ~/.zshrc'
 
 alias md='medea'
 alias clip='xclip -selection clipboard'
+alias sclip="scrot -s -e 'xclip -selection clipboard -t image/png -i $f'"
 alias vim=nvim
 alias py='python3'
 

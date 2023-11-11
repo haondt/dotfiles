@@ -1,6 +1,5 @@
 vim.g.mapleader = " "
 
-
 -- highlight move highlighted text with J and K
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -19,8 +18,3 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- copy and paste from system clipboard
 vim.keymap.set("v", "<leader>cy", "\"+y")
 vim.keymap.set("n", "<leader>cp", "\"+p")
-
--- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-
--- view file tree (netrw)
-vim.keymap.set("n", "<leader>pv", ":Ex<CR>")

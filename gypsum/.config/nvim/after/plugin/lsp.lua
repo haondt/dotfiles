@@ -45,8 +45,8 @@ require('mason-lspconfig').setup({
         'taplo',
         'yamlls'
 	},
-	handlers = {
-		lsp.default_setup,
+    handlers = {
+        lsp.default_setup,
         omnisharp = function()
             lspconfig.omnisharp.setup({})
         end,
@@ -61,7 +61,7 @@ require('mason-lspconfig').setup({
                 }
             })
         end
-	}
+    }
 })
 
 
