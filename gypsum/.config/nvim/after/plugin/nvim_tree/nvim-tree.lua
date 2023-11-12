@@ -95,6 +95,8 @@ preview.setup({
 tree.setup({
     on_attach = on_attach,
     disable_netrw = true,
+    respect_buf_cwd = true,
+    sync_root_with_cwd = true,
     renderer = {
         icons = {
             glyphs = {

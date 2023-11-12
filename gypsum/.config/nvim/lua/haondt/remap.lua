@@ -18,3 +18,29 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- copy and paste from system clipboard
 vim.keymap.set("v", "<leader>cy", "\"+y")
 vim.keymap.set("n", "<leader>cp", "\"+p")
+vim.keymap.set("v", "<leader>cp", "\"+p")
+
+-- window navigation
+vim.keymap.set('n', '<C-h>', '<C-w>h')
+vim.keymap.set('n', '<C-j>', '<C-w>j')
+vim.keymap.set('n', '<C-k>', '<C-w>k')
+vim.keymap.set('n', '<C-l>', '<C-w>l')
+
+vim.keymap.set('n', '<C-A-h>', '<C-w>v')
+vim.keymap.set('n', '<C-A-j>', '<C-w>s<C-w>j')
+vim.keymap.set('n', '<C-A-k>', '<C-w>s')
+vim.keymap.set('n', '<C-A-l>', '<C-w>v<C-w>l')
+
+local original_layout
+local function toggle_fill()
+    if original_layout then
+        vim.cmd(original_layout)
+        original_layout = nil
+    else
+        original_layout = vim.fn.winrestcmd()
+        vim.cmd('resize +999')
+        vim.cmd('vertical resize +999')
+    end
+end
+
+vim.keymap.set('n', '<C-f>', toggle_fill, { noremap = true })
