@@ -9,6 +9,7 @@ end
 
 vim.keymap.set('n', '<A-Tab>', in_normal(builtin.buffers), {})
 vim.keymap.set('n', '<leader><leader>', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>hl', builtin.highlights, {})
 
 vim.keymap.set('n', 'gr', in_normal(builtin.lsp_references), {})
 vim.keymap.set('n', 'gi', in_normal(builtin.lsp_implementations), {})
@@ -30,7 +31,7 @@ local function haondt_map()
     vim.keymap.set('n', '<leader>og', haondt.pickers.git_status, {})
 end
 
-vim.keymap.set('n', '<leader>rl', function()
+vim.keymap.set('n', '<leader>rlt', function()
  reloader.reload_module("haondt")
  reloader.reload_module("telescope")
  haondt_map()

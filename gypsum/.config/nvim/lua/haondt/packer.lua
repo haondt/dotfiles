@@ -25,13 +25,15 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'nvim-tree/nvim-tree.lua',
-        requires = {
-            'nvim-tree/nvim-web-devicons', -- optional
-        }
+        'nvim-tree/nvim-tree.lua'
     }
     use{
         'haondt/nvim-tree.lua-float-preview'
+    }
+
+    use {
+        "eoh-bse/minintro.nvim",
+        config = function() require("minintro").setup({ color = "#cc6666" }) end
     }
 
     use {

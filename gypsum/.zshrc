@@ -15,13 +15,28 @@ export EDITOR=nvim
 export PATH=$PATH:~/.local/share/bob/nvim-bin
 export PATH=$PATH:~/.local/bin
 
+## custom vim startup ##
+vimcd() {
+    if [ -n "$1" ]; then # called with arg
+        if [ -d "$1" ]; then # arg is dir
+            \nvim -c "cd $1"
+        else # arg is file
+            local file_dir=$(dirname "$1")
+            \nvim -c "cd $file_dir" -c "edit $1"
+        fi
+    else # no arg
+        \nvim
+    fi
+}
+
 ## aliases ##
 alias sz='. ~/.zshrc'
 
 alias md='medea'
 alias clip='xclip -selection clipboard'
 alias sclip="scrot -s -e 'xclip -selection clipboard -t image/png -i $f'"
-alias vim=nvim
+alias vim=vimcd
+alias nvim=vimcd
 alias py='python3'
 
 alias gs='git status --short -b'
@@ -37,12 +52,6 @@ hash -d vs="$HOME/dotfiles/gypsum/.config/nvim"
 hash -d vl="$HOME/.local/state/nvim"
 hash -d p="$HOME/projects"
 
-# bun completions
-[ -s "/home/noah/.bun/_bun" ] && source "/home/noah/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 
 ## python ##
 VIRTUAL_ENV_DISABLE_PROMPT=1

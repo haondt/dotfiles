@@ -25,7 +25,7 @@ local function map()
 end
 map()
 
-vim.keymap.set('n', '<leader>srl', function()
+vim.keymap.set('n', '<leader>rls', function()
  reloader.reload_module("sticky")
  map()
  print('sticky reloaded.')
