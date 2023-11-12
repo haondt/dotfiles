@@ -7,7 +7,7 @@ local function in_normal(fn)
     end
 end
 
-vim.keymap.set('n', '<A-Tab>', in_normal(builtin.buffers), {})
+vim.keymap.set('n', '<leader><Tab>', in_normal(builtin.buffers), {})
 vim.keymap.set('n', '<leader><leader>', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>hl', builtin.highlights, {})
 

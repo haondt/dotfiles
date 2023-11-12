@@ -44,27 +44,50 @@ return function (opts)
         end
     })
 
+    local set_picker_strategy = function(_) end
+    local get_picker_strategy = function() return nil end
+
     opts.initial_mode = "normal"
     opts.layout_strategy = "vertical"
     opts.previewer = delta
     opts.attach_mappings = function(prompt_bufnr, map)
         actions.git_staging_toggle:enhance {
             post = function()
+                -- keep selection when staging/unstaging,
+                -- but allow it to be default when first opening the picker
+                -- otherwise when opening the picker the selection will start
+                -- at the bottom
+                local desired_strategy = "row"
+                local old_strategy = get_picker_strategy()
+                if old_strategy ~= desired_strategy then
+                    set_picker_strategy(desired_strategy)
+                end
+
                 action_state.get_current_picker(prompt_bufnr):refresh(gen_new_finder(opts), { reset_prompt = false})
+
+                -- delay before changing the strategy back
+                -- we need to keep the default strategy so 
+                -- the sort will jump to the top when typing
+                -- in the prompt
+                vim.defer_fn(function()
+                    set_picker_strategy(old_strategy)
+                end, 50)
             end
         }
         map({"i", "n"}, "<tab>", actions.git_staging_toggle)
         return true
     end
 
-    -- keep selection when staging/unstaging
-    opts.selection_strategy = "row"
-
     opts.sorter = sorters.get_fzy_sorter(opts)
     opts.finder = gen_new_finder(opts)
 
     local picker = pickers.new(opts)
-    picker:find() -- find() will create the results window, so we can add line numbers
+    picker:find()
+
+    set_picker_strategy = function(strat) picker.selection_strategy = strat end
+    get_picker_strategy = function() return picker.selection_strategy end
+
+    -- find() will create the results window, so we can add line numbers
     vim.api.nvim_win_set_option(picker.results_win, 'relativenumber', true)
 end
 
