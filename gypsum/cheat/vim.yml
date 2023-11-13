@@ -24,27 +24,28 @@
 - command: :so
   description: source current file
   tags: null
-- command: space+pf
+- command: <leader>pf
   description: search directory files by name
   tags:
   - project
-- command: space+pg
+- command: <leader>pg
   description: search all files in git directory
   tags:
   - project
-- command: space+ps
+- command: <leader>ps
   description: search directory files by content
   tags:
   - project
-- command: space+pv
+- command: <leader>pv
   description: go to file tree view
   tags:
   - project
   - directory
-- command: space+space
+  - nvim-tree
+- command: <leader>space
   description: search vim help with telescope view
   tags: null
-- command: alt+tab
+- command: <A-Tab>
   description: open buffer view
   tags: null
 - command: gr
@@ -53,7 +54,7 @@
 - command: gi
   description: go to implementations
   tags: null
-- command: ctrl+w+w
+- command: <C-w>w
   description: cycle between open windows
   tags:
   - toggle
@@ -122,7 +123,7 @@
   description: go to space after previous word
   tags:
   - combo
-- command: space+p
+- command: <leader>p
   description: paste without copying to buffer
   tags:
   - remap
@@ -139,16 +140,16 @@
 - command: ctrl+^
   description: toggle between current and last file
   tags: null
-- command: space+sa
+- command: <leader>sa
   description: toggle sticky menu
   tags:
   - remap
-- command: space+s1 / space+s2 / ...
+- command: <leader>s1 / <leader>s2 / ...
   description: stick buffer to slot n
   tags:
   - remap
   - sticky
-- command: space+1 / space+2 / ...
+- command: <leader>1 / <leader>2 / ...
   description: open buffer in slot n
   tags:
   - remap
@@ -158,3 +159,43 @@
   tags:
   - ast
   - highlight
+- command: <C-h/j/k/l> 
+  description: change window focus
+  tags:
+  - move
+- command: <C-s-h/j/k/l>
+  description: split window in direction
+  tags:
+  - open
+  - window
+- command: <C-q>
+  description: close window
+  tags:
+  - quit
+  - exit
+- command: <C-e>
+  description: make windows even sized
+  tags:
+  - resize
+  - equal
+- command: <C-f>
+  description: toggle window fullscreen
+  tags:
+  - zoom
+  - toggle
+- command: <C-x>
+  description: swap window with closest
+  tags:
+  - toggle
+  - swap
+- command: <C-w>
+  description: toggle line wrapping
+  tags:
+  - toggle
+- command: <leader>cy
+  description: copy to system clipboard
+  tags:
+- command: <leader>cp
+  description: paste from system clipboard
+  tags:
+

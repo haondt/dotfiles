@@ -1,5 +1,5 @@
 - command: <A-h/j/k/l> 
-  description: change pane focuse
+  description: change pane focus
   tags:
   - move
 - command: <A-s-h/j/k/l>
