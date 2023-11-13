@@ -1,0 +1,48 @@
+- command: ',space'
+  description: remove search highlight
+  tags: null
+- command: f
+  description: hint mode
+  tags: null
+- command: F
+  description: hint mode, open in new tab
+  tags: null
+- command: ctrl+alt+escape
+  description: toggle ignore mode
+  tags: null
+- command: L
+  description: go forward in history
+  tags: null
+- command: H
+  description: go backward in history
+  tags: null
+- command: b
+  description: open tab view
+  tags: null
+- command: tab
+  description: cycle through options in view
+  tags: null
+- command: u
+  description: reopen closed tab/window
+  tags: null
+- command: q
+  description: close current tab
+  tags: null
+- command: alt+enter
+  description: open new tab
+  tags: null
+- command: alt+tab
+  description: search open tabs
+  tags: null
+- command: gt
+  description: go to next tab
+  tags: null
+- command: gT
+  description: go to previous tab
+  tags: null
+- command: t
+  description: type in a url and open in new tab
+  tags: null
+- command: T
+  description: edit the current url and open in new tab
+  tags: null

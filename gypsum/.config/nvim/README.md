@@ -4,3 +4,4 @@ requirements:
 - packer
 - fd
 - git delta
+- yq

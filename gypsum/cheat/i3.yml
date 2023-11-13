@@ -1,0 +1,58 @@
+- command: mod+enter
+  description: open new terminal
+  tags: null
+- command: mod+shift+arrow keys
+  description: move window
+  tags: null
+- command: mod+f
+  description: toggle fullscreen
+  tags: null
+- command: mod+shift-space
+  description: toggle floating window
+  tags: null
+- command: mod+[0-9]
+  description: go to workspace
+  tags:
+  - desktop
+- command: mod+shift+[0-9]
+  description: move window to workspace
+  tags:
+  - desktop
+- command: mod+s
+  description: open application launcher (rofi)
+  tags:
+  - run
+- command: mod+shift+c
+  description: reload configuration file
+  tags: null
+- command: mod+shift+r
+  description: restart i3 inplace
+  tags: null
+- command: mod+shift+e
+  description: exit i3
+  tags: null
+- command: mod+shift+minus
+  description: move window to scratchpad
+  tags:
+  - shadow-realm
+- command: mod+minus
+  description: toggle through windows in scratchpad
+  tags:
+  - shadow-realm
+- command: mod+tab
+  description: show window switcher
+  tags: null
+- command: mod+shift+space
+  description: toggle window float
+  tags:
+  - scratchpad
+  - shadow-realm
+- command: mod+r
+  description: toggle resize mode
+  tags: null
+- command: escape | return | mod+r
+  description: exit resize mode
+  tags: null
+- command: mod+q
+  description: close focused window
+  tags: null

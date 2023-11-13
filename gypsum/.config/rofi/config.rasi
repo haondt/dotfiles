@@ -4,6 +4,7 @@ configuration {
   kb-mode-next: "Alt-l";
   kb-mode-previous: "Alt-h";
   font: "MesloLGS NF 13";
+  monitor: "primary";
 }
 
 
