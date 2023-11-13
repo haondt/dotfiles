@@ -31,6 +31,7 @@ vimcd() {
 
 ## aliases ##
 alias sz='. ~/.zshrc'
+alias ez='vim ~/.zshrc'
 
 alias md='medea'
 alias clip='xclip -selection clipboard'

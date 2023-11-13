@@ -14,7 +14,7 @@ haondt_virtual_env() {
 
 haondt_build_prompt() {
   HAONDT_RETVAL=$?
-  echo -n "%{%B%F{6}%2c%b%f%}"
+  echo -n "%{%B%F{6}%1c%b%f%}"
   echo -n "$(git_prompt_info)"
   echo -n "$(haondt_virtual_env)"
   haondt_prompt_leader

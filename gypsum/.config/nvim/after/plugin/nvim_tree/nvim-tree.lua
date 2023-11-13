@@ -76,7 +76,7 @@ preview.setup({
             local window_w_f = (screen_w - WIDTH_PADDING * 2 -1) / 2
             local window_w = math.floor(window_w_f)
             local window_h = screen_h - HEIGHT_PADDING * 2
-            local center_x = window_w_f + WIDTH_PADDING + 1 + 1
+            local center_x = window_w_f + WIDTH_PADDING + 2
             local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
 
             return {
@@ -100,15 +100,15 @@ tree.setup({
     renderer = {
         icons = {
             glyphs = {
-                default = '',
+                default = ' ',
                 symlink = '&',
                 folder = {
-                    arrow_closed = '',
-                    arrow_open = '',
-                    default = '',
-                    open = '',
-                    empty = '',
-                    empty_open = '',
+                    arrow_closed = ' ',
+                    arrow_open = ' ',
+                    default = ' ',
+                    open = ' ',
+                    empty = ' ',
+                    empty_open = ' ',
                     symlink = '&',
                     symlink_open = '&'
                 },
@@ -118,7 +118,7 @@ tree.setup({
                     unmerged = '!',
                     untracked = '?',
                     deleted = '-',
-                    ignored = ''
+                    ignored = '.'
                 }
             },
         }
