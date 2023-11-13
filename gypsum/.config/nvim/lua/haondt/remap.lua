@@ -15,6 +15,9 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- paste without copying pasted text
 -- vim.keymap.set("x", "p", "\"_dP")
 
+-- toggle wrapping
+vim.keymap.set('n', '<leader>w', ':set wrap!<CR>')
+
 -- copy and paste from system clipboard
 vim.keymap.set("v", "<leader>cy", "\"+y")
 vim.keymap.set("n", "<leader>cp", "\"+p")
@@ -26,10 +29,14 @@ vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 
-vim.keymap.set('n', '<C-A-h>', '<C-w>v')
-vim.keymap.set('n', '<C-A-j>', '<C-w>s<C-w>j')
-vim.keymap.set('n', '<C-A-k>', '<C-w>s')
-vim.keymap.set('n', '<C-A-l>', '<C-w>v<C-w>l')
+vim.keymap.set('n', '<C-s><C-h>', '<C-w>v')
+vim.keymap.set('n', '<C-s><C-j>', '<C-w>s<C-w>j')
+vim.keymap.set('n', '<C-s><C-k>', '<C-w>s')
+vim.keymap.set('n', '<C-s><C-l>', '<C-w>v<C-w>l')
+
+vim.keymap.set('n', '<C-q>', '<C-w>q')
+vim.keymap.set('n', '<C-x>', '<C-w>x')
+vim.keymap.set('n', '<C-e>', '<C-w>=')
 
 local original_layout
 local function toggle_fill()
