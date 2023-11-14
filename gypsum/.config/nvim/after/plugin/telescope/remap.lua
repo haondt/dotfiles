@@ -19,7 +19,8 @@ vim.keymap.set('n', 'gt', in_normal(builtin.lsp_type_definitions), {})
 
 vim.keymap.set('n', '<leader>pg', builtin.git_files);
 vim.keymap.set('n', '<leader>pm', builtin.lsp_workspace_symbols, {})
-vim.keymap.set('n', '<leader>pe', in_normal(builtin.diagnostics), {})
+vim.keymap.set('n', '<leader>pw', in_normal(function() builtin.diagnostics({ severity_bound = vim.diagnostic.severity.WARN }) end), {})
+vim.keymap.set('n', '<leader>pe', in_normal(function() builtin.diagnostics({ severity_limit = vim.diagnostic.severity.ERROR }) end), {})
 
 vim.keymap.set('n', '<leader>oh', in_normal(builtin.git_bcommits), {})
 

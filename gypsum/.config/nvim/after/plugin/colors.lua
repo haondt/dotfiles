@@ -17,6 +17,7 @@ vim.api.nvim_set_hl(0, "LineNr", { fg = palette.color6 })
 vim.api.nvim_set_hl(0, "CursorLineNr", { fg = palette.color14 })
 vim.api.nvim_set_hl(0, 'Folded', { fg = palette.color0 })
 vim.api.nvim_set_hl(0, 'FoldColumn', { fg = palette.color8 })
+vim.api.nvim_set_hl(0, 'MatchParen', { fg = palette.color12, bold = true })
 
 -- diagnostics
 vim.api.nvim_set_hl(0, "DiagnosticError", { fg = palette.error.bg })
