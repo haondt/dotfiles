@@ -12,6 +12,10 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
+-- select all
+vim.keymap.set("n", "<leader>va", "ggVG")
+
+
 -- paste without copying pasted text
 -- vim.keymap.set("x", "p", "\"_dP")
 
@@ -69,3 +73,22 @@ local toggle_diff_mode = function ()
     end
 end
 vim.keymap.set('n', '<C-y>', toggle_diff_mode, { noremap = true })
+
+local set_filetype = function()
+    local filetype = vim.fn.input('Enter filetype: ')
+    if filetype and filetype ~= "" then
+        local clients = vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf()})
+        for _, client in ipairs(clients) do
+            vim.lsp.buf_detach_client(0, client.id)
+        end
+        vim.bo.filetype = filetype
+        vim.cmd('LspStart')
+    else
+        print('invalid or empty filetype. LSP not changed')
+    end
+end
+vim.keymap.set('n', '<leader>sf', set_filetype, { noremap = true })
+
+-- diagnostic
+
+vim.keymap.set('n', '<leader>fe', vim.diagnostic.open_float, opts)

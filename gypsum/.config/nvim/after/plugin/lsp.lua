@@ -5,13 +5,15 @@ lsp.on_attach(function(client, bufnr)
 	--lsp.default_keymaps({buffer = bufnr})
 
     vim.keymap.set('n', '<leader>=', vim.lsp.buf.format, opts)
+    vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, opts)
+    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
     --vim.lsp.buf.hover()
     --vim.lsp.buf.signature_help()
     --vim.lsp.buf.rename()
     --vim.lsp.buf.code_action()
     --vim.diagnostic.open_float()
     --vim.diagnostic.goto_[prev|next]()
-    
+
 
 	--vim.keymap.set('n', 'gh', function() vim.lsp.buf.hover() end, opts)
 	vim.keymap.set('n', '<leader>vd', function() end, opts)

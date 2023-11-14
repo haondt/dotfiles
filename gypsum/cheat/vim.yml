@@ -203,4 +203,12 @@
 - command: <C-y>
   description: toggle diff mode
   tags:
-
+- command: <leader>va
+  description: select all
+  tags:
+- command: <leader>sf
+  description: set the filetype for buffer
+  tags:
+- command: <leader>=
+  description: format document with lsp
+  tags:
