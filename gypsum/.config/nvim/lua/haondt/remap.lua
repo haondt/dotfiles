@@ -63,12 +63,12 @@ end
 vim.keymap.set('n', '<C-t>', open_scratch_buffer, { noremap = true })
 
 local is_in_diff_mode = false
-local toggle_diff_mode = function ()
+local toggle_diff_mode = function()
     if is_in_diff_mode then
-        vim.cmd('windo diffthis')
+        vim.cmd('diffoff!')
         is_in_diff_mode = false
     else
-        vim.cmd('diffoff!')
+        vim.cmd('windo diffthis')
         is_in_diff_mode = true
     end
 end

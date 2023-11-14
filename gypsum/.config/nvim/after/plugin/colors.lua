@@ -106,6 +106,11 @@ vim.api.nvim_set_hl(0, "diffLine", { fg = palette.color7, bg = palette.color8 })
 vim.api.nvim_set_hl(0, "diffSubname", { fg = palette.color0 })
 vim.api.nvim_set_hl(0, "diffFileId", { fg = palette.color0 })
 
+vim.api.nvim_set_hl(0, 'DiffText', { bg = palette.color0 })
+vim.api.nvim_set_hl(0, 'DiffChange', { bg = palette.color7 })
+vim.api.nvim_set_hl(0, 'DiffAdd',  palette.add)
+vim.api.nvim_set_hl(0, 'DiffDelete',  palette.remove)
+
 -- sticky
 vim.api.nvim_set_hl(0, "StickyWindow", { bg = palette.bg })
 vim.api.nvim_set_hl(0, "StickyTitle", { fg = palette.fg })

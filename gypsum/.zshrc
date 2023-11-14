@@ -33,7 +33,7 @@ vimcd() {
 alias sz='. ~/.zshrc'
 alias ez='vim ~/.zshrc'
 
-alias md='medea'
+alias md='medea --trim'
 alias clip='xclip -selection clipboard'
 alias sclip="scrot -s -e 'xclip -selection clipboard -t image/png -i $f'"
 alias vim=vimcd
