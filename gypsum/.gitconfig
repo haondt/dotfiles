@@ -20,7 +20,8 @@
     old = brightred
     new = brightgreen
     meta = brightgreen
-
+    oldMoved = brightwhite
+    newMoved = brightwhite
 
 [interactive]
     diffFilter = delta --color-only
@@ -46,7 +47,7 @@
 
     #hunk-header-decoration-style = brightmagenta ul ol normal
     hunk-header-file-style = brightblue normal
-    hunk-header-line-number-styke = blue normal
+    hunk-header-line-number-style = blue normal
     hunk-header-style = file
     hunk-header-decoration-style = brightmagenta ul normal
     hunk-label = " "

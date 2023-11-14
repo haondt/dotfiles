@@ -33,10 +33,31 @@ vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 
-vim.keymap.set('n', '<C-s><C-h>', '<C-w>v')
-vim.keymap.set('n', '<C-s><C-j>', '<C-w>s<C-w>j')
-vim.keymap.set('n', '<C-s><C-k>', '<C-w>s')
-vim.keymap.set('n', '<C-s><C-l>', '<C-w>v<C-w>l')
+local open_scratch_buffer = function()
+    local scratch_buffer = vim.api.nvim_create_buf(true, true)
+    vim.api.nvim_buf_set_option(scratch_buffer, 'bufhidden', 'delete')
+    vim.api.nvim_set_current_buf(scratch_buffer)
+end
+vim.keymap.set('n', '<C-t>', open_scratch_buffer, { noremap = true })
+
+vim.keymap.set('n', '<C-s><C-h>', function()
+    vim.cmd('vsplit')
+    open_scratch_buffer()
+end)
+vim.keymap.set('n', '<C-s><C-j>', function()
+    vim.cmd('split')
+    vim.cmd('wincmd j')
+    open_scratch_buffer()
+end)
+vim.keymap.set('n', '<C-s><C-k>', function()
+    vim.cmd('split')
+    open_scratch_buffer()
+end)
+vim.keymap.set('n', '<C-s><C-l>', function()
+    vim.cmd('vsplit')
+    vim.cmd('wincmd l')
+    open_scratch_buffer()
+end)
 
 vim.keymap.set('n', '<C-q>', '<C-w>q')
 vim.keymap.set('n', '<C-x>', '<C-w>x')
@@ -55,12 +76,6 @@ local function toggle_fill()
 end
 vim.keymap.set('n', '<C-f>', toggle_fill, { noremap = true })
 
-local open_scratch_buffer = function()
-    local scratch_buffer = vim.api.nvim_create_buf(true, true)
-    vim.api.nvim_buf_set_option(scratch_buffer, 'bufhidden', 'delete')
-    vim.api.nvim_set_current_buf(scratch_buffer)
-end
-vim.keymap.set('n', '<C-t>', open_scratch_buffer, { noremap = true })
 
 local is_in_diff_mode = false
 local toggle_diff_mode = function()
