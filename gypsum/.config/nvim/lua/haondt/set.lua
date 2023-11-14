@@ -26,3 +26,6 @@ vim.cmd('autocmd Filetype help setlocal number')
 
 -- global status bar
 vim.opt.laststatus = 3
+
+vim.o.diffopt = vim.o.diffopt .. ',linematch:60'
+vim.o.diffopt = vim.o.diffopt .. ',foldcolumn:0'
