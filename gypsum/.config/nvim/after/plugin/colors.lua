@@ -15,6 +15,8 @@ vim.api.nvim_set_hl(0, "Search", palette.search)
 vim.api.nvim_set_hl(0, "IncSearch", palette.search)
 vim.api.nvim_set_hl(0, "LineNr", { fg = palette.color6 })
 vim.api.nvim_set_hl(0, "CursorLineNr", { fg = palette.color14 })
+vim.api.nvim_set_hl(0, 'Folded', { fg = palette.color0 })
+vim.api.nvim_set_hl(0, 'FoldColumn', { fg = palette.color8 })
 
 -- diagnostics
 vim.api.nvim_set_hl(0, "DiagnosticError", { fg = palette.error.bg })
@@ -106,8 +108,8 @@ vim.api.nvim_set_hl(0, "diffLine", { fg = palette.color7, bg = palette.color8 })
 vim.api.nvim_set_hl(0, "diffSubname", { fg = palette.color0 })
 vim.api.nvim_set_hl(0, "diffFileId", { fg = palette.color0 })
 
-vim.api.nvim_set_hl(0, 'DiffText', { bg = palette.color0 })
-vim.api.nvim_set_hl(0, 'DiffChange', { bg = palette.color7 })
+vim.api.nvim_set_hl(0, 'DiffText', { bg = palette.color0, fg = palette.color15, bold = true })
+vim.api.nvim_set_hl(0, 'DiffChange', { bg = palette.color0, fg = palette.color15, bold = false })
 vim.api.nvim_set_hl(0, 'DiffAdd',  palette.add)
 vim.api.nvim_set_hl(0, 'DiffDelete',  palette.remove)
 

@@ -60,4 +60,6 @@ return require('packer').startup(function(use)
         config = function() require("nvim-autopairs").setup {} end
     }
 
+    use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+
 end)

@@ -7,6 +7,7 @@ require'nvim-treesitter.configs'.setup {
       "c",
       "lua",
       "vim",
+      "python",
       "vimdoc",
       "query"
   },
@@ -28,3 +29,4 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+
