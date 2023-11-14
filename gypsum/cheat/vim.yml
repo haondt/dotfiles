@@ -191,11 +191,16 @@
 - command: <C-w>
   description: toggle line wrapping
   tags:
-  - toggle
 - command: <leader>cy
   description: copy to system clipboard
   tags:
 - command: <leader>cp
   description: paste from system clipboard
+  tags:
+- command: <C-t>
+  description: switch to new scratch buffer
+  tags:
+- command: <C-y>
+  description: toggle diff mode
   tags:
 
