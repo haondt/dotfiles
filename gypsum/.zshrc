@@ -29,6 +29,35 @@ vimcd() {
     fi
 }
 
+## custom tmux startup ##
+tvim() {
+    if [ "$#" -ne 1 ]; then
+        tmux
+    else
+        cwd=$(pwd)
+        target="$1"
+
+        # ensure target exists
+        if [ ! -e "$target" ]; then
+            echo "Error: '$target' does not exist"
+            exit 1
+        fi
+
+        # arg is dir
+        if [ -d "$target" ]; then
+            cd "$target"
+            vim_target=""
+        else
+            cd $(dirname "$target")
+            vim_target=$(basename "$target")
+        fi
+
+        tmux new-session "nvim $vim_target; zsh" \; split-window -v -p 20 \; select-pane -t 0
+        cd $cwd
+    fi
+
+}
+
 ## aliases ##
 alias sz='. ~/.zshrc'
 alias ez='vim ~/.zshrc'
@@ -38,6 +67,7 @@ alias clip='xclip -selection clipboard'
 alias sclip="scrot -s -e 'xclip -selection clipboard -t image/png -i $f'"
 alias vim=vimcd
 alias nvim=vimcd
+alias tv=tvim
 alias py='python3'
 
 alias gs='git status --short -b'
