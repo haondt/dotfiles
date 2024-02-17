@@ -28,6 +28,7 @@ local function haondt_map()
     local haondt = require('telescope').extensions.haondt
     vim.keymap.set('n', '<leader>ps', haondt.pickers.live_grep, {})
     vim.keymap.set('n', '<leader>pf', haondt.pickers.find_files, {})
+    vim.keymap.set('n', '<leader>pd', haondt.pickers.find_directories, {})
 
     vim.keymap.set('n', '<leader>og', haondt.pickers.git_status, {})
 end
