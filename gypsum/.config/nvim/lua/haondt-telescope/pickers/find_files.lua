@@ -11,8 +11,9 @@ return function(opts)
         local fn = utils.path_tail(line)
         local path = string.sub(line, 1, -(#fn+1))
 
+        local ord = opts.haondt_search_directory and line or fn
         local entry = {
-            ordinal = fn,
+            ordinal = ord,
             __fn = fn,
             __path = path,
             path = line

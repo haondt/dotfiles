@@ -83,6 +83,5 @@ hash -d vs="$HOME/dotfiles/gypsum/.config/nvim"
 hash -d vl="$HOME/.local/state/nvim"
 hash -d p="$HOME/projects"
 
-
 ## python ##
 VIRTUAL_ENV_DISABLE_PROMPT=1
