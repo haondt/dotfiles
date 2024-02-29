@@ -31,7 +31,7 @@ local function haondt_map()
     vim.keymap.set('n', '<leader>pd', function() haondt.pickers.find_files({ haondt_search_directory = true }) end, {})
     vim.keymap.set('n', '<leader>pi', function() haondt.pickers.find_files({
         haondt_search_directory = true,
-        find_command = { "fd", "--type", "f", "--color", "never", "--hidden", "--exclude", ".git", "-I" }
+        find_command = { "fdfind", "--type", "f", "--color", "never", "--hidden", "--exclude", ".git", "-I" }
     }) end, {})
 
     vim.keymap.set('n', '<leader>og', haondt.pickers.git_status, {})
