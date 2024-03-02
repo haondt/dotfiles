@@ -1,3 +1,4 @@
+local sorters = require("telescope.sorters")
 local entry_display = require('telescope.pickers.entry_display')
 local strings = require('plenary.strings')
 local state = require('telescope.state')
@@ -176,7 +177,7 @@ return function(opts)
 
     local picker = pickers.new(opts, {
         prompt_title = "Cheat",
-        sorter = require("telescope.config").values.file_sorter(opts),
+        sorter = sorters.get_fzy_sorter(opts),
         attach_mappings = function(_)
             if opts.use_cheat_window == nil or opts.use_cheat_window then
                 action_set.edit:replace(action_set_edit)
