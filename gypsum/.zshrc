@@ -1,7 +1,7 @@
 ## zsh setup ##
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="haondt"
-plugins=()
+plugins=(vi-mode)
 source $ZSH/oh-my-zsh.sh
 export ZLE_RPROMPT_INDENT=0
 
@@ -109,9 +109,14 @@ hash -d p="$HOME/projects"
 
 alias notes="vim $HOME/syncthing/notes/The\ Vault\ v2"
 
-zle -N cheat
-bindkey '\e  ' cheat
+## bindings ##
 
+zle -N cheat
+
+KEYTIMEOUT=1 # 10 ms key timeout
+bindkey -M vicmd '  ' cheat # <leader><leader>
+# map <leader> to circumvent 10ms timeout when activating cheat
+bindkey -M vicmd ' ' undefined-key 
 
 ## python ##
 VIRTUAL_ENV_DISABLE_PROMPT=1
