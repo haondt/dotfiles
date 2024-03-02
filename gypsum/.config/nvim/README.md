@@ -12,12 +12,13 @@ Requirements are based on a fairly bare Debian install.
 - `tmux`
 - `nodejs`
 - `npm`
+- `bat` (also installable via cargo)
 
 **rust dependencies** (installable via cargo)
 
 - `[bob](https://github.com/MordechaiHadad/bob)`
   - use to install `neovim`, since a fairly recent version is required
-- `ripgrep` (optional)
+- `ripgrep`
 - `fd-find`
 - `[delta](https://github.com/dandavison/delta)`
 

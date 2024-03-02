@@ -38,7 +38,7 @@ return function (opts)
     local delta = previewers.new_termopen_previewer({
         get_command = function(entry)
             if entry.status and (entry.status == '??' or entry.status == 'A ') then
-                return { 'less', entry.path }
+                return { 'batcat', entry.path, '--paging=never', '-p', '--theme=ansi' }
             end
             return {'git', 'diff', 'HEAD', '--', entry.path}
         end
