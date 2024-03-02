@@ -85,6 +85,7 @@ alias sz='. ~/.zshrc'
 alias ez='vim ~/.zshrc'
 alias ec='vim ~/dotfiles/gypsum/cheat'
 alias ev='vim ~/dotfiles/gypsum/.config/nvim'
+alias v=vimcd
 
 alias md='medea --trim'
 alias clip='xclip -selection clipboard'
