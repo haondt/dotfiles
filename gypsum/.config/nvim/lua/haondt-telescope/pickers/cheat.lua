@@ -1,4 +1,6 @@
 local entry_display = require('telescope.pickers.entry_display')
+local strings = require('plenary.strings')
+local state = require('telescope.state')
 local Path = require("plenary.path")
 local from_entry = require("telescope.from_entry")
 local utils = require('telescope.utils')
@@ -29,15 +31,35 @@ local gen_entry_maker = function(opts)
             colend = colend,
         }
 
+        opts.separator = opts.separator or " "
         local displayer = entry_display.create({
+            separator = opts.separator,
             items = {
+                { width = nil },
                 { width = nil },
             }
         })
 
         entry.display = function(et)
+            local fn = utils.path_tail(et.path);
+            local text = et.ordinal:gsub("^%s+", "")
+
+            local status = state.get_status(vim.api.nvim_get_current_buf());
+            local window_width = vim.api.nvim_win_get_width(status.results_win) - #status.picker.selection_caret
+            local remaining_width = window_width - #fn - #opts.separator
+            local gap = remaining_width - #text
+
+            local fn_padded = fn
+            local text_truncated = text
+            if gap > 0 then
+                fn_padded = string.format("%s%s", string.rep(' ', gap), fn)
+            elseif gap < 0 then
+                 text_truncated = strings.truncate(text, #text + gap)
+            end
+
             return displayer({
-                { et.ordinal }
+                { text_truncated },
+                { fn_padded .. ' ', 'TelescopeResultsComment'}
             })
         end
 
@@ -69,7 +91,6 @@ return function(opts)
     opts.previewer = haondt_previewers.vim_buffer_vimgrep.new(opts)
     opts.layout_strategy = opts.layout_strategy or "horizontal"
 
-    -- TODO: show filename in entry
     local picker = pickers.new(opts, {
         prompt_title = "Cheat",
         sorter = require("telescope.config").values.file_sorter(opts),
