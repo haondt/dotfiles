@@ -104,6 +104,42 @@ local set_filetype = function()
 end
 vim.keymap.set('n', '<leader>sf', set_filetype, { noremap = true })
 
+local diff_disk_buffers = {}
+local diff_disk = function()
+    if #diff_disk_buffers ~= 0 then
+        for _, bufnr in ipairs(diff_disk_buffers) do
+            vim.cmd('bwipeout! ' .. bufnr)
+        end
+        diff_disk_buffers = {}
+        toggle_diff_mode()
+        return
+    end
+
+    local working_bufnr = vim.api.nvim_get_current_buf()
+
+    vim.cmd('new') -- top right pane
+    vim.cmd('set buftype=nofile')
+    local remote_bufnr = vim.api.nvim_win_get_buf(0)
+    vim.cmd('0r #' .. working_bufnr)
+    local last_line = vim.fn.line('$')
+    local last_line_content = vim.fn.trim(vim.fn.getline(last_line))
+    if last_line_content == '' then
+        --vim.api.nvim_feedkeys('Gdd', 'n', true)
+        vim.api.nvim_buf_set_lines(remote_bufnr, last_line - 1, last_line, false, {})
+    end
+
+    vim.cmd('vert new') -- top left pane
+    vim.cmd('set buftype=nofile')
+    local local_bufnr = vim.api.nvim_win_get_buf(0)
+    local local_lines = vim.api.nvim_buf_get_lines(working_bufnr, 0, -1, false)
+    vim.api.nvim_buf_set_lines(local_bufnr, 0, -1, false, local_lines)
+
+    table.insert(diff_disk_buffers, remote_bufnr)
+    table.insert(diff_disk_buffers, local_bufnr)
+    toggle_diff_mode()
+end
+vim.api.nvim_create_user_command('DiffDisk', diff_disk, {})
+
 -- diagnostic
 
 vim.keymap.set('n', '<leader>fe', vim.diagnostic.open_float, opts)

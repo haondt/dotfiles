@@ -69,11 +69,12 @@ return function(opts)
     opts.previewer = haondt_previewers.vim_buffer_vimgrep.new(opts)
     opts.layout_strategy = opts.layout_strategy or "horizontal"
 
+    -- TODO: show filename in entry
     local picker = pickers.new(opts, {
         prompt_title = "Cheat",
         sorter = require("telescope.config").values.file_sorter(opts),
         attach_mappings = function(prompt_bufnr)
-            -- based off the standard actionn_set.edit
+            -- based off the standard action_set.edit
             action_set.edit:replace(function(_, command)
                 local entry = action_state.get_selected_entry()
 

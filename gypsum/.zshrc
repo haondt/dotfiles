@@ -16,13 +16,14 @@ export PATH=$PATH:~/.local/share/bob/nvim-bin
 export PATH=$PATH:~/.local/bin
 
 ## custom vim startup ##
+# workaround because something is broken that causes grep (<leader>ps) to not preview files correctly
 vimcd() {
     if [ -n "$1" ]; then # called with arg
         if [ -d "$1" ]; then # arg is dir
-            \nvim -c "cd $1"
+            RETURN_PATH=$(pwd); cd $1 && \nvim -c "cd $1" && cd $RETURN_PATH
         else # arg is file
             local file_dir=$(dirname "$1")
-            \nvim -c "cd $file_dir" -c "edit $1"
+            RETURN_PATH=$(pwd); cd $file_dir && \nvim -c "edit $1" && cd $RETURN_PATH
         fi
     else # no arg
         \nvim
@@ -82,6 +83,8 @@ alias lla='ls -la'
 hash -d vs="$HOME/dotfiles/gypsum/.config/nvim"
 hash -d vl="$HOME/.local/state/nvim"
 hash -d p="$HOME/projects"
+
+alias notes="RETURN_PATH=$(pwd); cd $HOME/syncthing/notes/The\ Vault\ v2 && vim . && cd $RETURN_PATH"
 
 ## python ##
 VIRTUAL_ENV_DISABLE_PROMPT=1
