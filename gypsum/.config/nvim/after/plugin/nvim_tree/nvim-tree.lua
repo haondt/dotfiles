@@ -100,7 +100,7 @@ tree.setup({
     filters = {
         git_ignored = true,
         custom = {
-            '^\\.git$'
+            '^\\.git$' -- .git folder
         },
     },
     renderer = {
