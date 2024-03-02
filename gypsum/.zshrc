@@ -59,6 +59,27 @@ tvim() {
 
 }
 
+cheat() {
+    BUFFER=""
+
+    local markdown_dir="$HOME/dotfiles/gypsum/cheat"
+    local cheat="$HOME/dotfiles/gypsum/cheat/cheat.sh"
+
+    # Use grep to search for tags in Markdown files
+    #tags=$(grep -h -r -o -E '#\w+' "$markdown_dir" | sort -u)
+    local tags=$("$cheat" -d "$markdown_dir" | sed 's/:/\t/g' | sed 's/<COLON>/:/g')
+
+    # Use fzf to select a tag interactively
+    local selected=$(echo -e "$tags" | fzf -d "\t" --with-nth=1 --ansi --preview "batcat  -pp --color=always --highlight-line {2} {-1} --theme=Dracula" --preview-window '+{2}/2')
+    if [[ -n $selected ]]; then
+        local selected_path=$(echo -e "$selected" | awk -F'\t' '{print $4}')
+        local selected_line=$(echo -e "$selected" | awk -F'\t' '{print $2}')
+        batcat --theme=Dracula --highlight-line $selected_line --color=always -p --pager="less +"$selected_line"G -j.5" $selected_path 
+    fi
+
+    zle accept-line
+}
+
 ## aliases ##
 alias sz='. ~/.zshrc'
 alias ez='vim ~/.zshrc'
@@ -86,7 +107,11 @@ hash -d vs="$HOME/dotfiles/gypsum/.config/nvim"
 hash -d vl="$HOME/.local/state/nvim"
 hash -d p="$HOME/projects"
 
-alias notes="RETURN_PATH=$(pwd); cd $HOME/syncthing/notes/The\ Vault\ v2 && vim . && cd $RETURN_PATH"
+alias notes="vim $HOME/syncthing/notes/The\ Vault\ v2"
+
+zle -N cheat
+bindkey '\e  ' cheat
+
 
 ## python ##
 VIRTUAL_ENV_DISABLE_PROMPT=1
