@@ -139,6 +139,7 @@ local diff_disk = function()
     toggle_diff_mode()
 end
 vim.api.nvim_create_user_command('DiffDisk', diff_disk, {})
+vim.keymap.set('n', '<leader>df', diff_disk, {})
 
 -- diagnostic
 
