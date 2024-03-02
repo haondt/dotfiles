@@ -8,7 +8,7 @@ local function in_normal(fn)
 end
 
 vim.keymap.set('n', '<leader><Tab>', in_normal(builtin.buffers), {})
-vim.keymap.set('n', '<leader><leader>', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>ht', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>hl', builtin.highlights, {})
 
 vim.keymap.set('n', 'gr', in_normal(builtin.lsp_references), {})
@@ -26,6 +26,7 @@ vim.keymap.set('n', '<leader>oh', in_normal(builtin.git_bcommits), {})
 
 local function haondt_map()
     local haondt = require('telescope').extensions.haondt
+    vim.keymap.set('n', '<leader><leader>', function() haondt.pickers.cheat({ path = "~/dotfiles/gypsum/cheat" }) end, {})
     vim.keymap.set('n', '<leader>ps', haondt.pickers.live_grep, {})
     vim.keymap.set('n', '<leader>pf', haondt.pickers.find_files, {})
     vim.keymap.set('n', '<leader>pd', function() haondt.pickers.find_files({ haondt_search_directory = true }) end, {})
