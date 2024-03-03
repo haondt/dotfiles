@@ -26,10 +26,13 @@ Requirements are based on a fairly bare Debian install.
 
 - `packer.nvim`
 - `yq`
+- `fzf`
 
 **not dependencies but they make life easier**
+
 - `curl`
 - `wget`
 - `python3-pip`
 - `python3-venv`
 - `[medea](https://github.com/haondt/medea)`
+- `nvm`

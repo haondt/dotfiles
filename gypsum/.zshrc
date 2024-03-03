@@ -80,6 +80,60 @@ cheat() {
     zle accept-line
 }
 
+fzf_dir() {
+  local dirs=()
+  local command_to_run="$1"
+  shift
+
+  while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+      -p|--parent)
+        shift
+        if [ -d "$1" ]; then
+          dirs+=( $(find "$1" -maxdepth 1 -type d -not -name "$(basename "$1")" ) )
+        fi
+        ;;
+      -d|--directory)
+        shift
+        if [ -d "$1" ]; then
+          dirs+=( "$1" )
+        fi
+        ;;
+      *)
+        echo "Unknown option: $1"
+        return 1
+        ;;
+    esac
+    shift
+  done
+
+  if [ "${#dirs[@]}" -eq 0 ]; then
+    echo "No valid directories found."
+    return 1
+  fi
+
+  local selected_dir
+  selected_dir=$(printf "%s\n" "${dirs[@]}" | fzf --prompt="Select a directory: " --preview='rg --files {} | sed "s|^"{}"/||" | tree --fromfile -L 5 -C | sed "1i"{}' --ansi)
+
+  if [ -n "$selected_dir" ]; then
+    $command_to_run "$selected_dir"
+  else
+    echo "No directory selected."
+    return 1
+  fi
+}
+
+
+
+FZF_RUN_ARGS=(
+    "-d" "$HOME/syncthing/notes/The Vault v2"
+    "-p" "$HOME/projects"
+    "-d" "$HOME/dotfiles/gypsum"
+)
+
+fzt() { fzf_dir tvim "${FZF_RUN_ARGS[@]}" }
+fzv() { fzf_dir vimcd "${FZF_RUN_ARGS[@]}" }
+
 ## aliases ##
 alias sz='. ~/.zshrc'
 alias ez='vim ~/.zshrc'
