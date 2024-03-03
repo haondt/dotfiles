@@ -128,9 +128,11 @@ local action_set_edit = function(prompt_bufnr, command)
             last_bufnr = vim.api.nvim_create_buf(true, true)
             vim.api.nvim_buf_set_option(last_bufnr, 'bufhidden', 'wipe')
             vim.api.nvim_buf_set_name(last_bufnr, 'Cheat - ' .. path)
-            vim.api.nvim_buf_set_option(last_bufnr, 'syntax', 'markdown')
 
             vim.cmd('sp | buffer ' .. last_bufnr)
+            vim.bo[last_bufnr].filetype = 'markdown'
+            vim.api.nvim_buf_set_option(last_bufnr, 'syntax', 'markdown') -- stand in until the lsp takes over
+            vim.cmd('LspStart')
         -- last buffer is still open
         else
             vim.fn.win_gotoid(window)
