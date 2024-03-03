@@ -173,6 +173,8 @@ return function(opts)
     opts.previewer_dyn_title = function(_, e)
         return Path:new(from_entry.path(e, false, false)):normalize(opts.path)
     end
+    opts.syntax = 'markdown'
+
     opts.finder = gen_new_finder(opts)
     opts.previewer = haondt_previewers.vim_buffer_vimgrep.new(opts)
     opts.layout_strategy = opts.layout_strategy or "horizontal"
