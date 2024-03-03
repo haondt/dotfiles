@@ -13,7 +13,7 @@ the text as it is seen on their copy
 >>>>>>>> theirs.txt
 
 ## nvimdiff
-#merge
+#mergetool
 nvimdiff can be launched with `git mergetool`. It will present the conflict in three numbered windows
 
 +----------------+----------------+----------------+

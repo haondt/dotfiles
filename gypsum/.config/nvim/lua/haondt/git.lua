@@ -132,6 +132,32 @@ M.take_remote = function()
     print("Took remote")
 end
 
+M.take_local_and_remote = function()
+    local coords = get_block_range()
+    if coords == nil then
+        print("Not inside a merge conflict")
+        return
+    end
+    local lines = vim.fn.getline(coords[1], coords[2])
+
+    local valid, relative_markers = validate_block(lines)
+    if not valid then
+        print(relative_markers.ERROR)
+        return
+    end
+
+    vim.fn.cursor(coords[1] + relative_markers.START - 1,1)
+    vim.cmd('normal! ' .. #lines .. 'D')
+    local local_lines = { unpack(lines, relative_markers.START + 1, (relative_markers.COMMON or relative_markers.REMOTE) - 1) }
+    local remote_lines = { unpack(lines, relative_markers.REMOTE + 1, relative_markers.END - 1) }
+    local new_lines = { unpack(local_lines) }
+    table.move(remote_lines, 1, #remote_lines, #new_lines + 1, new_lines)
+    vim.fn.append(coords[1] - 1, new_lines)
+    vim.fn.cursor(coords[1], 1)
+
+    print("Took local and remote")
+end
+
 M.remove_markers = function()
     local cursor_pos = vim.fn.getpos('.')
     local coords = get_block_range()

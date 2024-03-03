@@ -63,3 +63,5 @@
     tool = nvimdiff
 [diff]
     colorMoved = default
+[mergetool]
+	keepBackup = false

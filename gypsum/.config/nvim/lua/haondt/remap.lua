@@ -156,6 +156,7 @@ vim.keymap.set('n', '<leader>fe', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', 'dol', git.take_local, {})
 vim.keymap.set('n', 'dor', git.take_remote, {})
 vim.keymap.set('n', 'doa', git.remove_markers, {})
+vim.keymap.set('n', 'dob', git.take_local_and_remote, {})
 vim.keymap.set('n', ']d', git.next_conflict, {})
 vim.keymap.set('n', '[d', git.previous_conflict, {})
 
