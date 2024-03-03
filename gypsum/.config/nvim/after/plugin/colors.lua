@@ -18,6 +18,12 @@ vim.api.nvim_set_hl(0, "CursorLineNr", { fg = palette.color14 })
 vim.api.nvim_set_hl(0, 'Folded', { fg = palette.color0 })
 vim.api.nvim_set_hl(0, 'FoldColumn', { fg = palette.color8 })
 vim.api.nvim_set_hl(0, 'MatchParen', { fg = palette.color12, bold = true })
+vim.api.nvim_set_hl(0, 'Title', { fg = palette.color4, bold = true })
+vim.api.nvim_set_hl(0, 'htmlBold', { fg = palette.color15, bold = true })
+vim.api.nvim_set_hl(0, 'htmlItalic', { fg = palette.color15, italic = true })
+vim.api.nvim_set_hl(0, 'htmlBoldItalic', { fg = palette.color15, bold = true, italic = true })
+vim.api.nvim_set_hl(0, 'htmlLink', { fg = palette.color13, underline = true })
+vim.api.nvim_set_hl(0, 'markdownUrl', { fg = palette.color8 })
 
 -- diagnostics
 vim.api.nvim_set_hl(0, "DiagnosticError", { fg = palette.error.bg })

@@ -166,8 +166,14 @@ open buffer in slot n
 
 see lsp syntax tree
 
-## <C-h/j/k/l>
-#move
+## <C-h> <C-j> <C-k> <C-l>
+#move #windows #navigate
+change window focus
+
+## <C-w-h> <C-w-j> <C-w-k> <C-w-l>
+#move #windows #navigate
+move windows around
+
 
 change window focus
 
@@ -209,7 +215,12 @@ paste from system clipboard
 switch to new scratch buffer
 
 ## <C-y>
+#diff
 toggle diff mode
+
+## :DiffDisk
+#diff
+start a merge with the version of the file in the buffer with the version on disk. Run the command again to
 
 ## <leader>va
 select all
@@ -226,3 +237,9 @@ format document with lsp
 - `:TSUpdate` - update treesitter
 - `:MasonUpdate` - update mason
 - `:PackerSync` - update plugins installed with packer 
+
+## Troubleshooting
+
+- update everything, see above.
+- `:checkhealth`
+- `:LspLog`

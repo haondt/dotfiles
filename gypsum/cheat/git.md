@@ -2,8 +2,9 @@
 
 ## Conflicts
 #merge
-Conflicts are presented as such:
+Conflicts are presented as such: 
 
+```
 <<<<<<< yours.txt
 the text as it is seen on your copy
 |||||||| hash of common ancestor
@@ -11,6 +12,7 @@ the text before it diverged
 ========
 the text as it is seen on their copy
 >>>>>>>> theirs.txt
+```
 
 ## nvimdiff
 #mergetool
