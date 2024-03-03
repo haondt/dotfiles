@@ -1,4 +1,7 @@
+local git = require('haondt.git')
+
 vim.g.mapleader = " "
+vim.keymap.set("n", "<leader>sv", ":so $MYVIMRC<CR>")
 
 -- highlight move highlighted text with J and K
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -32,6 +35,10 @@ vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
+vim.keymap.set('n', '<C-w><C-h>', '<C-w>H')
+vim.keymap.set('n', '<C-w><C-j>', '<C-w>J')
+vim.keymap.set('n', '<C-w><C-k>', '<C-w>K')
+vim.keymap.set('n', '<C-w><C-l>', '<C-w>L')
 
 local open_scratch_buffer = function()
     local scratch_buffer = vim.api.nvim_create_buf(true, true)
@@ -144,3 +151,11 @@ vim.keymap.set('n', '<leader>df', diff_disk, {})
 -- diagnostic
 
 vim.keymap.set('n', '<leader>fe', vim.diagnostic.open_float, opts)
+
+-- git
+vim.keymap.set('n', 'dol', git.take_local, {})
+vim.keymap.set('n', 'dor', git.take_remote, {})
+vim.keymap.set('n', 'doa', git.remove_markers, {})
+vim.keymap.set('n', ']d', git.next_conflict, {})
+vim.keymap.set('n', '[d', git.previous_conflict, {})
+

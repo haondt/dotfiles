@@ -133,6 +133,7 @@ FZF_RUN_ARGS=(
 
 fzt() { fzf_dir tvim "${FZF_RUN_ARGS[@]}" }
 fzv() { fzf_dir vimcd "${FZF_RUN_ARGS[@]}" }
+fzd() { fzf_dir cd "${FZF_RUN_ARGS[@]}" }
 
 ## aliases ##
 alias sz='. ~/.zshrc'
