@@ -90,7 +90,9 @@ fzf_dir() {
       -p|--parent)
         shift
         if [ -d "$1" ]; then
-          dirs+=( $(find "$1" -maxdepth 1 -type d -not -name "$(basename "$1")" ) )
+          while IFS= read -r -d '' dir; do
+              dirs+=("$dir")
+          done < <(find "$1" -maxdepth 1 -type d -not -name "$(basename "$1")" -print0)
         fi
         ;;
       -d|--directory)
@@ -131,9 +133,9 @@ FZF_RUN_ARGS=(
     "-d" "$HOME/dotfiles/gypsum"
 )
 
-fzt() { fzf_dir tvim "${FZF_RUN_ARGS[@]}" }
-fzv() { fzf_dir vimcd "${FZF_RUN_ARGS[@]}" }
-fzd() { fzf_dir cd "${FZF_RUN_ARGS[@]}" }
+jt() { fzf_dir tvim "${FZF_RUN_ARGS[@]}" }
+jv() { fzf_dir vimcd "${FZF_RUN_ARGS[@]}" }
+jd() { fzf_dir cd "${FZF_RUN_ARGS[@]}" }
 
 ## aliases ##
 alias sz='. ~/.zshrc'
