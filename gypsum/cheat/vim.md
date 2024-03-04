@@ -243,3 +243,11 @@ format document with lsp
 - update everything, see above.
 - `:checkhealth`
 - `:LspLog`
+
+## +
+#comment
+Comment visual selection
+
+## -
+#comment
+Uncomment visual selection

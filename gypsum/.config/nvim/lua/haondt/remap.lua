@@ -2,6 +2,7 @@ local git = require('haondt.git')
 local diff = require('haondt.diff')
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 vim.keymap.set("n", "<leader>sv", ":so $MYVIMRC<CR>")
 
 -- highlight move highlighted text with J and K

@@ -16,10 +16,12 @@ vim.keymap.set('n', 'gi', in_normal(builtin.lsp_implementations), {})
 vim.keymap.set('n', 'gc', builtin.lsp_incoming_calls, {})
 vim.keymap.set('n', 'gd', in_normal(builtin.lsp_definitions), {})
 vim.keymap.set('n', 'gt', in_normal(builtin.lsp_type_definitions), {})
+vim.keymap.set('n', '<leader>gw', in_normal(function() builtin.diagnostics({ bufnr = 0, severity_bound = vim.diagnostic.severity.WARN }) end), {})
+vim.keymap.set('n', '<leader>ge', in_normal(function() builtin.diagnostics({ bufnr = 0, severity_limit = vim.diagnostic.severity.ERROR }) end), {})
 
 vim.keymap.set('n', '<leader>pg', builtin.git_files);
 vim.keymap.set('n', '<leader>pm', builtin.lsp_workspace_symbols, {})
-vim.keymap.set('n', '<leader>pw', in_normal(function() builtin.diagnostics({ severity_bound = vim.diagnostic.severity.WARN }) end), {})
+vim.keymap.set('n', '<leader>pw', in_normal(function() builtin.diagnostics({ severity_bound = vim.diagnostic.severity.WARN }) end), { desc = 'Show [p]roject [w]arning diagnostics'})
 vim.keymap.set('n', '<leader>pe', in_normal(function() builtin.diagnostics({ severity_limit = vim.diagnostic.severity.ERROR }) end), {})
 
 vim.keymap.set('n', '<leader>oh', in_normal(builtin.git_bcommits), {})
