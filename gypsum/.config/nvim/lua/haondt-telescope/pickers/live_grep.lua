@@ -14,6 +14,7 @@ return function(opts)
     opts.separator = opts.separator or " "
     opts.vimgrep_arguments = {
         "rg",
+        "-L",
         "--hidden",
         "--color=never",
         "--no-heading",

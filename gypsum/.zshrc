@@ -154,6 +154,8 @@ alias gs='git status --short -b'
 alias ga='git add'
 alias gcm='git commit -m'
 alias gr='git reset'
+alias gd='git difftool --dir-diff'
+alias gm='git mergetool'
 
 alias la='ls -a'
 alias ll='ls -l'

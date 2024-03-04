@@ -14,9 +14,11 @@ the text as it is seen on their copy
 >>>>>>>> theirs.txt
 ```
 
-## nvimdiff
-#mergetool
+## git mergetool
+#mergetool #nvimdiff #gm
 nvimdiff can be launched with `git mergetool`. It will present the conflict in three numbered windows
+
+Aliased to `gm`
 
 +----------------+----------------+----------------+
 |                |                |                |
@@ -44,4 +46,20 @@ diff obtain remote
 #diff
 diff obtain all
 just removes git markers, leaving all 2 or 3 changes present
+
+## git difftool --dir-diff
+#gd
+view diffs in vim. good for diffing two branches or tags:
+
+Aliased to `gd`
+
+compare HEAD with tag `v1.0.0`
+```shell
+git difftool v1.0.0
+```
+
+compare two commits
+```shell
+git difftool hash1..hash2
+```
 

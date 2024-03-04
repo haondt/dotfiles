@@ -58,10 +58,14 @@
     navigate = true
     paging = always # important to show up in telescope new_termopen_previewer correctly
 
+[diff]
+    colorMoved = default
+    tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = "cd $LOCAL/.. && LOCAL=$LOCAL REMOTE=$REMOTE nvim -R -c ':DiffTool'"
+
 [merge]
     conflictstyle = diff3
     tool = nvimdiff
-[diff]
-    colorMoved = default
 [mergetool]
-	keepBackup = false
+    keepBackup = false

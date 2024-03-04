@@ -1,4 +1,5 @@
 local git = require('haondt.git')
+local diff = require('haondt.diff')
 
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>sv", ":so $MYVIMRC<CR>")
@@ -23,7 +24,7 @@ vim.keymap.set("n", "<leader>va", "ggVG")
 -- vim.keymap.set("x", "p", "\"_dP")
 
 -- toggle wrapping
-vim.keymap.set('n', '<leader>w', ':set wrap!<CR>')
+vim.keymap.set('n', '<leader>w', ':windo set wrap!<CR>')
 
 -- copy and paste from system clipboard
 vim.keymap.set("v", "<leader>cy", "\"+y")
@@ -88,9 +89,11 @@ local is_in_diff_mode = false
 local toggle_diff_mode = function()
     if is_in_diff_mode then
         vim.cmd('diffoff!')
+        vim.cmd('windo set nocursorline')
         is_in_diff_mode = false
     else
         vim.cmd('windo diffthis')
+        vim.cmd('windo set cursorline')
         is_in_diff_mode = true
     end
 end
@@ -159,4 +162,7 @@ vim.keymap.set('n', 'doa', git.remove_markers, {})
 vim.keymap.set('n', 'dob', git.take_local_and_remote, {})
 vim.keymap.set('n', ']d', git.next_conflict, {})
 vim.keymap.set('n', '[d', git.previous_conflict, {})
+
+-- diff
+vim.api.nvim_create_user_command('DiffTool', function() vim.schedule(diff.difftool) end, {})
 

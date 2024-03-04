@@ -30,3 +30,7 @@ vim.opt.laststatus = 3
 
 vim.o.diffopt = vim.o.diffopt .. ',linematch:60'
 vim.o.diffopt = vim.o.diffopt .. ',foldcolumn:0'
+
+ if vim.o.diff then
+     vim.o.cursorline = true
+ end

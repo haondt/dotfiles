@@ -5,7 +5,7 @@ local builtin = require('telescope.builtin')
 -- displays entire file path but only searches on file name
 return function(opts)
     opts = opts or {}
-    opts.find_command = opts.find_command or { "fdfind", "--type", "f", "--color", "never", "--hidden", "--exclude", ".git"}
+    opts.find_command = opts.find_command or { "fdfind", "--type", "f", "--color", "never", "--hidden", "--exclude", ".git", "-L"}
 
     opts.entry_maker = function(line)
         local fn = utils.path_tail(line)
