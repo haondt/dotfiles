@@ -47,24 +47,35 @@ fzf_dir() {
 	fi
 }
 
-alias vs22="/c/Program\ Files/Microsoft\ Visual\ Studio/2022/Community/Common7/IDE/devenv.exe"
+alias vs22="start /c/Program\ Files/Microsoft\ Visual\ Studio/2022/Community/Common7/IDE/devenv.exe"
 
 FZF_RUN_ARGS=(
-	"-p" "/d/Documents/Projects"
+	"-p" "D:\Documents\Projects"
+	"-p" "D:\Documents\work"
+	#"-d" "$HOME/dotfiles/gypsum"
 )
 
 jc() { 
 	fzf_dir code "${FZF_RUN_ARGS[@]}" 
 }
 
-sde22() {
- 	/c/Program\ Files/Microsoft\ Visual\ Studio/2022/Community/Common7/IDE/devenv.exe "$1" &
+js() { 
+	projects=()
+	for ((i=1; i < ${#FZF_RUN_ARGS[@]}; i+=2)); do
+		mapfile -t files < <(rg "${FZF_RUN_ARGS[i]}" --files --max-depth=5 --glob "*.sln") #windows path seps
+		#mapfile -t files < <(rg "${FZF_RUN_ARGS[i]}" --files --max-depth=5 --glob "*.sln" | sed 's/\\/\//g' | sed -E 's/([A-Z]):\//\/\L\1\//g') # unix path seps
+		projects+=("${files[@]}")
+	done
+
+	local selected_project
+	selected_project=$(printf "%s\n" "${projects[@]}" | fzf --prompt="Select a project: " --preview='grep -Eo "^Project.*" {} | sed '"'"'s/.* = "\([^"]\+\)".*/\1/g'"'" --ansi)
+	if [ -n "$selected_project" ]; then
+		start /c/Program\ Files/Microsoft\ Visual\ Studio/2022/Community/Common7/IDE/devenv.exe "$selected_project" &
+	else
+		echo "No directory selected."
+	fi
 }
 
-js() { 
-	fzf_dir sde22 "${FZF_RUN_ARGS[@]}" 
-}
 jd() {
 	fzf_dir cd "${FZF_RUN_ARGS[@]}" 
 }
-

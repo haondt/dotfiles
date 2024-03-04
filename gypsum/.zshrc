@@ -115,7 +115,7 @@ fzf_dir() {
   fi
 
   local selected_dir
-  selected_dir=$(printf "%s\n" "${dirs[@]}" | fzf --prompt="Select a directory: " --preview='rg --files {} | sed "s|^"{}"/||" | tree --fromfile -L 5 -C | sed "1i"{}' --ansi)
+  selected_dir=$(printf "%s\n" "${dirs[@]}" | fzf --prompt="Select a directory: " --preview='rg --max-depth=5 --files {} | sed "s|^"{}"/||" | tree --fromfile -L 5 -C | sed "1i"{}' --ansi)
 
   if [ -n "$selected_dir" ]; then
     $command_to_run "$selected_dir"
