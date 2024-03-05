@@ -32,6 +32,8 @@ vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = palette.color3 })
 vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { sp = palette.color3, underline = true })
 vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = palette.color11 })
 vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { sp = palette.color11, underline = true })
+vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = palette.color14 })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { sp = palette.color14, underline = true })
 
 -- lsp colors
 --vim.api.nvim_set_hl(0, "Type", { fg = palette.color9, bold = true })
