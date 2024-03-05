@@ -16,8 +16,38 @@ lsp.on_attach(function(client, bufnr)
     map('<leader>cs', vim.lsp.buf.signature_help, '[c]ode [s]ignature help')
 end)
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
+
+local servers = {
+    lsp.default_setup,
+    omnisharp = {},
+    lua_ls = {
+        settings = {
+            Lua = {
+                diagnostics = {
+                    globals = { 'vim' }
+                }
+            }
+        }
+    },
+    pyright = {
+        settings = {
+            python = {
+                analysis = {
+                    diagnosticMode = "workspace"
+                }
+            }
+        }
+    }
+}
+
 require('mason').setup({})
-local lspconfig = require('lspconfig')
+
 require('mason-lspconfig').setup({
 	ensure_installed = {
 		'lua_ls',
@@ -38,20 +68,13 @@ require('mason-lspconfig').setup({
         'yamlls'
 	},
     handlers = {
-        lsp.default_setup,
-        omnisharp = function()
-            lspconfig.omnisharp.setup({})
-        end,
-        pyright = function()
-            lspconfig.pyright.setup({
-                settings = {
-                    python = {
-                        analysis = {
-                            diagnosticMode = "workspace"
-                        }
-                    }
-                }
-            })
+        function(server_name)
+            local server = servers[server_name] or {}
+            -- This handles overriding only values explicitly passed
+            -- by the server configuration above. Useful when disabling
+            -- certain features of an LSP (for example, turning off formatting for tsserver)
+            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            require('lspconfig')[server_name].setup(server)
         end
     }
 })
@@ -81,3 +104,4 @@ cmp.setup({
 		['<C-Space>'] = cmp.mapping.complete()
 	})
 })
+
