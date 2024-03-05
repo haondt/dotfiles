@@ -136,3 +136,10 @@ vim.api.nvim_set_hl(0, "NvimTreeGitMoved", { fg = palette.color3, bold = true })
 vim.api.nvim_set_hl(0, "NvimTreeGitStaged", { fg = palette.color10, bold = true })
 vim.api.nvim_set_hl(0, "NvimTreeGitNew", { fg = palette.color15, bold = true })
 vim.api.nvim_set_hl(0, "NvimTreeGitIgnored", { fg = palette.color1, bold = true })
+
+-- cmp
+vim.api.nvim_set_hl(0, "Pmenu", { bg = palette.color10 })
+vim.api.nvim_set_hl(0, "PmenuSel", { bg = palette.color0 })
+vim.api.nvim_set_hl(0, "CmpItemKindDefault", { fg = palette.color12 })
+vim.api.nvim_set_hl(0, "CmpItemKindFunctionDefault", { fg = palette.color6 })
+vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { fg = palette.color8 })

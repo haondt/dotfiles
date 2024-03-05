@@ -34,7 +34,12 @@ return require('packer').startup(function(use)
             })
 
             require('which-key').register({
-                ['<leader>g'] = { name = '[g]o to', _ = 'which_key_ignore' }
+                ['<leader>g'] = { name = '[g]it', _ = 'which_key_ignore' },
+                ['<leader>p'] = { name = '[p]roject actions', _ = 'which_key_ignore' },
+                ['<leader>o'] = { name = '[o]pen action on buffer', _ = 'which_key_ignore' },
+                ['<leader>c'] = { name = '[c]ode actions', _ = 'which_key_ignore' },
+                ['<leader>d'] = { name = 'start [d]iff modes', _ = 'which_key_ignore' },
+                ['d'] = { name = '[d]iff mode actions', _ = 'which_key_ignore' }
             })
         end
     }

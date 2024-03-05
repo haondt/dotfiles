@@ -98,7 +98,7 @@ local toggle_diff_mode = function()
         is_in_diff_mode = true
     end
 end
-vim.keymap.set('n', '<C-y>', toggle_diff_mode, { noremap = true })
+vim.keymap.set('n', '<leader>dt', toggle_diff_mode, { noremap = true, desc = '[d]iff mode [t]oggle' })
 
 local set_filetype = function()
     local filetype = vim.fn.input('Enter filetype: ')
@@ -113,7 +113,7 @@ local set_filetype = function()
         print('invalid or empty filetype. LSP not changed')
     end
 end
-vim.keymap.set('n', '<leader>sf', set_filetype, { noremap = true })
+vim.keymap.set('n', '<leader>sf', set_filetype, { noremap = true, desc = '[s]et [f]iletype' })
 
 local diff_disk_buffers = {}
 local diff_disk = function()
@@ -150,19 +150,19 @@ local diff_disk = function()
     toggle_diff_mode()
 end
 vim.api.nvim_create_user_command('DiffDisk', diff_disk, {})
-vim.keymap.set('n', '<leader>df', diff_disk, {})
+vim.keymap.set('n', '<leader>df', diff_disk, { desc = 'start [d]iff with [f]ile on disk' })
 
 -- diagnostic
 
-vim.keymap.set('n', '<leader>fe', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '<leader>ce', vim.diagnostic.open_float, { desc = 'float [c]ode [e]rror' })
 
 -- git
-vim.keymap.set('n', 'dol', git.take_local, {})
-vim.keymap.set('n', 'dor', git.take_remote, {})
-vim.keymap.set('n', 'doa', git.remove_markers, {})
-vim.keymap.set('n', 'dob', git.take_local_and_remote, {})
-vim.keymap.set('n', ']d', git.next_conflict, {})
-vim.keymap.set('n', '[d', git.previous_conflict, {})
+vim.keymap.set('n', 'dol', git.take_local, { desc = '[d]iff [o]btain [l]ocal' })
+vim.keymap.set('n', 'dor', git.take_remote, {  desc = '[d]iff [o]btain [r]emote' })
+vim.keymap.set('n', 'doa', git.remove_markers, { desc = '[d]iff [o]btain [a]ll' })
+vim.keymap.set('n', 'dob', git.take_local_and_remote, { desc = '[d]iff [o]btain [b]oth' })
+vim.keymap.set('n', ']d', git.next_conflict, { desc = 'next [d]iff conflict' })
+vim.keymap.set('n', '[d', git.previous_conflict, { desc = 'previous [d]iff conflict' })
 
 -- diff
 vim.api.nvim_create_user_command('DiffTool', function() vim.schedule(diff.difftool) end, {})
