@@ -39,6 +39,8 @@ return require('packer').startup(function(use)
                 ['<leader>o'] = { name = '[o]pen action on buffer', _ = 'which_key_ignore' },
                 ['<leader>c'] = { name = '[c]ode actions', _ = 'which_key_ignore' },
                 ['<leader>d'] = { name = 'start [d]iff modes', _ = 'which_key_ignore' },
+                ['<leader>t'] = { name = '[t]ext tools', _ = 'which_key_ignore' },
+                ['<leader>ta'] = { name = '[t]ext [a]lign', _ = 'which_key_ignore' },
                 ['d'] = { name = '[d]iff mode actions', _ = 'which_key_ignore' }
             })
         end
@@ -109,4 +111,15 @@ return require('packer').startup(function(use)
 
     use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
+    use {
+        'echasnovski/mini.nvim',
+        config = function ()
+            require('mini.align').setup({
+                mappings = {
+                    start = '',
+                    start_with_preview = '<leader>ta',
+                }
+            })
+        end
+    }
 end)
