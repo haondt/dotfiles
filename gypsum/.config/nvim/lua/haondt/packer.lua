@@ -17,6 +17,29 @@ return require('packer').startup(function(use)
     }
 
     use {
+        'folke/which-key.nvim',
+        config = function()
+            require('which-key').setup({
+                registers = false,
+                spelling = { enabled = false },
+                icons = {
+                    breadcrumb = '',
+                    separator = '',
+                    group = ''
+                },
+                window = {
+                    border = 'single',
+                    winblend = 0
+                }
+            })
+
+            require('which-key').register({
+                ['<leader>g'] = { name = '[g]o to', _ = 'which_key_ignore' }
+            })
+        end
+    }
+
+    use {
         'nvim-telescope/telescope.nvim', tag = '0.1.3',
         -- or                            , branch = '0.1.x',
         requires = { {'nvim-lua/plenary.nvim'} }

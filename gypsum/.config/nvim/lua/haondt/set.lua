@@ -46,6 +46,7 @@ vim.opt.smartcase = true
 -- Decrease update time
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
+vim.opt.timeout = true
 
 -- hilight when yanking text
 vim.api.nvim_create_autocmd('TextYankPost', {

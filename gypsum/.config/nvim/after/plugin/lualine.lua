@@ -109,7 +109,10 @@ lualine.setup {
     sections = {
         lualine_a = { 'mode' },
         lualine_b = { current_file },
-        lualine_c = { 'diagnostics' },
+        lualine_c = { {
+            'diagnostics',
+            symbols = { error = '!', warn = '?', info = 'i', hint = '*'  }
+        } },
         lualine_x = { lsp_status },
         lualine_y = { vim.loop.cwd },
         lualine_z = { 'progress' },
