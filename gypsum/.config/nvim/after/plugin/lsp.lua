@@ -49,10 +49,10 @@ local servers = {
 require('mason').setup({})
 
 require('mason-lspconfig').setup({
-	ensure_installed = {
-		'lua_ls',
-		'rust_analyzer',
-		'jedi_language_server',
+    ensure_installed = {
+        'lua_ls',
+        'rust_analyzer',
+        'jedi_language_server',
         'pyright',
         'omnisharp',
         'ansiblels',
@@ -66,7 +66,7 @@ require('mason-lspconfig').setup({
         'marksman',
         'taplo',
         'yamlls'
-	},
+    },
     handlers = {
         function(server_name)
             local server = servers[server_name] or {}
@@ -84,9 +84,9 @@ local cmp = require('cmp')
 local cmp_action = lsp.cmp_action()
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 cmp.setup({
---	sources = {
---		{ name = 'nvim_lsp' }
---	}, 
+--  sources = {
+--      { name = 'nvim_lsp' }
+--  }, 
     window = {
         completion = {
            border = 'single',
@@ -97,11 +97,12 @@ cmp.setup({
            --winhighlight = 'NormalFloat:FloatBorder'
         }
     },
-	mapping = cmp.mapping.preset.insert({
-		['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-		['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-		['<Tab>'] = cmp.mapping.confirm({ select = true }),
-		['<C-Space>'] = cmp.mapping.complete()
-	})
+    mapping = cmp.mapping.preset.insert({
+        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+        ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-d>'] = cmp.mapping.scroll_docs(4),
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4)
+    })
 })
-
