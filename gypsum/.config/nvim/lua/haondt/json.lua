@@ -59,12 +59,14 @@ M.decode = function()
     end
 
     local selected_text = table.concat(selected_lines, "\n")
-    local json_stringified = vim.fn.json_decode(selected_text)
+    local json_parsed = vim.fn.json_decode(selected_text)
+    json_parsed = vim.split(json_parsed, "\n")
 
-    if end_col >= 2^32/2-1 then
-        vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, {json_stringified})
+    if is_line_select then
+        vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, json_parsed)
     else
-        vim.api.nvim_buf_set_text(0, start_line - 1, start_col, end_line - 1, end_col + 1, {json_stringified})
+
+        vim.api.nvim_buf_set_text(0, start_line - 1, start_col, end_line - 1, end_col + 1, json_parsed)
     end
 
     print("JSON decoded")
