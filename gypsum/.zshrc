@@ -137,6 +137,10 @@ jt() { fzf_dir tvim "${FZF_RUN_ARGS[@]}" }
 jv() { fzf_dir vimcd "${FZF_RUN_ARGS[@]}" }
 jd() { fzf_dir cd "${FZF_RUN_ARGS[@]}" }
 
+# temporarily source an env file
+# xenv ./.env ./script.sh
+xenv() { (set -a && source "$1" && shift && "$@" ); }
+
 ## aliases ##
 alias sz='. ~/.zshrc'
 alias ez='vim ~/.zshrc'
