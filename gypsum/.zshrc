@@ -35,8 +35,8 @@ tvim() {
     if [ "$#" -ne 1 ]; then
         tmux
     else
-        cwd=$(pwd)
-        target="$1"
+        local cwd=$(pwd)
+        local target="$1"
 
         # ensure target exists
         if [ ! -e "$target" ]; then
@@ -155,6 +155,7 @@ alias vim=vimcd
 alias nvim=vimcd
 alias tv=tvim
 alias py='python3'
+alias notes="vim $HOME/syncthing/notes/The\ Vault\ v2"
 
 alias gs='git status --short -b'
 alias ga='git add'
@@ -171,7 +172,16 @@ hash -d vs="$HOME/dotfiles/gypsum/.config/nvim"
 hash -d vl="$HOME/.local/state/nvim"
 hash -d p="$HOME/projects"
 
-alias notes="vim $HOME/syncthing/notes/The\ Vault\ v2"
+alias gcloud="docker run --rm \
+    -v $(pwd):/app \
+    -it \
+    --user $(id -u):$(id -g) \
+    -v ~/gcloud/config/:/config/mygcloud \
+    -e CLOUDSDK_CONFIG=/config/mygcloud \
+    -v ~/gcloud/certs/:/certs \
+    -w /app \
+    --entrypoint gcloud \
+    gcr.io/google.com/cloudsdktool/google-cloud-cli:alpine"
 
 ## bindings ##
 
