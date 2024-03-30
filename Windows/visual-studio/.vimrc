@@ -1,3 +1,5 @@
+" Hot tip: all the ":vsc Abc.Xyz" things are comming from the Command Window. You can type in there to explore with autocomplete.
+
 set showcmd
 set nu
 set rnu
@@ -41,14 +43,17 @@ nmap <leader>pf :vsc Edit.GoToFile<CR>
 nmap <leader>ps :vsc Edit.GoToText<CR>
 nmap <leader>pv :vsc View.SolutionExplorer<CR>:vsc SolutionExplorer.SyncWithActiveDocument<CR>
 nmap <leader>pe :vsc View.ErrorList<CR>
+nmap <leader>pt :vsc TestExplorer.ShowTestExplorer<CR>
 
-" open git, open tests, open references window
-nmap <leader>og :vsc Team.Git.GoToGitChanges<CR>
-nmap <leader>ot :vsc TestExplorer.ShowTestExplorer<CR>
+" open git
+nmap <leader>gs :vsc Team.Git.GoToGitChanges<CR>
+
+" open references window
 nmap <leader>or :vsc View.FindReferencesWindow1<CR>
 
-" float definition
-nmap <leader>fd :vsc Edit.PeekDefinition<CR>
+" code actions
+nmap <leader>ch :vsc Edit.PeekDefinition<CR>
+nmap <leader>cr :vsc Refactor.Rename<CR>
 
 " sticky all, sticky clear
 nmap <leader>sa :vsc View.BookmarkWindow<CR>
@@ -56,6 +61,9 @@ nmap <leader>sc :vsc Edit.ClearBookmarks<CR>
 
 " fullscreen
 nmap <leader>f :vsc View.FullScreen<CR>
+
+" recent files
+nmap <leader><tab> :vsc Edit.GoToRecentFile<CR>
 
 " toggle wrap
 nmap <leader>w :set wrap!<CR>
@@ -66,4 +74,3 @@ nmap gE :vsc View.PreviousError<CR>
 
 nnoremap n nzz
 nnoremap N Nzz
-

@@ -20,7 +20,7 @@ Requirements are based on a fairly bare Debian install.
   - use to install `neovim`, since a fairly recent version is required
 - `ripgrep`
 - `fd-find`
-- `[delta](https://github.com/dandavison/delta)`
+- [`delta`](https://github.com/dandavison/delta)
 
 **other dependencies**
 
