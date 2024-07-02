@@ -2,6 +2,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="haondt"
 plugins=(vi-mode)
+zstyle ':omz:alpha:lib:git' async-prompt no # disable async, it messed with git prompt
 source $ZSH/oh-my-zsh.sh
 export ZLE_RPROMPT_INDENT=0
 
@@ -20,7 +21,7 @@ export PATH=$PATH:~/.local/bin
 vimcd() {
     if [ -n "$1" ]; then # called with arg
         if [ -d "$1" ]; then # arg is dir
-            RETURN_PATH=$(pwd); cd $1 && \nvim -c "cd $1" && cd $RETURN_PATH
+            RETURN_PATH=$(pwd); cd $1 && \nvim && cd $RETURN_PATH
         else # arg is file
             local file_dir=$(dirname "$1")
             RETURN_PATH=$(pwd); cd $file_dir && \nvim -c "edit $1" && cd $RETURN_PATH
@@ -56,7 +57,6 @@ tvim() {
         tmux new-session "nvim $vim_target; zsh" \; split-window -v -p 20 \; select-pane -t 0
         cd $cwd
     fi
-
 }
 
 cheat() {
@@ -118,6 +118,8 @@ fzf_dir() {
   selected_dir=$(printf "%s\n" "${dirs[@]}" | fzf --prompt="Select a directory: " --preview='rg --max-depth=5 --files {} | sed "s|^"{}"/||" | tree --fromfile -L 5 -C | sed "1i"{}' --ansi)
 
   if [ -n "$selected_dir" ]; then
+    local title=$(basename "$selected_dir")
+    echo -en "\033]0;$title\a"
     $command_to_run "$selected_dir"
   else
     echo "No directory selected."
@@ -183,6 +185,7 @@ alias gcloud="docker run --rm \
     --entrypoint gcloud \
     gcr.io/google.com/cloudsdktool/google-cloud-cli:alpine"
 
+
 ## bindings ##
 
 zle -N cheat
@@ -198,3 +201,6 @@ VIRTUAL_ENV_DISABLE_PROMPT=1
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f "/home/noah/.ghcup/env" ] && . "/home/noah/.ghcup/env" # ghcup-env
+
