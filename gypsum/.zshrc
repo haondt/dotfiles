@@ -32,34 +32,6 @@ vimcd() {
 }
 
 
-## custom tmux startup ##
-tvim() {
-    if [ "$#" -ne 1 ]; then
-        tmux
-    else
-        local cwd=$(pwd)
-        local target="$1"
-
-        # ensure target exists
-        if [ ! -e "$target" ]; then
-            echo "Error: '$target' does not exist"
-            return 1
-        fi
-
-        # arg is dir
-        if [ -d "$target" ]; then
-            cd "$target"
-            vim_target=""
-        else
-            cd $(dirname "$target")
-            vim_target=$(basename "$target")
-        fi
-
-        tmux new-session "nvim $vim_target; zsh" \; split-window -v -p 20 \; select-pane -t 0
-        cd $cwd
-    fi
-}
-
 cheat() {
     BUFFER=""
 
@@ -98,9 +70,67 @@ EOF
     printf "%s\n" "${dirs[@]}" | fzf --prompt="Select a directory: " --preview='rg --max-depth=5 --files {} | sed "s|^"{}"/||" | tree --fromfile -L 5 -C | sed "1i"{}' --ansi
 }
 
-jt() { dir=$(fzf_dir); [ $? -eq 0 ] && echo -en "\033]0;$(basename $dir)\a" && tvim "$dir" }
-jv() { dir=$(fzf_dir); [ $? -eq 0 ] && echo -en "\033]0;$(basename $dir)\a" && vimcd "$dir" }
 jd() { dir=$(fzf_dir); [ $? -eq 0 ] && cd $dir }
+
+jt() {
+    dir=$(fzf_dir)
+    if [ $? -ne 0 ]; then
+        return 1
+    fi
+
+    base_name=$(basename $dir | tr . _)
+    name="~ $base_name" 
+
+    if ! tmux has-session -t=$name 2> /dev/null; then
+        tmux new-session -ds $name -c $dir "nvim; zsh" \; split-window -v -p 20 \; select-pane -t 0
+    fi
+
+    if [[ -z $TMUX ]]; then
+        tmux attach-session -t $name
+    else
+        tmux switch-client -t $name
+    fi
+}
+
+jv() {
+    dir=$(fzf_dir)
+    if [ $? -ne 0 ]; then
+        return 1
+    fi
+
+    base_name=$(basename $dir | tr . _)
+    name="~ $base_name" 
+
+    if ! tmux has-session -t=$name 2> /dev/null; then
+        tmux new-session -ds $name -c $dir "nvim; zsh"
+    fi
+
+    if [[ -z $TMUX ]]; then
+        tmux attach-session -t $name
+    else
+        tmux switch-client -t $name
+    fi
+}
+
+jm() {
+    dir=$(fzf_dir)
+    if [ $? -ne 0 ]; then
+        return 1
+    fi
+
+    base_name=$(basename $dir | tr . _)
+    name="~ $base_name" 
+
+    if ! tmux has-session -t=$name 2> /dev/null; then
+        tmux new-session -ds $name -c $dir
+    fi
+
+    if [[ -z $TMUX ]]; then
+        tmux attach-session -t $name
+    else
+        tmux switch-client -t $name
+    fi
+}
 
 # temporarily source an env file
 # xenv ./.env ./script.sh
