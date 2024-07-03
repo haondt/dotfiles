@@ -31,6 +31,7 @@ vimcd() {
     fi
 }
 
+
 ## custom tmux startup ##
 tvim() {
     if [ "$#" -ne 1 ]; then
@@ -42,7 +43,7 @@ tvim() {
         # ensure target exists
         if [ ! -e "$target" ]; then
             echo "Error: '$target' does not exist"
-            exit 1
+            return 1
         fi
 
         # arg is dir
@@ -80,64 +81,26 @@ cheat() {
     zle accept-line
 }
 
+FZF_DIRS=(
+    "$HOME/syncthing/notes/The Vault v2"
+    "$HOME/dotfiles/gypsum"
+)
+FZF_DIRS+=($HOME/projects/*)
+
 fzf_dir() {
-  local dirs=()
-  local command_to_run="$1"
-  shift
-
-  while [[ "$#" -gt 0 ]]; do
-    case "$1" in
-      -p|--parent)
-        shift
-        if [ -d "$1" ]; then
-          while IFS= read -r -d '' dir; do
-              dirs+=("$dir")
-          done < <(find "$1" -maxdepth 1 -type d -not -name "$(basename "$1")" -print0)
-        fi
-        ;;
-      -d|--directory)
-        shift
-        if [ -d "$1" ]; then
-          dirs+=( "$1" )
-        fi
-        ;;
-      *)
-        echo "Unknown option: $1"
-        return 1
-        ;;
-    esac
-    shift
-  done
-
-  if [ "${#dirs[@]}" -eq 0 ]; then
-    echo "No valid directories found."
-    return 1
-  fi
-
-  local selected_dir
-  selected_dir=$(printf "%s\n" "${dirs[@]}" | fzf --prompt="Select a directory: " --preview='rg --max-depth=5 --files {} | sed "s|^"{}"/||" | tree --fromfile -L 5 -C | sed "1i"{}' --ansi)
-
-  if [ -n "$selected_dir" ]; then
-    local title=$(basename "$selected_dir")
-    echo -en "\033]0;$title\a"
-    $command_to_run "$selected_dir"
-  else
-    echo "No directory selected."
-    return 1
-  fi
+    dirs=$(python3 << EOF
+import os
+dirs = '''$(printf "%s\n" "${FZF_DIRS[@]}")'''.strip().split('\n')
+dirs = [os.path.realpath(i) for i in dirs]
+print('\n'.join(dirs), end='')
+EOF
+)
+    printf "%s\n" "${dirs[@]}" | fzf --prompt="Select a directory: " --preview='rg --max-depth=5 --files {} | sed "s|^"{}"/||" | tree --fromfile -L 5 -C | sed "1i"{}' --ansi
 }
 
-
-
-FZF_RUN_ARGS=(
-    "-d" "$HOME/syncthing/notes/The Vault v2"
-    "-p" "$HOME/projects"
-    "-d" "$HOME/dotfiles/gypsum"
-)
-
-jt() { fzf_dir tvim "${FZF_RUN_ARGS[@]}" }
-jv() { fzf_dir vimcd "${FZF_RUN_ARGS[@]}" }
-jd() { fzf_dir cd "${FZF_RUN_ARGS[@]}" }
+jt() { dir=$(fzf_dir); [ $? -eq 0 ] && echo -en "\033]0;$(basename $dir)\a" && tvim "$dir" }
+jv() { dir=$(fzf_dir); [ $? -eq 0 ] && echo -en "\033]0;$(basename $dir)\a" && vimcd "$dir" }
+jd() { dir=$(fzf_dir); [ $? -eq 0 ] && cd $dir }
 
 # temporarily source an env file
 # xenv ./.env ./script.sh
