@@ -10,3 +10,4 @@ ln -s ~/dotfiles/gypsum/.config/nvim ~/.config/nvim
 ln -s ~/dotfiles/gypsum/.zshrc ~/.zshrc
 ln -s ~/dotfiles/gypsum/.config/polybar ~/.config/polybar
 ln -s ~/dotfiles/gypsum/.tmux.conf ~/.tmux.conf
+ln -s ~/dotfiles/gypsum/scripts ~/scripts

@@ -53,83 +53,26 @@ cheat() {
     zle accept-line
 }
 
-FZF_DIRS=(
-    "$HOME/syncthing/notes/The Vault v2"
-    "$HOME/dotfiles/gypsum"
-)
-FZF_DIRS+=($HOME/projects/*)
-
 fzf_dir() {
-    dirs=$(python3 << EOF
-import os
-dirs = '''$(printf "%s\n" "${FZF_DIRS[@]}")'''.strip().split('\n')
-dirs = [os.path.realpath(i) for i in dirs]
-print('\n'.join(dirs), end='')
-EOF
-)
-    printf "%s\n" "${dirs[@]}" | fzf --prompt="Select a directory: " --preview='rg --max-depth=5 --files {} | sed "s|^"{}"/||" | tree --fromfile -L 5 -C | sed "1i"{}' --ansi
+    ~/dotfiles/gypsum/scripts/fzf_dir.sh
 }
 
 jd() { dir=$(fzf_dir); [ $? -eq 0 ] && cd $dir }
 
 jt() {
-    dir=$(fzf_dir)
-    if [ $? -ne 0 ]; then
-        return 1
-    fi
-
-    base_name=$(basename $dir | tr . _)
-    name="~ $base_name" 
-
-    if ! tmux has-session -t=$name 2> /dev/null; then
-        tmux new-session -ds $name -c $dir "nvim; zsh" \; split-window -v -p 20 \; select-pane -t 0
-    fi
-
-    if [[ -z $TMUX ]]; then
-        tmux attach-session -t $name
-    else
-        tmux switch-client -t $name
-    fi
+    ~/dotfiles/gypsum/scripts/tmux-dir-sessionize.sh '"nvim; zsh" \; split-window -v -p 20 \; select-pane -t 0'
 }
 
 jv() {
-    dir=$(fzf_dir)
-    if [ $? -ne 0 ]; then
-        return 1
-    fi
-
-    base_name=$(basename $dir | tr . _)
-    name="~ $base_name" 
-
-    if ! tmux has-session -t=$name 2> /dev/null; then
-        tmux new-session -ds $name -c $dir "nvim; zsh"
-    fi
-
-    if [[ -z $TMUX ]]; then
-        tmux attach-session -t $name
-    else
-        tmux switch-client -t $name
-    fi
+    ~/dotfiles/gypsum/scripts/tmux-dir-sessionize.sh '"nvim; zsh"'
 }
 
 jm() {
-    dir=$(fzf_dir)
-    if [ $? -ne 0 ]; then
-        return 1
-    fi
+    ~/dotfiles/gypsum/scripts/tmux-dir-sessionize.sh
+}
 
-    base_name=$(basename $dir | tr . _)
-    name="~ $base_name" 
-
-    if ! tmux has-session -t=$name 2> /dev/null; then
-        tmux new-session -ds $name -c $dir
-    fi
-
-    if [[ -z $TMUX ]]; then
-        tmux attach-session -t $name
-    else
-        tmux switch-client -t $name
-    fi
+ja() {
+    ~/dotfiles/gypsum/scripts/tmux-get-or-create-session.sh
 }
 
 # temporarily source an env file
@@ -139,6 +82,7 @@ xenv() { (set -a && source "$1" && shift && "$@" ); }
 ## aliases ##
 alias sz='. ~/.zshrc'
 alias ez='vim ~/.zshrc'
+alias st='tmux source-file ~/.tmux.conf'
 alias ec='vim ~/dotfiles/gypsum/cheat'
 alias ev='vim ~/dotfiles/gypsum/.config/nvim'
 alias v=vimcd
