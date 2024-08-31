@@ -19,29 +19,38 @@ return require('packer').startup(function(use)
     use {
         'folke/which-key.nvim',
         config = function()
-            require('which-key').setup({
-                registers = false,
-                spelling = { enabled = false },
+            local wk = require('which-key')
+            wk.setup({
+                plugins = {
+                    spelling = { enabled = false },
+                },
                 icons = {
                     breadcrumb = '',
                     separator = '',
-                    group = ''
+                    group = '',
+                    mappings = false,
+                    keys = {
+                        Esc = 'Esc',
+                        Tab = 'Tab',
+                        Space = 'Space',
+                        BS = 'Backspace'
+                    }
                 },
-                window = {
+                win = {
                     border = 'single',
-                    winblend = 0
                 }
             })
 
-            require('which-key').register({
-                ['<leader>g'] = { name = '[g]it', _ = 'which_key_ignore' },
-                ['<leader>p'] = { name = '[p]roject actions', _ = 'which_key_ignore' },
-                ['<leader>o'] = { name = '[o]pen action on buffer', _ = 'which_key_ignore' },
-                ['<leader>c'] = { name = '[c]ode actions', _ = 'which_key_ignore' },
-                ['<leader>d'] = { name = 'start [d]iff modes', _ = 'which_key_ignore' },
-                ['<leader>t'] = { name = '[t]ext tools', _ = 'which_key_ignore' },
-                ['<leader>ta'] = { name = '[t]ext [a]lign', _ = 'which_key_ignore' },
-                ['d'] = { name = '[d]iff mode actions', _ = 'which_key_ignore' }
+            wk.add({
+                { '<leader>g', group = '[g]it' },
+                { '<leader>p', group = '[p]roject actions' },
+                { '<leader>o', group = '[o]pen action on buffer' },
+                { '<leader>c', group = '[c]ode actions' },
+                { '<leader>d', group = 'start [d]iff modes' },
+                { '<leader>t', group = '[t]ext tools' },
+                { '<leader>ta', group = '[t]ext [a]lign' },
+                { '<leader>s', group = '[s]ticky' },
+                { 'd', group = '[d]iff mode actions' },
             })
         end
     }
