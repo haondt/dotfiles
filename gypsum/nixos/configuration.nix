@@ -2,7 +2,11 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
+let private_path = builtins.getEnv "NIXOS_PRIVATE_PATH";
+_ = assert private_path != ""; "NIXOS_PRIVATE_PATH must be set";
+
+ private = import (private_path + "/private.nix"); in
 
 {
   imports =
@@ -60,11 +64,11 @@ nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.noah = {
+  users.users.${private.username} = {
      isNormalUser = true;
      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
      shell = pkgs.zsh;
-     home = "/home/noah";
+     home = "/home/${private.username}";
      packages = with pkgs; [
        tree
      ];
@@ -77,9 +81,10 @@ programs.zsh.enable = true;
   # $ nix search wget
   environment.systemPackages = with pkgs; [
      git
-     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+     vim
      wget
-tmux
+     tmux
+     gnumake
    ];
   environment.variables.EDITOR = "vim";
 
@@ -109,7 +114,7 @@ enable = true;
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
-
+#
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
