@@ -23,12 +23,6 @@ return {
             local float_close_wrap = floatpreview.close_wrap
 
             local Event = api.events.Event
-            api.events.subscribe(Event.TreeClose, function()
-                vim.schedule(function()
-                    float_close_wrap(function() end)()
-                end)
-            end)
-
             local clear = function()
                 api.marks.clear()
                 api.fs.clear_clipboard()
@@ -69,8 +63,8 @@ return {
                 end
             end
 
-            vim.keymap.set('n', '<ESC>', api.tree.close, opts('Close'))
-            vim.keymap.set('n', '<CR>', haondt.node.navigate.edit, opts('Close'))
+            vim.keymap.set('n', '<ESC>', float_close_wrap(api.tree.close), opts('Close'))
+            vim.keymap.set('n', '<CR>', float_close_wrap(haondt.node.navigate.edit), opts('Edit'))
             vim.keymap.set('n', '<Tab>', haondt.node.navigate.toggle, opts('Toggle'))
             vim.keymap.set('n', 'gp', api.node.navigate.parent, opts('Go to parent'))
             vim.keymap.set('n', '<leader>h', api.node.show_info_popup, opts('Info'))
@@ -91,7 +85,7 @@ return {
 
         preview.setup({
             window = {
-                wrap = false,
+                wrap_nvimtree_commands = false,
                 trim_height = false,
                 open_win_config = function()
                     local screen_w = vim.opt.columns:get()

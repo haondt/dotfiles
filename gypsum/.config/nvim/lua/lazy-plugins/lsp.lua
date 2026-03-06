@@ -36,6 +36,18 @@ return {
                     map('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ctions')
                     map('<leader>ch', vim.lsp.buf.hover, '[c]ode hover')
                     map('<leader>cs', vim.lsp.buf.signature_help, '[c]ode [s]ignature help')
+
+                    -- Format on save
+                    local format_on_save_types = { 'typescript', 'python', 'csharp', 'html', 'lua' }
+                    vim.api.nvim_create_autocmd('BufWritePre', {
+                        buffer = bufnr,
+                        callback = function()
+                            local ft = vim.bo[bufnr].filetype
+                            if vim.tbl_contains(format_on_save_types, ft) then
+                                vim.lsp.buf.format({ bufnr = bufnr })
+                            end
+                        end,
+                    })
                 end
             })
 

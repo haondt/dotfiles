@@ -22,6 +22,9 @@ delete character under cursor and switch to insert mode
 ## :PackerSync
 sync packer plugins
 
+## :Lazy sync
+sync lazy plugins
+
 ## :so
 source current file
 
@@ -237,6 +240,7 @@ format document with lsp
 - `:TSUpdate` - update treesitter
 - `:MasonUpdate` - update mason
 - `:PackerSync` - update plugins installed with packer 
+- `:Lazy sync` - update plugins installed with lazy 
 
 ## Troubleshooting
 

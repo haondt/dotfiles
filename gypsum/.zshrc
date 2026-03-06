@@ -17,22 +17,6 @@ export PATH=$PATH:~/.local/share/bob/nvim-bin
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/go/bin
 
-## custom vim startup ##
-# workaround because something is broken that causes grep (<leader>ps) to not preview files correctly
-vimcd() {
-    if [ -n "$1" ]; then # called with arg
-        if [ -d "$1" ]; then # arg is dir
-            RETURN_PATH=$(pwd); cd $1 && \nvim && cd $RETURN_PATH
-        else # arg is file
-            local file_dir=$(dirname "$1")
-            RETURN_PATH=$(pwd); cd $file_dir && \nvim -c "edit $1" && cd $RETURN_PATH
-        fi
-    else # no arg
-        \nvim
-    fi
-}
-
-
 cheat() {
     BUFFER=""
 
@@ -86,13 +70,12 @@ alias ez='vim ~/.zshrc'
 alias st='tmux source-file ~/.tmux.conf'
 alias ec='vim ~/dotfiles/gypsum/cheat'
 alias ev='vim ~/dotfiles/gypsum/.config/nvim'
-alias v=vimcd
+alias v='nvim'
 
 alias md='medea --trim'
 alias clip='xclip -selection clipboard'
 alias sclip="scrot -s -e 'xclip -selection clipboard -t image/png -i $f'"
-alias vim=vimcd
-alias nvim=vimcd
+alias vim='nvim'
 alias tv=tvim
 alias py='python3'
 alias notes="vim $HOME/syncthing/notes/The\ Vault\ v2"
