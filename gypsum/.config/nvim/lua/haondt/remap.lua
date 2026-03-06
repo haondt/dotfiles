@@ -109,6 +109,10 @@ local set_filetype = function()
             vim.lsp.buf_detach_client(0, client.id)
         end
 
+        -- at the time of writing, vim.lsp does not attach automatically on nofile buffers
+        -- so we engage in a bit of trickery
+        -- https://github.com/neovim/neovim/issues/36599
+        -- https://github.com/neovim/neovim/issues/36775
         if vim.bo.buftype == 'nofile' then
             vim.bo.buftype = ''
             vim.bo.filetype = filetype
