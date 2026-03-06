@@ -49,6 +49,26 @@ return {
                 }
             end
 
+            local function clipboard_action(action_fn)
+                return function(node)
+                    api.fs.clear_clipboard()
+                    if api.marks.get(node) then
+                        for _, marked in pairs(api.marks.list()) do
+                            action_fn(marked)
+                        end
+                    else
+                        action_fn(node)
+                    end
+                end
+            end
+
+            local function clear_marks_after(action_fn)
+                return function()
+                    action_fn()
+                    api.marks.clear()
+                end
+            end
+
             vim.keymap.set('n', '<ESC>', api.tree.close, opts('Close'))
             vim.keymap.set('n', '<CR>', haondt.node.navigate.edit, opts('Close'))
             vim.keymap.set('n', '<Tab>', haondt.node.navigate.toggle, opts('Toggle'))
@@ -57,13 +77,13 @@ return {
             vim.keymap.set('n', 'a', api.fs.create, opts('Create'))
             vim.keymap.set('n', 'r', api.fs.rename_sub, opts('Rename: full'))
             vim.keymap.set('n', '<C-r>', api.fs.rename_basename, opts('Rename'))
-            vim.keymap.set('n', 'y', api.fs.copy.node, opts('Copy'))
-            vim.keymap.set('n', 'x', api.fs.cut, opts('Cut'))
-            vim.keymap.set('n', 'p', api.fs.paste, opts('Paste'))
-            vim.keymap.set('n', 'd', api.fs.remove, opts('Delete'))
+            vim.keymap.set('n', 'y', clear_marks_after(clipboard_action(api.fs.copy.node)), opts('Copy'))
+            vim.keymap.set('n', 'x', clear_marks_after(clipboard_action(api.fs.cut)), opts('Cut'))
+            vim.keymap.set('n', 'p', clear_marks_after(api.fs.paste), opts('Paste'))
+            vim.keymap.set('n', 'd', clear_marks_after(clipboard_action(api.fs.remove)), opts('Delete'))
             vim.keymap.set('n', 'cl', api.fs.print_clipboard, opts('Print clipboard'))
             vim.keymap.set('n', 'z', clear, opts('Clear marks and clipboard'))
-            vim.keymap.set('n', 'm', api.marks.toggle, opts('Mark'))
+            vim.keymap.set('n', 'v', api.marks.toggle, opts('Mark'))
             vim.keymap.set('n', 'bl', haondt.marks.bulk_list, opts('List marks'))
             vim.keymap.set('n', 'bd', api.marks.bulk.delete, opts('Delete marked'))
             vim.keymap.set('n', 'bv', haondt.marks.bulk_move, opts('Move marked'))

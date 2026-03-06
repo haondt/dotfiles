@@ -14,6 +14,7 @@ local function wrap_node(fn)
     end
 end
 
+
 local bulk_move = function(node)
     if #marks.get_marks() == 0 then
         notify.warn("No marks to move")
@@ -56,7 +57,7 @@ local bulk_list = function()
         s = s .. node.absolute_path .. '\n'
     end
 
-    vim.api.nvim_echo({{s, 'Normal'}}, true, {})
+    vim.api.nvim_echo({ { s, 'Normal' } }, true, {})
 end
 
 
