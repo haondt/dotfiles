@@ -17,14 +17,13 @@ Requirements are based on a fairly bare Debian install.
 **rust dependencies** (installable via cargo)
 
 - `[bob](https://github.com/MordechaiHadad/bob)`
-  - use to install `neovim`, since a fairly recent version is required
+  - use to install `neovim`. must be >= 0.11.6
 - `ripgrep`
 - `fd-find`
 - [`delta`](https://github.com/dandavison/delta)
 
 **other dependencies**
 
-- `packer.nvim`
 - `yq`
 - `fzf`
 

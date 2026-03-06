@@ -4,13 +4,14 @@ local utils = require("nvim-tree.utils")
 local rename_file = require('nvim-tree.actions.fs.rename-file')
 local parent = require('nvim-tree.actions.moves.parent')
 local lib = require('nvim-tree.lib')
+local api = require('nvim-tree.api')
 
 local M = {}
 
 
 local function wrap_node(fn)
     return function(node, ...)
-        node = node or lib.get_node_at_cursor()
+        node = node or api.tree.get_node_under_cursor()
         if node then
             fn(node, ...)
         end
@@ -23,8 +24,8 @@ local toggle = function(node)
     end
 
 
-    if node.nodes then
-        lib.expand_or_collapse(node)
+    if node.type == "directory" then
+        api.node.open.edit(node)
         return
     end
 

@@ -3,7 +3,7 @@ local palette = colors.palette
 --colors.colors.bg
 
 --vim.cmd.colorscheme(color)
-vim.api.nvim_set_hl(0, "Normal", { bg = palette.bg, fg = palette.fg  })
+vim.api.nvim_set_hl(0, "Normal", { bg = palette.bg, fg = palette.fg })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = palette.bg })
 vim.api.nvim_set_hl(0, "Visual", palette.selected)
 vim.api.nvim_set_hl(0, "Cursorline", palette.selected)
@@ -93,11 +93,11 @@ vim.api.nvim_set_hl(0, "@lsp.type.namespace", { fg = palette.color0 })
 
 
 -- telescope
-vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = palette.none, fg = palette.fg  })
+vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = palette.none, fg = palette.fg })
 vim.api.nvim_set_hl(0, "TelescopeBorder", palette.popup_border)
-vim.api.nvim_set_hl(0, "TelescopeTitle", { fg = palette.fg  })
+vim.api.nvim_set_hl(0, "TelescopeTitle", { fg = palette.fg })
 vim.api.nvim_set_hl(0, "TelescopePromptCounter", { fg = palette.color12 })
-vim.api.nvim_set_hl(0, "TelescopeResultsComment", { fg = palette.color0})
+vim.api.nvim_set_hl(0, "TelescopeResultsComment", { fg = palette.color0 })
 vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = palette.color9, underline = true })
 vim.api.nvim_set_hl(0, "TelescopePreviewLine", palette.search)
 vim.api.nvim_set_hl(0, "TelescopeResultsDiffAdd", { fg = palette.add.fg, bold = true })
@@ -111,7 +111,7 @@ vim.api.nvim_set_hl(0, "diffChanged", { fg = palette.color3 })
 vim.api.nvim_set_hl(0, "diffFile", { fg = palette.color0 })
 vim.api.nvim_set_hl(0, "diffIndexLine", { fg = palette.color0 })
 vim.api.nvim_set_hl(0, "diffIndexFile", { fg = palette.color0 })
-vim.api.nvim_set_hl(0, "diffOldFile", palette.remove )
+vim.api.nvim_set_hl(0, "diffOldFile", palette.remove)
 vim.api.nvim_set_hl(0, "diffNewFIle", palette.add)
 vim.api.nvim_set_hl(0, "diffLine", { fg = palette.color7, bg = palette.color8 })
 vim.api.nvim_set_hl(0, "diffSubname", { fg = palette.color0 })
@@ -119,8 +119,8 @@ vim.api.nvim_set_hl(0, "diffFileId", { fg = palette.color0 })
 
 vim.api.nvim_set_hl(0, 'DiffText', { fg = palette.color3, bold = true })
 vim.api.nvim_set_hl(0, 'DiffChange', { fg = palette.color3, bold = false })
-vim.api.nvim_set_hl(0, 'DiffAdd',  palette.add)
-vim.api.nvim_set_hl(0, 'DiffDelete',  palette.remove)
+vim.api.nvim_set_hl(0, 'DiffAdd', palette.add)
+vim.api.nvim_set_hl(0, 'DiffDelete', palette.remove)
 
 -- sticky
 vim.api.nvim_set_hl(0, "StickyWindow", { bg = palette.bg })
@@ -146,3 +146,12 @@ vim.api.nvim_set_hl(0, "PmenuSel", { bg = palette.color0 })
 vim.api.nvim_set_hl(0, "CmpItemKindDefault", { fg = palette.color12 })
 vim.api.nvim_set_hl(0, "CmpItemKindFunctionDefault", { fg = palette.color6 })
 vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { fg = palette.color8 })
+
+-- status line
+vim.api.nvim_set_hl(0, "StatusLine", { bg = palette.bg })
+vim.api.nvim_set_hl(0, "StatusLineNC", { bg = palette.bg })
+vim.api.nvim_set_hl(0, "Tabline", { bg = palette.bg })
+vim.api.nvim_set_hl(0, "TabLineFill", { bg = palette.bg })
+vim.api.nvim_set_hl(0, "TabLineSel", { bg = palette.bg })
+vim.api.nvim_set_hl(0, "Winbar", { bg = palette.bg })
+vim.api.nvim_set_hl(0, "WinbarNC", { bg = palette.bg })

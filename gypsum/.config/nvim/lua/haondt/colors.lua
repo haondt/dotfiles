@@ -34,7 +34,7 @@ M.colors = {
     color14 = "#f3afaf",
 
     -- white
-    color7 = "#3e2d34",
+    color7 = "#6E4952",
     color15 = "#eacfda",
 }
 

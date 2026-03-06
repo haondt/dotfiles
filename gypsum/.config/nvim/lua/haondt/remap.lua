@@ -43,7 +43,7 @@ vim.keymap.set('n', '<C-w><C-k>', '<C-w>K')
 vim.keymap.set('n', '<C-w><C-l>', '<C-w>L')
 
 local open_scratch_buffer = function()
-    local scratch_buffer = vim.api.nvim_create_buf(true, true)
+    local scratch_buffer = vim.api.nvim_create_buf(false, false)
     vim.api.nvim_buf_set_option(scratch_buffer, 'bufhidden', 'delete')
     vim.api.nvim_set_current_buf(scratch_buffer)
 end
@@ -103,12 +103,19 @@ vim.keymap.set('n', '<leader>dt', toggle_diff_mode, { noremap = true, desc = '[d
 local set_filetype = function()
     local filetype = vim.fn.input('Enter filetype: ')
     if filetype and filetype ~= "" then
-        local clients = vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf()})
+        local bufnr = vim.api.nvim_get_current_buf()
+        local clients = vim.lsp.get_clients({ bufnr = bufnr })
         for _, client in ipairs(clients) do
             vim.lsp.buf_detach_client(0, client.id)
         end
-        vim.bo.filetype = filetype
-        vim.cmd('LspStart')
+
+        if vim.bo.buftype == 'nofile' then
+            vim.bo.buftype = ''
+            vim.bo.filetype = filetype
+            vim.bo.buftype = 'nofile'
+        else
+            vim.bo.filetype = filetype
+        end
     else
         print('invalid or empty filetype. LSP not changed')
     end
@@ -158,7 +165,7 @@ vim.keymap.set('n', '<leader>ce', vim.diagnostic.open_float, { desc = 'float [c]
 
 -- git
 vim.keymap.set('n', 'dol', git.take_local, { desc = '[d]iff [o]btain [l]ocal' })
-vim.keymap.set('n', 'dor', git.take_remote, {  desc = '[d]iff [o]btain [r]emote' })
+vim.keymap.set('n', 'dor', git.take_remote, { desc = '[d]iff [o]btain [r]emote' })
 vim.keymap.set('n', 'doa', git.remove_markers, { desc = '[d]iff [o]btain [a]ll' })
 vim.keymap.set('n', 'dob', git.take_local_and_remote, { desc = '[d]iff [o]btain [b]oth' })
 vim.keymap.set('n', ']d', git.next_conflict, { desc = 'next [d]iff conflict' })
@@ -166,4 +173,3 @@ vim.keymap.set('n', '[d', git.previous_conflict, { desc = 'previous [d]iff confl
 
 -- diff
 vim.api.nvim_create_user_command('DiffTool', function() vim.schedule(diff.difftool) end, {})
-

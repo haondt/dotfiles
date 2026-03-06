@@ -15,6 +15,7 @@ export EDITOR=nvim
 . "$HOME/.cargo/env"
 export PATH=$PATH:~/.local/share/bob/nvim-bin
 export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/go/bin
 
 ## custom vim startup ##
 # workaround because something is broken that causes grep (<leader>ps) to not preview files correctly
@@ -77,7 +78,7 @@ ja() {
 
 # temporarily source an env file
 # xenv ./.env ./script.sh
-xenv() { (set -a && source "$1" && shift && "$@" ); }
+xenv() { (set -a && source "$1" && shift && "$@"); }
 
 ## aliases ##
 alias sz='. ~/.zshrc'
@@ -122,7 +123,6 @@ alias gcloud="docker run --rm \
     --entrypoint gcloud \
     gcr.io/google.com/cloudsdktool/google-cloud-cli:alpine"
 
-
 ## bindings ##
 
 zle -N cheat
@@ -141,3 +141,10 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -f "/home/noah/.ghcup/env" ] && . "/home/noah/.ghcup/env" # ghcup-env
 
+
+# bun completions
+[ -s "/home/noah/.bun/_bun" ] && source "/home/noah/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
