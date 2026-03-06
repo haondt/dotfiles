@@ -24,6 +24,9 @@ vim.api.nvim_set_hl(0, 'htmlItalic', { fg = palette.color15, italic = true })
 vim.api.nvim_set_hl(0, 'htmlBoldItalic', { fg = palette.color15, bold = true, italic = true })
 vim.api.nvim_set_hl(0, 'htmlLink', { fg = palette.color13, underline = true })
 vim.api.nvim_set_hl(0, 'markdownUrl', { fg = palette.color8 })
+vim.api.nvim_set_hl(0, "Changed", { fg = palette.color3 })
+vim.api.nvim_set_hl(0, "QuickFixLine", { fg = palette.color6 })
+vim.api.nvim_set_hl(0, "Question", { fg = palette.color6 })
 
 -- diagnostics
 vim.api.nvim_set_hl(0, "DiagnosticError", { fg = palette.error.bg })
