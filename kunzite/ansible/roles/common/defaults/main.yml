@@ -11,6 +11,8 @@ common_role_defaults:
     enabled: false
   foot:
     enabled: false
+  sway:
+    enabled: false
   colors:
     # special
     foreground: '#f3c6b1'

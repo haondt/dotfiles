@@ -17,10 +17,7 @@ export PATH=$PATH:~/.local/share/bob/nvim-bin
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/go/bin
 
-## aliases ##
-alias sz='. ~/.zshrc'
-alias st='tmux source-file ~/.tmux.conf'
-
+## functions ##
 fzf_dir() {
     ~/.local/bin/kunzite/fzf_dir.sh
 }
@@ -42,3 +39,90 @@ jm() {
 ja() {
     ~/.config/tmux/scripts/tmux-get-or-create-session.sh
 }
+
+# temporarily source an env file
+# xenv ./.env ./script.sh
+xenv() { (set -a && source "$1" && shift && "$@"); }
+
+cheat() {
+    BUFFER=""
+
+    local markdown_dir="$HOME/.local/bin/kunzite/cheat"
+    local cheat="$HOME/.local/bin/kunzite/cheat/cheat.sh"
+
+    # Use grep to search for tags in Markdown files
+    #tags=$(grep -h -r -o -E '#\w+' "$markdown_dir" | sort -u)
+    local tags=$("$cheat" -d "$markdown_dir" | sed 's/:/\t/g' | sed 's/<COLON>/:/g')
+
+    # Use fzf to select a tag interactively
+    local selected=$(echo -e "$tags" | fzf -d "\t" --with-nth=1 --ansi --preview "bat  -pp --color=always --highlight-line {2} {-1} --theme=Dracula" --preview-window '+{2}/2')
+    if [[ -n $selected ]]; then
+        local selected_path=$(echo -e "$selected" | awk -F'\t' '{print $4}')
+        local selected_line=$(echo -e "$selected" | awk -F'\t' '{print $2}')
+        bat --theme=Dracula --highlight-line $selected_line --color=always -p --pager="less +"$selected_line"G -j.5" $selected_path 
+    fi
+
+    zle accept-line
+}
+
+## aliases ##
+alias sz='. ~/.zshrc'
+alias ez='$EDITOR ~/projects/dotfiles/kunzite/ansible/roles/zsh-configure'
+alias vz='$EDITOR ~/.zshrc'
+alias rz='(cd ~/projects/dotfiles/kunzite && just configure zsh) && . ~/.zshrc'
+
+alias ev='$EDITOR ~/projects/dotfiles/kunzite/ansible/roles/neovim-configure'
+alias vv='$EDITOR ~/.config/nvim'
+alias rv='(cd ~/projects/dotfiles/kunzite && just configure neovim)'
+alias v='nvim'
+alias vim='nvim'
+
+alias st='tmux source-file ~/.tmux.conf'
+alias et='$EDITOR ~/projects/dotfiles/kunzite/ansible/roles/tmux-configure'
+alias rt='(cd ~/projects/dotfiles/kunzite && just configure tmux)'
+
+alias ec='$EDITOR ~/projects/dotfiles/kunzite/ansible/roles/base-configure/files/scripts/cheat'
+
+alias md='medea --trim'
+alias clip='wl-copy'
+alias sclip="grim -g \"\$(slurp)\" - | wl-copy --type image/png"
+alias py='python3'
+
+alias gs='git status --short -b'
+alias ga='git add'
+alias gcm='git commit -m'
+alias gr='git reset'
+alias gd='git difftool --dir-diff'
+alias gm='git mergetool'
+
+alias la='ls -a'
+alias ll='ls -l'
+alias lla='ls -la'
+
+alias gcloud="docker run --rm \
+    -v $(pwd):/app \
+    -it \
+    --user $(id -u):$(id -g) \
+    -v ~/gcloud/config/:/config/mygcloud \
+    -e CLOUDSDK_CONFIG=/config/mygcloud \
+    -v ~/gcloud/certs/:/certs \
+    -w /app \
+    --entrypoint gcloud \
+    gcr.io/google.com/cloudsdktool/google-cloud-cli:alpine"
+
+## bindings ##
+
+zle -N cheat
+
+KEYTIMEOUT=1 # 10 ms key timeout
+bindkey -M vicmd '  ' cheat # <leader><leader>
+# map <leader> to circumvent 10ms timeout when activating cheat
+bindkey -M vicmd ' ' undefined-key
+
+## python ##
+VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# bun
+[ -s "/home/noah/.bun/_bun" ] && source "/home/noah/.bun/_bun"
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

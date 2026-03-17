@@ -68,7 +68,8 @@ M.setup = function()
 
     local function haondt_map()
         local haondt = require('telescope').extensions.haondt
-        vim.keymap.set('n', '<leader><leader>', function() haondt.pickers.cheat({ path = "~/dotfiles/gypsum/cheat" }) end,
+        vim.keymap.set('n', '<leader><leader>',
+            function() haondt.pickers.cheat({ path = "~/.local/bin/kunzite/cheat" }) end,
             { desc = 'cheat' })
         vim.keymap.set('n', '<leader>ph', function() haondt.pickers.cheat({ path = ".", use_cheat_window = false }) end,
             {})

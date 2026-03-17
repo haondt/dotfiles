@@ -55,12 +55,12 @@ local gen_entry_maker = function(opts)
             if gap > 0 then
                 fn_padded = string.format("%s%s", string.rep(' ', gap), fn)
             elseif gap < 0 then
-                 text_truncated = strings.truncate(text, #text + gap)
+                text_truncated = strings.truncate(text, #text + gap)
             end
 
             return displayer({
                 { text_truncated },
-                { fn_padded .. ' ', 'TelescopeResultsComment'}
+                { fn_padded .. ' ', 'TelescopeResultsComment' }
             })
         end
 
@@ -69,7 +69,8 @@ local gen_entry_maker = function(opts)
 end
 
 local gen_new_finder = function(opts)
-    opts.finder_command = opts.finder_command or { vim.fn.expand("~/dotfiles/gypsum/cheat/cheat.sh"), "-d", opts.path }
+    opts.finder_command = opts.finder_command or
+        { vim.fn.expand("~/.local/bin/kunzite/cheat/cheat.sh"), "-d", opts.path }
     local output = utils.get_os_command_output(opts.finder_command, opts.cwd)
 
     return finders.new_table({
@@ -104,7 +105,7 @@ local action_set_edit = function(prompt_bufnr, command)
         vim.api.nvim_set_current_win(win_id)
     end
 
-    local find_cheat_window = function ()
+    local find_cheat_window = function()
         if last_bufnr == -1 then
             return -1
         elseif vim.fn.bufexists(last_bufnr) == 0 then
@@ -133,7 +134,7 @@ local action_set_edit = function(prompt_bufnr, command)
             vim.bo[last_bufnr].filetype = 'markdown'
             vim.api.nvim_buf_set_option(last_bufnr, 'syntax', 'markdown') -- stand in until the lsp takes over
             vim.cmd('LspStart')
-        -- last buffer is still open
+            -- last buffer is still open
         else
             vim.fn.win_gotoid(window)
             vim.api.nvim_buf_set_option(last_bufnr, 'modifiable', true)

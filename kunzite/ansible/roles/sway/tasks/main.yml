@@ -1,0 +1,22 @@
+- name: Check if sway is installed
+  stat:
+    path: /usr/bin/sway
+  register: sway_bin
+
+- name: Install and configure sway
+  when: not sway_bin.stat.exists
+  block:
+    - name: Install sway
+      dnf:
+        name: sway
+        state: present
+      become: true
+    - name: Install sway associated apps
+      dnf:
+        name: 
+          - rofi
+        state: present
+      become: true
+    - name: Configure sway
+      include_role:
+        name: sway-configure

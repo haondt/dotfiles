@@ -52,18 +52,32 @@ vim.opt.timeout = true
 
 -- hilight when yanking text
 vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+    desc = 'Highlight when yanking (copying) text',
+    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
 })
 
 -- hilight when yanking text
 vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+    desc = 'Highlight when yanking (copying) text',
+    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+})
+
+vim.api.nvim_create_autocmd('VimEnter', {
+    desc = 'cd to dir when opening directory',
+    group = vim.api.nvim_create_augroup('cd-to-pwd', { clear = true }),
+    callback = function()
+        local path = vim.fn.argv(0)
+        if path and path ~= "" then
+            path = path:gsub("^oil://", "")
+            local dir = vim.fn.isdirectory(path) == 1 and path or vim.fn.fnamemodify(path, ":h")
+            vim.notify("dir: " .. dir)
+            vim.api.nvim_set_current_dir(dir)
+        end
+    end,
 })
