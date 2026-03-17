@@ -1,6 +1,11 @@
 #set-option -sa terminal-features ',alacritty:RGB' # retrieved via echo $TERM
+{% if foot.enabled %}
+set-option -sa terminal-features ',foot:RGB' # retrieved via echo $TERM
+set -g default-terminal 'foot'
+{% else %}
 set-option -sa terminal-features ',xterm-256color:RGB' # retrieved via echo $TERM
 set -g default-terminal 'screen-256color'
+{% endif %}
 set -g set-titles on
 set -g set-titles-string '#{session_name}'
 set -g automatic-rename on
@@ -39,8 +44,8 @@ set -g bell-action none
 set -g mode-style 'fg=color4 bold'
 
 # pane style
-set -g pane-border-style 'none'
-set -g pane-active-border-style 'fg=color2 bold'
+set -g pane-border-style 'fg=color2'
+set -g pane-active-border-style 'fg=color10 bold'
 set -g pane-border-status 'bottom'
 set -g pane-border-format ''
 

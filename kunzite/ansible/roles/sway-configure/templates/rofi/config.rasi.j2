@@ -1,52 +1,57 @@
 configuration {
-  kb-row-up: "Alt+k";
-  kb-row-down: "Alt+j";
-  kb-mode-next: "Alt-l";
-  kb-mode-previous: "Alt-h";
+  kb-row-up: "Control+u";
+  kb-row-down: "Control+d";
+  kb-element-next: "Control+j";
+  kb-element-prev: "Control+k";
+  kb-remove-to-sol: "";
+  kb-remove-char-forward: "Delete";
+  kb-mode-next: "Tab";
+  kb-accept-entry: "Return,KP_Enter";
+  kb-remove-to-eol: "";
   font: "Source Code Pro 13";
   monitor: "primary";
 }
 
 * {
-  foregroundColor: "{{ colors.foreground }}";
-  backgroundColor: "{{ colors.background }}";
-  cursorColor: "{{ colors.cursorColor }}";
+  foregroundColor: {{ colors.foreground }};
+  backgroundColor: {{ colors.background }};
+  cursorColor: {{ colors.cursorColor }};
 
-  color0: "{{ colors.black.dark }}";
-  color8: "{{ colors.black.bright }}";
+  color0: {{ colors.black.dark }};
+  color8: {{ colors.black.bright }};
   
-  color1: "{{ colors.red.dark }}";
-  color9: "{{ colors.red.bright }}";
+  color1: {{ colors.red.dark }};
+  color9: {{ colors.red.bright }};
   
-  color2: "{{ colors.green.dark }}";
-  color10: "{{ colors.green.bright }}";
+  color2: {{ colors.green.dark }};
+  color10: {{ colors.green.bright }};
   
-  color3: "{{ colors.yellow.dark }}";
-  color11: "{{ colors.yellow.bright }}";
+  color3: {{ colors.yellow.dark }};
+  color11: {{ colors.yellow.bright }};
   
-  color4: "{{ colors.blue.dark }}";
-  color12: "{{ colors.blue.bright }}";
+  color4: {{ colors.blue.dark }};
+  color12: {{ colors.blue.bright }};
   
-  color5: "{{ colors.magenta.dark }}";
-  color13: "{{ colors.magenta.bright }}";
+  color5: {{ colors.magenta.dark }};
+  color13: {{ colors.magenta.bright }};
 
-  color6: "{{ colors.cyan.dark }}";
-  color14: "{{ colors.cyan.bright }}";
+  color6: {{ colors.cyan.dark }};
+  color14: {{ colors.cyan.bright }};
 
-  color7: "{{ colors.white.dark }}";
-  color15: "{{ colors.white.bright }}";
+  color7: {{ colors.white.dark }};
+  color15: {{ colors.white.bright }};
 
-  color7Transparent: {{ colors.white.dark }}80;
-  color12Transparent: {{ colors.blue.bright }}30;
   color6Underline: underline {{ colors.cyan.dark }};
   color9Underline: underline {{ colors.red.bright }};
+
 }
-/*
+
+
 window {
-  background-color: var(color7Transparent);
+  background-color: var(backgroundColor);
   border: 1;
   padding: 0;
-  border-color: var(color9);
+  border-color: var(color13);
   transparency: "real";
 }
 
@@ -58,8 +63,9 @@ inputbar, prompt {
   text-color: var(color6);
 }
 
+
 inputbar {
-  background-color: {{ colors.background }}50;
+  background-color: var(backgroundColor);
 }
 
 textbox-prompt-colon {
@@ -67,7 +73,7 @@ textbox-prompt-colon {
 }
 
 entry {
-  placeholder-color: var(color9);
+  placeholder-color: var(color8);
   text-color: var(color14);
 }
 
@@ -93,24 +99,21 @@ element-text, inputbar {
   padding: 7px 10px;
 }
 
-*/
-element.normal.normal,
-element.alternate.normal,
-element.selected.normal,
-element.alternate.active,
-element.normal.active,
-element.selected.active {
-  background-color: var(color7);
-}
-
 element-text {
   highlight: var(color9Underline);
   text-color: var(foregroundColor);
   background-color: #00000000;
 }
 
-
-element-text.selected { 
-  background-color: var(color7);
+element.normal.normal,
+element.alternate.normal,
+element.selected.normal,
+element.alternate.active,
+element.normal.active,
+element.selected.active {
+  background-color: var(backgroundColor);
 }
 
+element-text.selected { 
+  background-color: var(cursorColor);
+}

@@ -18,7 +18,7 @@ common_role_defaults:
     foreground: '#f3c6b1'
     #background: '#0b0708'
     background: '#3b272c'
-    cursorColor: '#f3c6b1'
+    cursorColor: '#6e4952'
 
     black:
       dark: '#8e6c51'

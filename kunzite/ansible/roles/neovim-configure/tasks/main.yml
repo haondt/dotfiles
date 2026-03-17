@@ -9,6 +9,7 @@
     dest: "{{ ansible_facts['user_dir'] }}/.config/nvim/"
     delete: true
     recursive: true
+
 - name: Find all Jinja2 template files in templates/nvim
   find:
     paths: "{{ role_path }}/templates/nvim"

@@ -146,7 +146,7 @@ bindsym $mod+Shift+s reload
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+q exec swaynag -t warning -m 'Exit sway?' -b 'Yes' 'swaymsg exit'
 
 ###################
 # launch programs #
@@ -203,28 +203,19 @@ exec --no-startup-id nitrogen --restore; sleep 1; picom -b --experimental-backen
 # a e s t h e t i c s #
 #######################
 
-gaps inner 40
-default_border pixel 1
-# TODO
-#set_from_resource $background background
-#set_from_resource $foreground foreground
-#set_from_resource $color0     color0
-#set_from_resource $color1     color1
-#set_from_resource $color2     color2
-#set_from_resource $color3     color3
-#set_from_resource $color4     color4
-#set_from_resource $color5     color5
-#set_from_resource $color6     color6
-#set_from_resource $color7     color7
-#set_from_resource $color8     color8
-#set_from_resource $color9     color9
-#set_from_resource $color10    color10
-#set_from_resource $color11    color11
-#set_from_resource $color12    color12
-#set_from_resource $color13    color13
-#set_from_resource $color14    color14
-#set_from_resource $color15    color15
-# class			        border	backgr.	    text	indic.
-#client.focused 		    $color0	$color6	    $color0	$color12
-#client.unfocused 	    $color0	#00000000	$color0 $color7
-#client.focused_inactive $color0	#00000000	$color0	$color7
+gaps inner 20
+default_border pixel 3
+#class                  border  background              text    indicator 
+client.focused          #000000 {{colors.green.bright}} #000000 {{colors.white.bright}}
+client.focused_inactive #000000 {{colors.green.dark}}   #000000
+client.unfocused        #000000 {{colors.background}} #000000
+client.urgent           #000000 {{colors.red.dark}}     #000000
+
+##########
+# inputs #
+##########
+
+input * {
+    accel_profile flat
+    pointer_accel -0.25
+}

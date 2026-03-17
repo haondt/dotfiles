@@ -99,7 +99,7 @@ return {
             inactive = {
                 a = { bg = palette.color7, fg = palette.color7, gui = 'bold' },
                 b = { bg = palette.color0, fg = palette.color7 },
-                c = { bg = palette.color7, fg = palette.color15 },
+                c = { bg = palette.bg, fg = palette.color15 },
                 x = { bg = palette.bg, fg = palette.color15, gui = 'bold' },
                 y = { bg = palette.color7, fg = palette.color8 },
                 z = { bg = palette.color0, fg = palette.color0 }

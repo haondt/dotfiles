@@ -4,6 +4,21 @@
     dest: "{{ ansible_facts['user_dir'] }}/.config/tmux/"
     delete: true
     recursive: true 
+
+- name: Find all Jinja2 template files in templates/tmux
+  find:
+    paths: "{{ role_path }}/templates/tmux"
+    patterns: "*.j2"
+    recurse: true
+    file_type: file
+  register: template_files
+
+- name: Template all configuration files from templates/tmux
+  loop: "{{ template_files.files }}"
+  template:
+    src: "{{ item.path }}"
+    dest: "{{ ansible_facts['user_dir'] }}/.config/tmux/{{ item.path | regex_replace('^' + role_path + '/templates/tmux/', '') | regex_replace('.j2$', '') }}"
+
 - name: Create symlink
   ansible.builtin.file:
     src: "{{ ansible_facts['user_dir'] }}/.config/tmux/tmux.conf"
