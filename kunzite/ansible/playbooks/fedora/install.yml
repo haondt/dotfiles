@@ -12,3 +12,5 @@
       when: git.enabled | bool
     - role: tmux
       when: tmux.enabled | bool
+    - role: foot
+      when: foot.enabled | bool

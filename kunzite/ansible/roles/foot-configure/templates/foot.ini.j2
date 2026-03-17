@@ -1,0 +1,36 @@
+# see https://codeberg.org/dnkl/foot/src/branch/master/foot.ini
+
+font=Source Code Pro:size=11
+shell=/bin/zsh
+pad=5x5 center-when-maximized-and-fullscreen
+
+[colors]
+#alpha=0.5
+background={{ colors.background[1:] }}
+foreground={{ colors.foreground[1:] }}
+cursor={{ colors.cursorColor[1:] }} {{ colors.cursorColor[1:] }}
+
+regular0={{ colors.black.dark[1:] }}
+regular1={{ colors.red.dark[1:] }}
+regular2={{ colors.green.dark[1:] }}
+regular3={{ colors.yellow.dark[1:] }}
+regular4={{ colors.blue.dark[1:] }}
+regular5={{ colors.magenta.dark[1:] }}
+regular6={{ colors.cyan.dark[1:] }}
+regular7={{ colors.white.dark[1:] }}
+
+bright0={{ colors.black.bright[1:] }}
+bright1={{ colors.red.bright[1:] }}
+bright2={{ colors.green.bright[1:] }}
+bright3={{ colors.yellow.bright[1:] }}
+bright4={{ colors.blue.bright[1:] }}
+bright5={{ colors.magenta.bright[1:] }}
+bright6={{ colors.cyan.bright[1:] }}
+bright7={{ colors.white.bright[1:] }}
+
+[cursor]
+style=beam
+beam-thickness=1
+
+[csd]
+size=0

@@ -1,0 +1,16 @@
+- name: Check if foot is installed
+  stat:
+    path: /usr/bin/foot
+  register: foot_bin
+
+- name: Install and configure foot
+  when: not foot_bin.stat.exists
+  block:
+    - name: Install foot
+      dnf:
+        name: foot
+        state: present
+      become: true
+    - name: Configure foot
+      include_role:
+        name: foot-configure

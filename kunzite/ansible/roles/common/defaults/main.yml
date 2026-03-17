@@ -7,10 +7,13 @@ common_role_defaults:
     enabled: false
   tmux:
     enabled: false
+  foot:
+    enabled: false
   colors:
     # special
     foreground: '#f3c6b1'
-    background: '#0b0708'
+    #background: '#0b0708'
+    background: '#3b272c'
     cursorColor: '#f3c6b1'
 
     black:
