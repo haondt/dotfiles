@@ -1,0 +1,25 @@
+- name: Check if zsh is installed
+  stat:
+    path: /usr/bin/zsh
+  register: zsh_bin
+
+- name: Install and configure zsh
+  when: not zsh_bin.stat.exists
+  block:
+    - name: Install zsh
+      dnf:
+        name: zsh
+        state: present
+      become: true
+    - name: Set zsh as default shell
+      user:
+        name: "{{ ansible_facts['user_id'] }}"
+        shell: /bin/zsh
+      become: true
+    - name: Deploy .zshrc
+      template:
+        src: .zshrc.j2
+        dest: "{{ ansible_facts['user_dir'] }}/.zshrc"
+      
+
+

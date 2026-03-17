@@ -1,0 +1,54 @@
+---
+- name: Set role defaults
+  set_fact:
+    neovim: "{{ role_defaults | combine(neovim, recursive=True) }}"
+
+- name: Check if neovim is installed
+  stat:
+    path: /usr/share/nvim
+  register: nvim_dir
+
+- name: Check neovim version
+  ansible.builtin.shell: "nvim --version | head -1"
+  register: nvim_version
+  changed_when: false
+  failed_when: false
+  when: nvim_dir.stat.exists
+
+- name: Install and Configure Neovim
+  when: >
+    not nvim_dir.stat.exists or
+    neovim.version not in nvim_version.stdout
+  block:
+    - name: Install Neovim with Bob
+      ansible.builtin.shell: 'bob use {{ neovim.version }}'
+      register: nvim_install
+      changed_when: "'is already installed and used' not in nvim_install.stdout"
+    - name: Install Neovim dnf dependencies
+      dnf:
+        name:
+          - git
+          - unzip
+          - python3
+          - python3-pip
+          - tmux
+          - nodejs
+          - npm
+          - fzf
+          - curl
+          - wget
+        state: present
+      become: true
+    - name: Install Neovim Rust dependencies
+      community.general.cargo:
+        name:
+          - ripgrep
+          - fd-find
+          - git-delta
+          - bat
+    - name: Deploy Neovim Config
+      synchronize:
+        src: nvim/
+        dest: "{{ ansible_facts['user_dir'] }}/.config/nvim/"
+        delete: true
+        recursive: true

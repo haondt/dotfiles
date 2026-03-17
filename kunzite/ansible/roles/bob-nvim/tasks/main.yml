@@ -1,0 +1,3 @@
+- name: Install Bob
+  community.general.cargo:
+    name: bob-nvim

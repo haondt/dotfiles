@@ -1,0 +1,4 @@
+ansible
+pyyaml
+pip
+wheel

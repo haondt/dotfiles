@@ -1,0 +1,49 @@
+# Define variables
+inventory := "build/inventory.yml"
+inventory_source := "inventory"
+inventory_source_directories := shell("find", inventory_source, "-type", "d")
+inventory_source_files := shell("find", inventory_source, "-type", "f")
+
+secrets_file := "secrets.yml"
+
+scripts_directory := "scripts"
+render_directory := scripts_directory / "render_directory.py"
+
+venv := "venv"
+python := venv / "bin/python"
+pip := venv / "bin/pip"
+
+ansible_inventory := "build/ansible.inventory.yml"
+ansible_directory := "ansible"
+ansible_playbook := venv / "bin/ansible-playbook"
+
+[script]
+[arg("force", short="f", long="force", value="true")] 
+venv force="false":
+    if [ -d "{{venv}}" ] && [ "{{force}}" != "true" ]; then exit 0; fi
+    python3 -m venv {{venv}}
+    {{pip}} install --upgrade -r requirements.txt
+
+inventory: venv
+    mkdir -p {{parent_dir(inventory)}}
+    {{python}} {{render_directory}} {{inventory_source}} -v secrets {{secrets_file}} > {{inventory}}
+
+ansible_inventory: inventory
+    mkdir -p {{parent_dir(ansible_inventory)}}
+    cat {{inventory}} | yq '.ansible' | \
+        yq eval '.all.vars.haondt.artifacts = "{{shell("pwd")}}/artifacts/ansible"' -> {{ansible_inventory}}
+
+[script]
+update target="default": ansible_inventory
+    ANSIBLE_CONFIG={{ansible_directory}}/ansible.cfg {{ansible_playbook}} -i {{ansible_inventory}} \
+        {{ansible_directory}}/playbooks/fedora/update.yml \
+        -e target_hosts={{target}} \
+        --ask-become-pass 
+
+[script]
+install target="default": ansible_inventory
+    ANSIBLE_CONFIG={{ansible_directory}}/ansible.cfg {{ansible_playbook}} -i {{ansible_inventory}} \
+        {{ansible_directory}}/playbooks/fedora/install.yml \
+        -e target_hosts={{target}} \
+        -v \
+        --ask-become-pass

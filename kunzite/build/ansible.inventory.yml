@@ -1,0 +1,16 @@
+all:
+  hosts:
+    default:
+      neovim:
+        enabled: true
+        version: 0.11.6
+      zsh:
+        enabled: true
+      git:
+        enabled: true
+        email: code@mail.haondt.dev
+      ansible_connection: local
+      ansible_host: localhost
+  vars:
+    haondt:
+      artifacts: /home/noah/projects/dotfiles/kunzite/artifacts/ansible

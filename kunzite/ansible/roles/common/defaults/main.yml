@@ -1,0 +1,7 @@
+common_role_defaults:
+  neovim:
+    enabled: false
+  zsh:
+    enabled: false
+  git:
+    enabled: false

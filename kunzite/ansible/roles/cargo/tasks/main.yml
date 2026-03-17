@@ -1,0 +1,17 @@
+- name: Check if cargo is installed
+  stat:
+    path: "{{ ansible_facts['env']['HOME'] }}/.cargo/bin/cargo"
+  register: cargo_bin
+
+- name: Install Rust toolchain
+  when: not cargo_bin.stat.exists
+  block:
+    - name: Install build tools
+      dnf:
+        name:
+          - gcc
+          - gcc-c++
+        state: present
+      become: true
+    - name: Install Rust using rustup
+      ansible.builtin.shell: 'curl https://sh.rustup.rs -sSf | sh -s -- -y'

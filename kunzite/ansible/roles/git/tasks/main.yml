@@ -1,0 +1,19 @@
+- name: Check if .gitconfig exists
+  stat:
+    path: "{{ ansible_facts['user_dir'] }}/.gitconfig"
+  register: gitconfig_file
+
+- name: Set role defaults
+  set_fact:
+    git: "{{ role_defaults | combine(git, recursive=True) }}"
+
+- name: Deploy .gitconfig
+  when: not gitconfig_file.stat.exists
+  block:
+    - name: Deploy .gitconfig
+      template:
+        src: gitconfig.j2
+        dest: "{{ ansible_facts['user_dir'] }}/.gitconfig"
+      
+
+

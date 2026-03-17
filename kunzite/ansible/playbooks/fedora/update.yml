@@ -1,0 +1,35 @@
+---
+- name: Fedora Update
+  hosts: "{{ target_hosts }}"
+  become: true
+  any_errors_fatal: true
+  serial: 1
+
+  tasks:
+    - name: Pre-update healthcheck
+      command: "uptime"
+      register: pre_sys_hc
+      failed_when: pre_sys_hc.rc != 0
+    - name: Upgrade system packages
+      dnf:
+        update_cache: true
+        name: "*"
+        state: latest
+      register: upgrade_result
+    - name: Remove unused packages
+      dnf:
+        autoremove: true
+    - name: Check if reboot required
+      command: needs-restarting -r
+      register: reboot_required
+      failed_when: false
+      changed_when: false
+    - name: Display upgrade summary
+      debug:
+        msg: |
+          Dnf changed: {{ upgrade_result.changed }}
+          Reboot required: {{ reboot_required.rc == 1 }}
+    - name: Post-update system healthcheck
+      command: "uptime"
+      register: post_sys_health
+      failed_when: post_sys_health.rc != 0

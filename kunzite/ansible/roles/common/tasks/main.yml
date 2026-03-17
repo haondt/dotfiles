@@ -1,0 +1,5 @@
+---
+- name: Set common role defaults
+  set_fact:
+    "{{ item.key }}": "{{ item.value | combine(hostvars[inventory_hostname][item.key] | default({}), recursive=True) }}"
+  loop: "{{ common_role_defaults | dict2items }}"
