@@ -1,0 +1,25 @@
+---
+- name: Set role defaults
+  set_fact:
+    neovim: "{{ role_defaults | combine(neovim, recursive=True) }}"
+
+- name: Deploy Neovim Config
+  synchronize:
+    src: nvim/
+    dest: "{{ ansible_facts['user_dir'] }}/.config/nvim/"
+    delete: true
+    recursive: true
+- name: Find all Jinja2 template files in templates/nvim
+  find:
+    paths: "{{ role_path }}/templates/nvim"
+    patterns: "*.j2"
+    recurse: true
+    file_type: file
+  register: template_files
+
+- name: Template all configuration files from templates/nvim
+  loop: "{{ template_files.files }}"
+  template:
+    src: "{{ item.path }}"
+    dest: "{{ ansible_facts['user_dir'] }}/.config/nvim/{{ item.path | regex_replace('^' + role_path + '/templates/nvim/', '') | regex_replace('.j2$', '') }}"
+    mode: '0644'

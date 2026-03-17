@@ -46,9 +46,6 @@
           - fd-find
           - git-delta
           - bat
-    - name: Deploy Neovim Config
-      synchronize:
-        src: nvim/
-        dest: "{{ ansible_facts['user_dir'] }}/.config/nvim/"
-        delete: true
-        recursive: true
+    - name: Configure Neovim
+      include_role:
+        name: neovim-configure

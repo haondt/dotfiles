@@ -16,4 +16,7 @@ just update [machine]
 
 # configure a specific component(s)
 just configure zsh tmux
+
+# show terminal colors
+just show colors
 ```

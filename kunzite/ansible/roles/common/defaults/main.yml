@@ -7,3 +7,34 @@ common_role_defaults:
     enabled: false
   tmux:
     enabled: false
+  colors:
+    # special
+    foreground: '#f3c6b1'
+    background: '#0b0708'
+    cursorColor: '#f3c6b1'
+
+    black:
+      dark: '#8e6c51'
+      bright: '#b89f8b'
+    red:
+      dark: '#d44e45'
+      bright: '#cc6666'
+    green:
+      dark: '#4f5040'
+      bright: '#7daf69'
+    yellow:
+      dark: '#fcb685'
+      bright: '#fcd1b3'
+    blue:
+      dark: '#c46692'
+      bright: '#dfa0bd'
+    magenta:
+      dark: '#8d479e'
+      bright: '#ad73be'
+    cyan:
+      dark: '#d98887'
+      bright: '#f3afaf'
+    white:
+      dark: '#3e2d34'
+      bright: '#eacfda'
+
