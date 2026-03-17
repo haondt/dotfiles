@@ -1,4 +1,6 @@
 common_role_defaults:
+  base:
+    enabled: true
   neovim:
     enabled: false
   zsh:

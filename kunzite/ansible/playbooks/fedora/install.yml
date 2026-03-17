@@ -4,6 +4,7 @@
   run_once: true
   roles:
     - role: common
+    - role: base-configure
     - role: neovim
       when: neovim.enabled | bool
     - role: zsh

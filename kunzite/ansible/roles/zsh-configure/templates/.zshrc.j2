@@ -1,3 +1,15 @@
+## zsh setup ##
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="haondt"
+plugins=(vi-mode)
+zstyle ':omz:alpha:lib:git' async-prompt no # disable async, it messed with git prompt
+source $ZSH/oh-my-zsh.sh
+export ZLE_RPROMPT_INDENT=0
+
+## vim everywhere ##
+set -o vi
+export FCEDIT=nvim
+export EDITOR=nvim
 
 ## path addendums ##
 . "$HOME/.cargo/env"
@@ -8,3 +20,25 @@ export PATH=$PATH:~/go/bin
 ## aliases ##
 alias sz='. ~/.zshrc'
 alias st='tmux source-file ~/.tmux.conf'
+
+fzf_dir() {
+    ~/.local/bin/kunzite/fzf_dir.sh
+}
+
+jd() { dir=$(fzf_dir); [ $? -eq 0 ] && cd $dir }
+
+jt() {
+    ~/.config/tmux/scripts/tmux-dir-sessionize.sh '"nvim; zsh" \; split-window -v -p 20 \; select-pane -t 0'
+}
+
+jv() {
+    ~/.config/tmux/scripts/tmux-dir-sessionize.sh '"nvim; zsh"'
+}
+
+jm() {
+    ~/.config/tmux/scripts/tmux-dir-sessionize.sh
+}
+
+ja() {
+    ~/.config/tmux/scripts/tmux-get-or-create-session.sh
+}

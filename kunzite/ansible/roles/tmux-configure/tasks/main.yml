@@ -9,3 +9,17 @@
     src: "{{ ansible_facts['user_dir'] }}/.config/tmux/tmux.conf"
     dest: "{{ ansible_facts['user_dir'] }}/.tmux.conf"
     state: link
+
+- name: Find all scripts
+  find:
+    paths: "{{ ansible_facts['user_dir'] }}/.config/tmux"
+    patterns: "*.sh"
+    recurse: true
+    file_type: file
+  register: script_files
+
+- name: Make scripts executable
+  file:
+    path: "{{ item.path }}"
+    mode: '0755'
+  loop: "{{ script_files.files }}"

@@ -2,3 +2,7 @@
   template:
     src: .zshrc.j2
     dest: "{{ ansible_facts['user_dir'] }}/.zshrc"
+- name: Deploy haondt.zsh-theme
+  copy:
+    src: haondt.zsh-theme
+    dest: "{{ ansible_facts['user_dir'] }}/.oh-my-zsh/custom/themes/haondt.zsh-theme"

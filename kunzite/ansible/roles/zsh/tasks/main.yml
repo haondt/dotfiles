@@ -11,6 +11,11 @@
         name: zsh
         state: present
       become: true
+    - name: Install Oh My Zsh
+      block:
+        - name: Run Oh My Zsh installer
+          shell: |
+            sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     - name: Set zsh as default shell
       user:
         name: "{{ ansible_facts['user_id'] }}"
@@ -19,3 +24,5 @@
     - name: Deploy .zshrc
       include_role:
         name: zsh-configure
+
+

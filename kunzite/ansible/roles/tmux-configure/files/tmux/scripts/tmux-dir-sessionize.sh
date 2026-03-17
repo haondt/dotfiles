@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-dir=$(~/dotfiles/gypsum/scripts/fzf_dir.sh)
+dir=$(~/.local/bin/kunzite/fzf_dir.sh)
 if [ $? -ne 0 ]; then
     return 1
 fi
