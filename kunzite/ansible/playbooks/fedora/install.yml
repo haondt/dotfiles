@@ -10,3 +10,5 @@
       when: zsh.enabled | bool
     - role: git
       when: git.enabled | bool
+    - role: tmux
+      when: tmux.enabled | bool

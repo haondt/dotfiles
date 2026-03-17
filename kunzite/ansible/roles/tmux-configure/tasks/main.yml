@@ -1,0 +1,11 @@
+- name: Configure tmux config
+  synchronize:
+    src: tmux/
+    dest: "{{ ansible_facts['user_dir'] }}/.config/tmux/"
+    delete: true
+    recursive: true 
+- name: Create symlink
+  ansible.builtin.file:
+    src: "{{ ansible_facts['user_dir'] }}/.config/tmux/tmux.conf"
+    dest: "{{ ansible_facts['user_dir'] }}/.tmux.conf"
+    state: link

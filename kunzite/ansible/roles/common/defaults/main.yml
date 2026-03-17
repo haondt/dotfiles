@@ -5,3 +5,5 @@ common_role_defaults:
     enabled: false
   git:
     enabled: false
+  tmux:
+    enabled: false

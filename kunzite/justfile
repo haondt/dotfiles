@@ -47,3 +47,12 @@ install target="default": ansible_inventory
         -e target_hosts={{target}} \
         -v \
         --ask-become-pass
+
+[script]
+[arg("target", short="t", long="target")]
+configure target="default" +components="": ansible_inventory
+    ANSIBLE_CONFIG={{ansible_directory}}/ansible.cfg {{ansible_playbook}} -i {{ansible_inventory}} \
+        {{ansible_directory}}/playbooks/fedora/configure.yml \
+        -e target_hosts={{target}} \
+        -e components={{replace_regex(components, '\s+', ',')}} \
+        -v

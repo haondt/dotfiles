@@ -1,3 +1,5 @@
 secrets.yml
 venv
 .*.swp
+build
+artifacts

@@ -13,4 +13,7 @@ just install [machine]
 ```shell
 # system update
 just update [machine]
+
+# configure a specific component(s)
+just configure zsh tmux
 ```

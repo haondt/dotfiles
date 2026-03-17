@@ -1,0 +1,17 @@
+---
+- name: Configure
+  hosts: "{{ target_hosts }}"
+  run_once: true
+  vars:
+    components_list: "{{ components | default('') | split(',') }}"
+  tasks:
+    - name: Base
+      include_role:
+        name: common
+    - name: Configure component
+      include_role:
+        name: "{{ loop_component }}-configure"
+      when: "{{ lookup('vars', loop_component)['enabled'] | bool }}"
+      loop: "{{ components_list }}"
+      loop_control:
+        loop_var: loop_component

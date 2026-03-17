@@ -1,0 +1,16 @@
+- name: Check if tmux is installed
+  stat:
+    path: /usr/bin/tmux
+  register: tmux_bin
+
+- name: Install and configure tmux
+  when: not tmux_bin.stat.exists
+  block:
+    - name: Install tmux
+      dnf:
+        name: tmux
+        state: present
+      become: true
+    - name: Configure tmux
+      include_role:
+        name: tmux-configure
