@@ -1,0 +1,54 @@
+- name: Set role defaults
+  set_fact:
+    dev_tools: "{{ role_defaults | combine(dev_tools, recursive=True) }}"
+
+- name: Install bun
+  shell: curl -fsSL https://bun.com/install | bash
+  args:
+    creates: "{{ ansible_facts['user_dir'] }}/.bun/bin/bun"
+
+- name: Install dcdn
+  shell: bun add -g https://gitlab.com/haondt/dcdn.git
+  args:
+    creates: "{{ ansible_facts['user_dir'] }}/.bun/bin/dcdn"
+
+- name: Set up .NET
+  when: dev_tools.dotnet.enabled
+  block:
+    - name: Install .NET SDKs
+      become: true
+      dnf:
+        name: 
+          - "dotnet-sdk-{{ item }}.0"
+          - "aspnetcore-runtime-{{ item }}.0"
+        state: present
+      loop: "{{ dev_tools.dotnet.versions }}"
+    - name: Ensure local nuget dir exists
+      file:
+        path: "{{ dev_tools.dotnet.nuget.local_packages }}"
+        state: directory
+    - name: Check if local NuGet source is already registered
+      ansible.builtin.shell: >
+        dotnet nuget list source
+        --configfile {{ dev_tools.dotnet.nuget.config }}
+        --format short
+        | grep -F "{{ dev_tools.dotnet.nuget.local_packages }}"
+      register: nuget_source_check
+      changed_when: false
+      failed_when: false
+    - name: Register local NuGet source
+      ansible.builtin.command: >
+        dotnet nuget add source {{ dev_tools.dotnet.nuget.local_packages }}
+        --configfile {{ dev_tools.dotnet.nuget.config }}
+        -n {{ dev_tools.dotnet.nuget.local_source_name }}
+      when: nuget_source_check.rc != 0
+      register: nuget_add_result
+    - name: Report result
+      ansible.builtin.debug:
+        msg: >-
+          {{
+            'Local NuGet source was already configured — nothing to do.'
+            if nuget_source_check.rc == 0
+            else 'Local NuGet source added: ' + dev_tools.dotnet.nuget.local_packages
+          }}
+

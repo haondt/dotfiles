@@ -14,6 +14,8 @@ common_role_defaults:
     enabled: false
   sway:
     enabled: false
+  dev_tools:
+    enabled: false
   colors:
     # special
     foreground: '#f3c6b1'

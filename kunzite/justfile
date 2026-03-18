@@ -43,12 +43,22 @@ update target="default": ansible_inventory
         --ask-become-pass 
 
 [script]
-install target="default": ansible_inventory
-    ANSIBLE_CONFIG={{ansible_directory}}/ansible.cfg {{ansible_playbook}} -i {{ansible_inventory}} \
-        {{ansible_directory}}/playbooks/fedora/install.yml \
-        -e target_hosts={{target}} \
-        -v \
-        --ask-become-pass
+[arg("target", short="t", long="target")]
+install target="default" *components="": ansible_inventory
+    if [ -z "{{components}}" ]; then
+        ANSIBLE_CONFIG={{ansible_directory}}/ansible.cfg {{ansible_playbook}} -i {{ansible_inventory}} \
+            {{ansible_directory}}/playbooks/fedora/install.yml \
+            -e target_hosts={{target}} \
+            -v \
+            --ask-become-pass
+    else
+        ANSIBLE_CONFIG={{ansible_directory}}/ansible.cfg {{ansible_playbook}} -i {{ansible_inventory}} \
+            {{ansible_directory}}/playbooks/fedora/install-component.yml \
+            -e target_hosts={{target}} \
+            -e components={{replace_regex(components, '\s+', ',')}} \
+            -v \
+            --ask-become-pass
+    fi
 
 [script]
 [arg("target", short="t", long="target")]

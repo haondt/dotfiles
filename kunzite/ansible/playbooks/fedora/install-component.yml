@@ -1,0 +1,10 @@
+---
+- name: Configure
+  hosts: "{{ target_hosts }}"
+  run_once: true
+  vars:
+    components_list: "{{ components | default('') | split(',') }}"
+  roles:
+    - role: common
+    - role: dev-tools
+      when: "'dev-tools' in components_list and dev_tools.enabled | bool"
