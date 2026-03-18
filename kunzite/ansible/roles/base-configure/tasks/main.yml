@@ -23,3 +23,26 @@
     path: "{{ item.path }}"
     mode: '0755'
   loop: "{{ script_files.files }}"
+
+- name: Ensure the GTK3 Directory exists
+  file:
+    path: "{{ ansible_facts['user_dir'] }}/.config/gtk-3.0"
+    state: directory
+
+- name: Deploy GTK3 settings
+  copy:
+    dest: "{{ ansible_facts['user_dir'] }}/.config/gtk-3.0/settings.ini"
+    content: |
+      [Settings]
+      gtk-application-prefer-dark-theme={{ 1 if base.scheme == 'dark' else 0 }}
+
+- name: Ensure the GTK4 Directory exists
+  file:
+    path: "{{ ansible_facts['user_dir'] }}/.config/gtk-4.0"
+    state: directory
+- name: Deploy GTK4 settings
+  copy:
+    dest: "{{ ansible_facts['user_dir'] }}/.config/gtk-4.0/settings.ini"
+    content: |
+      [Settings]
+      gtk-application-prefer-dark-theme={{ 1 if base.scheme == 'dark' else 0 }}
