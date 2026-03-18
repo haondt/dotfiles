@@ -1,0 +1,66 @@
+* {
+    font-family: "Source Code Pro";
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+    min-height: 20px;
+}
+
+window#waybar {
+    background-color: {{ colors.background }};
+    color: {{ colors.foreground }};
+}
+
+/* Workspaces */
+#workspaces button {
+    padding: 0 4px;
+    background-color: {{ colors.background }};
+    color: {{ colors.foreground }};
+}
+
+#workspaces button.focused {
+    background-color: {{ colors.background }};
+    color: {{ colors.foreground }};
+}
+
+#workspaces button.visible {
+    background-color: {{ colors.red.bright }};
+    color: {{ colors.foreground }};
+}
+
+#workspaces button.urgent {
+    background-color: {{ colors.red.dark }};
+    color: {{ colors.white.bright }};
+}
+
+
+/* sep */
+#custom-sep1 {
+    color: {{ colors.cyan.bright }};
+    background-color: {{ colors.background }};
+    font-size: 23px;
+}
+
+/* pulseaudio */
+#pulseaudio {
+    background-color: {{ colors.cyan.bright }};
+    color: {{ colors.white.dark }};
+}
+
+/* sep */
+#custom-sep2 {
+    background-color: {{ colors.cyan.bright }};
+    color: {{ colors.cyan.dark }};
+    font-size: 23px;
+}
+
+/* clock */
+#clock.date {
+    background-color: {{ colors.cyan.dark }};
+    color: {{ colors.white.dark }};
+}
+
+#clock.time {
+    background-color: {{ colors.cyan.dark }};
+    color: {{ colors.white.dark }};
+}

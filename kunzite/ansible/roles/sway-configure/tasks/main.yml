@@ -6,12 +6,14 @@
   template:
     src: config.j2
     dest: "{{ ansible_facts['user_dir'] }}/.config/sway/config"
+
 - name: Copy Sway Scripts
   synchronize:
     src: scripts/
     dest: "{{ ansible_facts['user_dir'] }}/.config/sway/scripts"
     delete: true
     recursive: true 
+
 - name: Find all scripts
   find:
     paths: "{{ ansible_facts['user_dir'] }}/.config/sway/scripts"
@@ -19,6 +21,7 @@
     recurse: true
     file_type: file
   register: script_files
+
 - name: Make scripts executable
   file:
     path: "{{ item.path }}"
@@ -33,3 +36,20 @@
   template:
     src: rofi/config.rasi.j2
     dest: "{{ ansible_facts['user_dir'] }}/.config/rofi/config.rasi"
+
+- name: Ensure the waybar configuration directory exists
+  file:
+    path: "{{ ansible_facts['user_dir'] }}/.config/waybar"
+    state: directory
+- name: Get waybar templates
+  find:
+    paths: "{{ role_path }}/templates/waybar"
+    patterns: "*.j2"
+    recurse: true
+    file_type: file
+  register: template_files
+- name: Deploy waybar config files
+  loop: "{{ template_files.files }}"
+  template:
+    src: "{{ item.path }}"
+    dest: "{{ ansible_facts['user_dir'] }}/.config/waybar/{{ item.path | regex_replace('^' + role_path + '/templates/waybar/', '') | regex_replace('.j2$', '') }}"

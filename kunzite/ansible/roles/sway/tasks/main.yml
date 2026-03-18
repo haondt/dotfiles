@@ -4,7 +4,7 @@
   register: sway_bin
 
 - name: Install and configure sway
-  when: not sway_bin.stat.exists
+  #when: not sway_bin.stat.exists
   block:
     - name: Install sway
       dnf:
@@ -15,6 +15,13 @@
       dnf:
         name: 
           - rofi
+          - waybar
+        state: present
+      become: true
+    - name: Install sway associated apps (flatpak)
+      community.general.flatpak:
+        name: 
+          - com.saivert.pwvucontrol
         state: present
       become: true
     - name: Configure sway

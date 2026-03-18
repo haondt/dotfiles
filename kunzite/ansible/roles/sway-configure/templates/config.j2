@@ -178,26 +178,12 @@ bindsym $mod+Tab exec "rofi -show window -display-window '[window]'"
 #######################
 # auto start programs #
 #######################
-
-# TODO
-# start fake bar to make space for polybar
-#bar {
-#        i3bar_command i3bar -t
-#        height 30
-#        mode dock
-#        position top
-#        tray_output none
-#        workspace_buttons no
-#        colors {
-#                background #00000000
-#        }
-#}
-
-# start polybar
-exec --no-startup-id ~/.config/i3/polybar.sh 
+bar {
+    swaybar_command waybar
+}
 
 # apply wallpapers & start compositor
-exec --no-startup-id nitrogen --restore; sleep 1; picom -b --experimental-backends
+# exec --no-startup-id nitrogen --restore; sleep 1; picom -b --experimental-backends
 
 #######################
 # a e s t h e t i c s #
@@ -208,7 +194,7 @@ default_border pixel 3
 #class                  border  background              text    indicator 
 client.focused          #000000 {{colors.green.bright}} #000000 {{colors.white.bright}}
 client.focused_inactive #000000 {{colors.green.dark}}   #000000
-client.unfocused        #000000 {{colors.background}} #000000
+client.unfocused        #000000 {{colors.background}}   #000000
 client.urgent           #000000 {{colors.red.dark}}     #000000
 
 ##########

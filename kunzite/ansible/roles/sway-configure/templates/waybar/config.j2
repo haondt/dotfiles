@@ -1,0 +1,44 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": "20",
+    "margin-top": 10,
+    "margin-left": 20,
+    "margin-right": 20,
+    "modules-left": [
+        "sway/workspaces"
+    ],
+    "modules-right": [
+        "custom/sep1",
+        "pulseaudio",
+        "custom/sep2",
+        "clock#date",
+        "clock#time"
+    ],
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "format": "{index}"
+    },
+    "clock#date": {
+        "interval": 1,
+        "format": " {:%Y-%m-%d} "
+    },
+    "clock#time": {
+        "interval": 1,
+        "format": "{:%I:%M %p} "
+    },
+    "custom/sep1": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/sep2": {
+        "format": "",
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "format": " Volume {volume}% ",
+        "interval": 1,
+        "on-click": "flatpak run com.saivert.pwvucontrol"
+    }
+}
