@@ -43,6 +43,26 @@
         -n {{ dev_tools.dotnet.nuget.local_source_name }}
       when: nuget_source_check.rc != 0
       register: nuget_add_result
+    - name: Register additional NuGet sources
+      block:
+        - name: Check if additional NuGet source is already registered
+          ansible.builtin.shell: >
+            dotnet nuget list source
+            --configfile {{ dev_tools.dotnet.nuget.config }}
+            --format short
+            | grep -F "{{ item.value }}"
+          register: nuget_additional_source_check
+          changed_when: false
+          failed_when: false
+          loop: "{{ dev_tools.dotnet.nuget.additional_sources | dict2items }}"
+        - name: Add additional NuGet source
+          ansible.builtin.command: >
+            dotnet nuget add source {{ item.item.value }}
+            --configfile {{ dev_tools.dotnet.nuget.config }}
+            -n "{{ item.item.key }}"
+          when: item.rc != 0
+          loop: "{{ nuget_additional_source_check.results }}"
+      when: dev_tools.dotnet.nuget.additional_sources | length > 0
     - name: Report result
       ansible.builtin.debug:
         msg: >-

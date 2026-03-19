@@ -9,3 +9,4 @@ role_defaults:
       config: "{{ ansible_env.HOME }}/.nuget/NuGet/NuGet.Config"
       local_packages: "{{ ansible_env.HOME }}/packages/nuget"
       local_source_name: local
+      additional_sources: {}
