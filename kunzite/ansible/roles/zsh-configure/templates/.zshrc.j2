@@ -86,7 +86,14 @@ alias rc='(cd ~/projects/dotfiles/kunzite && just configure base)'
 
 alias md='medea --trim'
 alias clip='wl-copy'
+{% if sway.enabled %}
 alias sclip="grim -g \"\$(slurp)\" - | wl-copy --type image/png"
+wclip() {
+    grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | wl-copy
+}
+alias spaste="wl-paste"
+alias sread="wl-paste | imv -"
+{% endif %}
 alias py='python3'
 
 alias gs='git status --short -b'

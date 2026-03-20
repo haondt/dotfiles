@@ -9,4 +9,12 @@
     - role: dev-tools
       when: "'dev-tools' in components_list and dev_tools.enabled | bool"
     - role: neovim
-      when: "'neovim' in components_list and dev_tools.enabled | bool"
+      when: "'neovim' in components_list and neovim.enabled | bool"
+    - role: zsh
+      when: "'zsh' in components_list and zsh.enabled | bool"
+    - role: git
+      when: "'git' in components_list and git.enabled | bool"
+    - role: foot
+      when: "'foot' in components_list and foot.enabled | bool"
+    - role: sway
+      when: "'sway' in components_list and sway.enabled | bool"

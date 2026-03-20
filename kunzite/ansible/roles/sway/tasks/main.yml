@@ -4,7 +4,7 @@
   register: sway_bin
 
 - name: Install and configure sway
-  #when: not sway_bin.stat.exists
+  when: base.force or not sway_bin.stat.exists
   block:
     - name: Install sway
       dnf:
@@ -16,6 +16,7 @@
         name: 
           - rofi
           - waybar
+          - imv
         state: present
       become: true
     - name: Install sway associated apps (flatpak)
