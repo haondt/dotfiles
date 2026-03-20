@@ -8,3 +8,5 @@
     - role: common
     - role: dev-tools
       when: "'dev-tools' in components_list and dev_tools.enabled | bool"
+    - role: neovim
+      when: "'neovim' in components_list and dev_tools.enabled | bool"

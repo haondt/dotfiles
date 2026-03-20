@@ -2,6 +2,7 @@ common_role_defaults:
   base:
     enabled: true
     scheme: dark
+    force: false
   neovim:
     enabled: false
   zsh:

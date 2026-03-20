@@ -17,7 +17,7 @@
 
 - name: Install and Configure Neovim
   when: >
-    not nvim_dir.stat.exists or
+    base.force or not nvim_dir.stat.exists or
     neovim.version not in nvim_version.stdout
   block:
     - name: Install Neovim with Bob
@@ -37,6 +37,7 @@
           - fzf
           - curl
           - wget
+          - clang-devel # needed for tree-sitter-cli
         state: present
       become: true
     - name: Install Neovim Rust dependencies
@@ -46,6 +47,7 @@
           - fd-find
           - git-delta
           - bat
+          - tree-sitter-cli
     - name: Configure Neovim
       include_role:
         name: neovim-configure
