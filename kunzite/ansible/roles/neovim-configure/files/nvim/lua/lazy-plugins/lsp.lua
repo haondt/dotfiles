@@ -29,6 +29,7 @@ return {
             })
 
             vim.lsp.config['roslyn'] = {
+                filetypes = { "csproj", "solution", "cs", "razor" },
                 settings = {
                     ["csharp|inlay_hints"] = {
                         csharp_enable_inlay_hints_for_implicit_object_creation = true,

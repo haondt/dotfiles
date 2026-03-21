@@ -22,10 +22,11 @@ return {
                 "lua", "vim", "python", "query", "razor",
                 "html", "css", "c_sharp", "jinja"
             }
+            vim.treesitter.language.register("html", "csproj")
         end,
         init = function()
             vim.api.nvim_create_autocmd('FileType', {
-                pattern = { 'c_sharp', 'razor' },
+                pattern = { 'cs', 'razor', 'csproj' },
                 callback = function() vim.treesitter.start() end,
             })
         end

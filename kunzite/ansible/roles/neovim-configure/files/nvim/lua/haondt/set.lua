@@ -90,3 +90,10 @@ vim.api.nvim_create_autocmd('VimEnter', {
         end
     end,
 })
+
+vim.filetype.add({
+    extension = {
+        csproj = "csproj",
+        pcss = "css"
+    }
+})
