@@ -11,6 +11,12 @@ just install [machine]
 ## Other tools
 
 ```shell
+# reinstall
+just install --force
+
+# (re)install individual components
+just install [--force] zsh neovim
+
 # system update
 just update [machine]
 
