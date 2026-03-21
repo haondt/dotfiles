@@ -19,6 +19,10 @@ common_role_defaults:
     enabled: false
   storage:
     enabled: true
+  grub:
+    enabled: true
+  ly:
+    enabled: true
   colors:
     # special
     foreground: '#f3c6b1'

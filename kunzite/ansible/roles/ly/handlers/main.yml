@@ -1,0 +1,6 @@
+---
+- name: restart ly
+  systemd:
+    name: ly@tty1.service
+    state: restarted
+  become: true

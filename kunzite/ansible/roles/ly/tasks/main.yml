@@ -1,0 +1,66 @@
+- name: Check if ly is installed
+  stat:
+    path: /usr/bin/ly
+  register: ly_bin
+
+- name: Build, install and configure ly
+  when: base.force or not ly_bin.stat.exists
+  become: true
+  block:
+    - name: Install build dependencies
+      dnf:
+        name:
+          - kernel-devel
+          - pam-devel
+          - libxcb-devel
+          - zig
+        state: present
+    - name: Clone ly repo
+      git:
+        repo: https://codeberg.org/fairyglade/ly.git
+        dest: /usr/local/src/ly
+        update: yes
+    - name: Build and install ly
+      command: zig build installexe -Dinit_system=systemd
+      args:
+        chdir: /usr/local/src/ly
+
+    - name: Disable getty on tty1
+      systemd:
+        name: getty@tty1.service
+        enabled: no
+        state: stopped
+    - name: Enable ly on tty1
+      ansible.builtin.systemd:
+        name: ly@tty1.service
+        enabled: true
+        state: started
+
+    # much love to https://codeberg.org/fairyglade/ly/issues/494#issuecomment-2926150
+    - name: Set SELinux file context for ly
+      community.general.sefcontext:
+        target: /usr/bin/ly
+        setype: xdm_exec_t
+        state: present
+    - name: Apply SELinux file context to ly
+      ansible.builtin.command: restorecon -v /usr/bin/ly
+      register: restorecon_result
+      changed_when: restorecon_result.stdout != ""
+
+- name: Configure ly
+  become: true
+  template:
+    src: config.ini.j2
+    dest: /etc/ly/config.ini
+- name: Configure ly startup
+  become: true
+  template:
+    src: startup.sh.j2
+    dest: /etc/ly/startup.sh
+- name: Restart ly
+  command: /bin/true
+  notify: restart ly
+- name: Make lye startup executable
+  file:
+    path: /etc/ly/startup.sh
+    mode: '0755'

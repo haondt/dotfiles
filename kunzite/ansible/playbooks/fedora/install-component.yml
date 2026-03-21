@@ -18,7 +18,11 @@
       when: "'foot' in components_list and foot.enabled | bool"
     - role: sway
       when: "'sway' in components_list and sway.enabled | bool"
+    - role: ly
+      when: "'ly' in components_list and ly.enabled | bool"
 
     # Things that don't get called in the default "install all" playbook
     - role: storage
       when: "'storage' in components_list and storage.enabled | bool"
+    - role: grub
+      when: "'grub' in components_list and grub.enabled | bool"

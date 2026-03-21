@@ -1,0 +1,39 @@
+#!/bin/sh
+# This file is executed when starting Ly (before the TTY is taken control of)
+# Custom startup code can be placed in this file or the start_cmd var can be pointed to a different file
+
+
+# Uncomment the example below for an example of changing the default TTY colors to an alternitive palette on linux
+# Colors are in red/green/blue hex (the current colors are a brighter palette than default)
+
+ if [ "$TERM" = "linux" ]; then
+     BLACK="{{ colors.background[1:].upper() }}"
+     DARK_RED="{{ colors.red.bright[1:].upper() }}"
+     DARK_GREEN="{{ colors.green.bright[1:].upper() }}"
+     DARK_YELLOW="{{ colors.yellow.bright[1:].upper() }}"
+     DARK_BLUE="{{ colors.black.bright[1:].upper() }}"
+     DARK_MAGENTA="{{ colors.magenta.bright[1:].upper() }}"
+     DARK_CYAN="{{ colors.cyan.dark[1:].upper() }}"
+     LIGHT_GRAY="{{ colors.background[1:].upper() }}"
+     DARK_GRAY="{{ colors.background[1:].upper() }}"
+     RED="{{ colors.red.bright[1:].upper() }}"
+     GREEN="{{ colors.green.bright[1:].upper() }}"
+     YELLOW="{{ colors.yellow.bright[1:].upper() }}"
+     BLUE="{{ colors.blue.bright[1:].upper() }}"
+     MAGENTA="{{ colors.magenta.bright[1:].upper() }}"
+     CYAN="{{ colors.cyan.bright[1:].upper() }}"
+     WHITE="{{ colors.white.bright[1:].upper() }}"
+
+ 	COLORS="${BLACK} ${DARK_RED} ${DARK_GREEN} ${DARK_YELLOW} ${DARK_BLUE} ${DARK_MAGENTA} ${DARK_CYAN} ${LIGHT_GRAY} ${DARK_GRAY} ${RED} ${GREEN} ${YELLOW} ${BLUE} ${MAGENTA} ${CYAN} ${WHITE}"
+
+ 	i=0
+ 	while [ $i -lt 16 ]; do
+ 		printf "\033]P%x%s" ${i} "$(echo "$COLORS" | cut -d ' ' -f$(( i + 1)))"
+
+ 		i=$(( i + 1 ))
+ 	done
+
+ 	clear # for fixing background artifacting after changing color
+ fi
+
+setfont --double

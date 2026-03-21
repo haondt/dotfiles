@@ -13,7 +13,7 @@
       become: true
     - name: Install sway associated apps
       dnf:
-        name: 
+        name:
           - rofi
           - waybar
           - imv
@@ -21,9 +21,17 @@
       become: true
     - name: Install sway associated apps (flatpak)
       community.general.flatpak:
-        name: 
+        name:
           - com.saivert.pwvucontrol
         state: present
+      become: true
+    - name: Install ly
+      include_role:
+        name: ly
+    - name: Disable GDM
+      ansible.builtin.systemd:
+        name: gdm
+        enabled: false
       become: true
     - name: Configure sway
       include_role:

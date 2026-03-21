@@ -1,0 +1,6 @@
+- name: remove rhgb and quiet args
+  become: true
+  ansible.builtin.command: >
+    grubby --update-kernel=ALL --remove-args="rhgb quiet"
+  register: grubby_result
+  changed_when: true
