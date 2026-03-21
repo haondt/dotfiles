@@ -27,6 +27,8 @@ vim.api.nvim_set_hl(0, 'markdownUrl', { fg = palette.color8 })
 vim.api.nvim_set_hl(0, "Changed", { fg = palette.color3 })
 vim.api.nvim_set_hl(0, "QuickFixLine", { fg = palette.color6 })
 vim.api.nvim_set_hl(0, "Question", { fg = palette.color6 })
+vim.api.nvim_set_hl(0, "SpecialKey", { fg = palette.color9 })
+vim.api.nvim_set_hl(0, "NonText", { fg = palette.color9 })
 
 -- diagnostics
 vim.api.nvim_set_hl(0, "DiagnosticError", { fg = palette.error.bg })

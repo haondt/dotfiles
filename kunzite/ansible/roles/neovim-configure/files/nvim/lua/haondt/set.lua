@@ -39,7 +39,16 @@ if vim.o.diff then
     vim.o.cursorline = true
 end
 
+vim.opt.list = true
+local list_space = '·'
+vim.opt.listchars = {
+    tab = '│─',
+    trail = list_space,
+    nbsp = list_space,
+}
+
 vim.opt.showmode = false
+vim.opt.fileformats = "unix"
 
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.opt.ignorecase = true
