@@ -27,9 +27,6 @@ return {
             require('roslyn').setup({
 
             })
-            if true then
-                return
-            end
 
             vim.lsp.config['roslyn'] = {
                 settings = {
@@ -123,7 +120,7 @@ return {
                                     return
                                 end
 
-                                local row, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+                                local row, col = unpack(vim.api.nvim_win_get_cursor(0))
                                 row, col = row - 1, col + 1
                                 local uri = vim.uri_from_bufnr(bufnr)
 

@@ -1,6 +1,7 @@
 return {
     'nvim-tree/nvim-tree.lua',
-    version = "*",
+    -- something with 1.16.0 breaks my on_attach, specifically the floatpreview.attach_nvimtree
+    version = "1.15.0",
     lazy = false,
     dependencies = {
         { "JMarkin/nvim-tree.lua-float-preview" },
@@ -11,27 +12,30 @@ return {
         local tree = require("nvim-tree")
         local preview = require('float-preview')
         local haondt = require('haondt-nvim-tree')
+        local api = require('nvim-tree.api')
 
         local HEIGHT_PADDING = 4
         local WIDTH_PADDING = 6
 
+        local Event = api.events.Event
+        local clear = function()
+            api.marks.clear()
+            api.fs.clear_clipboard()
+        end
+
+        api.events.subscribe(Event.TreeOpen, function()
+            clear()
+            -- necessary in case this handler fires while closing a telescope picker
+            vim.schedule(function()
+                api.git.reload()
+            end)
+        end)
+
         local function on_attach(bufnr)
-            local api = require('nvim-tree.api')
             local floatpreview = require('float-preview')
 
             floatpreview.attach_nvimtree(bufnr)
             local float_close_wrap = floatpreview.close_wrap
-
-            local Event = api.events.Event
-            local clear = function()
-                api.marks.clear()
-                api.fs.clear_clipboard()
-            end
-
-            api.events.subscribe(Event.TreeOpen, function()
-                clear()
-                api.git.reload()
-            end)
 
             local function opts(desc)
                 return {
@@ -194,9 +198,7 @@ return {
                 if status.picker then
                     require('telescope.actions').close(bufnr)
                 end
-                vim.schedule(function()
-                    vim.cmd('NvimTreeFindFile')
-                end)
+                vim.cmd('NvimTreeFindFile')
             end,
             noremap = true,
             silent = true,

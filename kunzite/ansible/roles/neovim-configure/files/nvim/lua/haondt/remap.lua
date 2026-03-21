@@ -174,6 +174,15 @@ vim.keymap.set('n', 'doa', git.remove_markers, { desc = '[d]iff [o]btain [a]ll' 
 vim.keymap.set('n', 'dob', git.take_local_and_remote, { desc = '[d]iff [o]btain [b]oth' })
 vim.keymap.set('n', ']d', git.next_conflict, { desc = 'next [d]iff conflict' })
 vim.keymap.set('n', '[d', git.previous_conflict, { desc = 'previous [d]iff conflict' })
+vim.keymap.set('n', '<leader>gr', function()
+    local file = vim.fn.expand('%')
+    local confirm = vim.fn.confirm('Restore ' .. file .. '?', '&Yes\n&No', 2)
+    if confirm == 1 then
+        vim.cmd('e!')
+        vim.cmd('Git restore ' .. file)
+        vim.cmd('e')
+    end
+end, { desc = '[g]it [r]estore current file' })
 
 -- diff
 vim.api.nvim_create_user_command('DiffTool', function() vim.schedule(diff.difftool) end, {})
