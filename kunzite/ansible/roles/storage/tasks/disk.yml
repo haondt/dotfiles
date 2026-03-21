@@ -1,0 +1,20 @@
+- name: Resolve disk path
+  command: readlink -f "{{ disk.by_path }}"
+  register: resolved_disk
+  changed_when: false
+
+- name: Handle partitions
+  include_tasks: partition.yml
+  vars:
+    disk_partition:
+      disk_device: "{{ resolved_disk.stdout }}"
+      number: "{{ part.key }}"
+      device: "{{ resolved_disk.stdout }}{{ 'p' if 'nvme' in resolved_disk.stdout else '' }}{{ part.key }}"
+      create: "{{ part.value.create | default(false) }}"
+      mount: "{{ part.value.mount }}"
+      fstype: "{{ part.value.fstype | default('ext4') }}"
+      opts: "{{ part.value.opts | default('defaults') }}"
+      create_dirs: "{{ part.value.create_dirs | default({}) }}"
+  loop: "{{ disk.partitions | default({}) | dict2items }}"
+  loop_control:
+    loop_var: part

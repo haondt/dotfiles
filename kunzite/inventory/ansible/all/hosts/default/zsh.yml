@@ -1,1 +1,3 @@
 enabled: true
+aliases:
+  mw: "~/.local/bin/kunzite/user/wsl_mount.sh"

@@ -17,6 +17,8 @@ common_role_defaults:
     enabled: false
   dev_tools:
     enabled: false
+  storage:
+    enabled: true
   colors:
     # special
     foreground: '#f3c6b1'

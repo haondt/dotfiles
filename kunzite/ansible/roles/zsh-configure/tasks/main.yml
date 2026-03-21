@@ -1,3 +1,6 @@
+- name: Set role defaults
+  set_fact:
+    zsh: "{{ role_defaults | combine(zsh, recursive=True) }}"
 - name: Deploy .zshrc
   template:
     src: .zshrc.j2

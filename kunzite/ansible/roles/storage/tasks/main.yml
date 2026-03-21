@@ -1,0 +1,18 @@
+- name: Set role defaults
+  set_fact:
+    storage: "{{ role_defaults | combine(storage, recursive=True) }}"
+
+- name: Set up disks
+  when: storage.disks | length > 0
+  block:
+    - name: Ensure parted is installed
+      ansible.builtin.package:
+        name: parted
+        state: present
+      become: true
+
+    - name: Set up disks
+      include_tasks: disk.yml
+      loop: "{{ storage.disks | default([]) }}"
+      loop_control:
+        loop_var: disk

@@ -1,0 +1,62 @@
+- name: Create partition
+  when: disk_partition.create
+  become: true
+  block:
+    - name: Ensure partition exists
+      community.general.parted:
+        device: "{{ disk_partition.disk_device }}"
+        number: "{{ disk_partition.number }}"
+        state: present
+        align: optimal
+        part_type: primary
+        label: gpt
+
+    - name: Format partition
+      filesystem:
+        fstype: "{{ disk_partition.fstype }}"
+        dev: "{{ disk_partition.device }}"
+
+- name: Get partition UUID
+  become: true
+  command: 'blkid -s UUID -o value "{{ disk_partition.device }}"'
+  register: partition_uuid
+  changed_when: false
+
+- name: Ensure mount point exists
+  block:
+    - name: Check if mount point exists
+      stat:
+        path: "{{ disk_partition.mount }}"
+      register: mount_point
+
+    - name: Create mount point
+      become: true
+      file:
+        path: "{{ disk_partition.mount }}"
+        state: directory
+        owner: root
+        group: root
+        mode: '0555'
+      when: not mount_point.stat.exists
+
+- name: Mount partition by UUID
+  become: true
+  mount:
+    path: "{{ disk_partition.mount }}"
+    src: "UUID={{ partition_uuid.stdout }}"
+    fstype: "{{ disk_partition.fstype }}"
+    opts: "{{ disk_partition.opts }}"
+    state: mounted
+
+- name: Create subdirectories under mount
+  become: true
+  file:
+    path: "{{ disk_partition.mount }}/{{ dir_item.key }}"
+    state: directory
+    owner: "{{ dir_item.value.owner | default('root') }}"
+    group: "{{ dir_item.value.group | default('root') }}"
+    mode: "{{ dir_item.value.mode | default('0755') }}"
+  loop: "{{ disk_partition.create_dirs | dict2items }}"
+  loop_control:
+    loop_var: dir_item
+  when: disk_partition.create_dirs | length > 0

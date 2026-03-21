@@ -1,3 +1,16 @@
+- name: Set role defaults
+  set_fact:
+    base: "{{ role_defaults | combine(base, recursive=True) }}"
+
+- name: Ensure home directories exist
+  file:
+    path: "{{ ansible_facts['user_dir'] }}/{{ item }}"
+    state: directory
+  loop:
+    - projects
+    - files
+    - downloads
+
 - name: Ensure the bin directory exists
   file:
     path: "{{ ansible_facts['user_dir'] }}/.local/bin"
@@ -9,6 +22,20 @@
     dest: "{{ ansible_facts['user_dir'] }}/.local/bin/kunzite/"
     delete: true
     recursive: true 
+
+- name: Deploy additional scripts
+  block:
+    - name: Create user scripts directory
+      file:
+        path: "{{ ansible_facts['user_dir'] }}/.local/bin/kunzite/user"
+        state: directory
+    - name: Deploy user scripts
+      copy:
+        content: "{{ item.value }}"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/bin/kunzite/user/{{ item.key }}"
+        mode: '0755'
+      loop: "{{ base.scripts | dict2items }}"
+  when: base.scripts | length > 0
 
 - name: Find all scripts
   find:
@@ -46,3 +73,11 @@
     content: |
       [Settings]
       gtk-application-prefer-dark-theme={{ 1 if base.scheme == 'dark' else 0 }}
+
+- name: Deploy user-dirs settings
+  copy:
+    dest: "{{ ansible_facts['user_dir'] }}/.config/user-dirs.dirs"
+    content: |
+      XDG_DOWNLOAD_DIR="$HOME/downloads"
+      XDG_DOCUMENTS_DIR="$HOME/files"
+

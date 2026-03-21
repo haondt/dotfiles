@@ -1,0 +1,31 @@
+disks:
+  - by_path: /dev/disk/by-path/pci-0000:0c:00.0-nvme-1
+    partitions:
+      4: &windows_drive
+        mount: /mnt/windows-1
+        fstype: ntfs3
+        opts: 'uid=1000,gid=1000,ro,umask=0222'
+
+  - by_path: /dev/disk/by-path/pci-0000:01:00.1-ata-2
+    partitions:
+      2:
+        <<: *windows_drive
+        mount: /mnt/windows-2
+
+  - by_path: /dev/disk/by-path/pci-0000:01:00.1-ata-6
+    partitions:
+      2:
+        <<: *windows_drive
+        mount: /mnt/windows-3
+  
+  - by_path: /dev/disk/by-path/pci-0000:01:00.1-ata-1
+    partitions:
+      1:
+        create: true
+        mount: /mnt/1
+        create_dirs:
+          games: &ownership
+            owner: 1000
+            group: 1000
+            mode: '0775'
+          files: *ownership

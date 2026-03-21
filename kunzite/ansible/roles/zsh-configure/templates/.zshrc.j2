@@ -107,6 +107,11 @@ alias la='ls -a'
 alias ll='ls -l'
 alias lla='ls -la'
 
+# user scripts
+{% for k, v in zsh.aliases.items() %}
+alias {{ k }}='{{ v }}'
+{% endfor %}
+
 alias gcloud="docker run --rm \
     -v $(pwd):/app \
     -it \

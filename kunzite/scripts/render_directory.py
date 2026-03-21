@@ -97,7 +97,10 @@ def create_directory_skeleton(path: str) -> None | dict | list:
             continue
         if result is None:
             result = {}
-        result[name] = None
+        if entry.is_dir() or entry.name.endswith(('.yml', '.yaml')):
+            result[name] = None
+        else:
+            result[entry.name] = None
     if result is not None \
         and len(result) > 0 \
         and all([i.isdigit() for i in result.keys()]):
@@ -140,6 +143,10 @@ def process_directory(base_dir, parent_env={}):
         elif entry.endswith((".yaml", ".yml")):
             data = load_yaml_with_env(path, current_env)
             result = merge_into_result(data, name, result)
+        elif entry.endswith((".sh",)):
+            with open(path, "r") as f:
+                data = f.read()
+            result = merge_into_result(data, entry, result)
     return result
 
 def load_vars(path: str):
