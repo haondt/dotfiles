@@ -11,7 +11,12 @@
     - name: Configure component
       include_role:
         name: "{{ loop_component }}-configure"
-      when: "{{ lookup('vars', loop_component)['enabled'] | bool }}"
+      when: >-
+        loop_component in always_configure_components or
+        lookup('vars', loop_component, default={}).get('enabled', false)
+      vars:
+        always_configure_components:
+          - k9s
       loop: "{{ components_list }}"
       loop_control:
         loop_var: loop_component

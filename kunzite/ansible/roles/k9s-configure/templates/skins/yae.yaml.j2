@@ -1,0 +1,115 @@
+{% set key_color = colors.blue.bright %}
+{% set value_color = colors.yellow.bright %}
+{% set header_color = colors.cyan.dark %}
+{% set border_color = colors.magenta.dark %}
+{% set title_color = colors.yellow.bright %}
+k9s:
+  # General K9s styles
+  body:
+    fgColor: '{{ colors.foreground }}'
+    bgColor: '{{ colors.background }}'
+    logoColor: '{{ colors.red.bright }}'
+  # when you hit ':'
+  prompt:
+    fgColor: '{{ colors.white.bright }}'
+    bgColor: '{{ colors.background }}'
+    suggestColor: '{{ colors.magenta.bright }}'
+    border:
+      command: '{{ border_color }}'
+      default: '{{ border_color }}'
+
+  # ClusterInfoView styles (Context, K9s Rev, etc)
+  info:
+    fgColor: '{{ key_color }}'
+    sectionColor: '{{ colors.black.bright }}'
+
+  # when you hit '?'
+  help:
+    fgColor: '{{ value_color }}'
+    bgColor: '{{ colors.background }}'
+    keyColor: '{{ key_color }}'
+    numKeyColor: '{{ value_color }}'
+    sectionColor: '{{ header_color }}'
+
+  dialog:
+    fgColor: '{{ colors.foreground }}'
+    bgColor: '{{ colors.background }}'
+    buttonFocusBgColor: '{{ colors.cursorColor }}'
+    buttonFocusFgColor: '{{ colors.foreground }}'
+    buttonBgColor: '{{ colors.background }}'
+    buttonFgColor: '{{ colors.foreground }}'
+    labelFgColor: '{{ key_color }}'
+    fieldFgColor: '{{ value_color }}'
+
+  # Frame styles
+  frame:
+    # Borders styles
+    border:
+      fgColor: '{{ border_color }}'
+      focusColor: '{{ border_color }}'
+
+    # MenuView attributes and styles
+    menu:
+      fgStyle: 'normal'
+      fgColor: '{{ colors.black.bright }}'
+      # Used for favorite namespaces
+      keyColor: '{{ key_color }}'
+      numKeyColor: '{{ key_color }}'
+
+    # CrumbView attributes for history navigation.
+    # at the bottom of the screen <namespace> <pod> <container>
+    crumbs:
+      fgColor: '{{ colors.black.bright }}'
+      bgColor: '{{ colors.background }}'
+      activeColor: '{{ colors.white.dark }}'
+
+    # Resource status and update styles
+    status:
+      newColor: '{{ colors.cyan.bright }}'
+      modifyColor: '{{ colors.green.bright }}'
+      addColor: '{{ colors.cyan.dark }}'
+      errorColor: '{{ colors.red.dark }}'
+      highlightcolor: '{{ colors.cursorColor }}'
+      pendingColor: '{{ colors.yellow.dark }}'
+      killColor: '{{ colors.red.bright }}'
+      completedColor: '{{ colors.black.dark }}'
+
+    # Border title styles.
+    title:
+      fgColor: '{{ title_color }}'
+      bgColor: '{{ colors.background }}'
+      highlightColor: '{{ colors.cyan.bright }}'
+      counterColor: '{{ colors.cyan.bright }}'
+      filterColor: '{{ colors.black.bright }}'
+
+  # Specific views styles
+  views:
+    # TableView attributes. (e.g. containers)
+    table:
+      fgColor: '{{ colors.foreground }}'
+      bgColor: '{{ colors.background }}'
+      cursorFgColor: '{{ colors.white.dark }}'
+      cursorBgColor: '{{ colors.cursorColor }}'
+      markColor: '{{ colors.magenta.bright }}'
+
+      # Header row styles.
+      header:
+        fgColor: '{{ header_color }}'
+        bgColor: '{{ colors.background }}'
+        sorterColor: '{{ colors.magenta.bright }}'
+
+    # YAML info styles.
+    yaml:
+      keyColor: '{{ colors.white.bright }}'
+      colonColor: '{{ colors.black.bright }}'
+      valueColor: '{{ colors.yellow.bright }}'
+
+    # Logs styles.
+    logs:
+      fgColor: '{{ colors.white.bright }}'
+      bgColor: '{{ colors.background }}'
+      indicator:
+        fgColor: '{{ key_color }}'
+        bgColor: '{{ colors.background }}'
+        toggleOnColor: '{{ value_color }}'
+        toggleOffColor: '{{ colors.black.dark }}'

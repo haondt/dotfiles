@@ -26,3 +26,7 @@
       when: "'storage' in components_list and storage.enabled | bool"
     - role: grub
       when: "'grub' in components_list and grub.enabled | bool"
+
+    # Things that don't get called in the default "install all" playbook because they are included as dependencies
+    - role: k9s
+      when: "'k9s' in components_list"

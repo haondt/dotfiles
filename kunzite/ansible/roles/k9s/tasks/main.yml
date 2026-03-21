@@ -1,0 +1,23 @@
+- name: Set role defaults
+  set_fact:
+    k9s: "{{ role_defaults | combine(k9s, recursive=True) }}"
+
+- name: Check if k9s is installed
+  stat:
+    path: "{{ ansible_facts['user_dir'] }}/.local/bin/k9s"
+  register: k9s_bin
+
+- name: Install and configure k9s
+  when: base.force or not k9s_bin.stat.exists
+  block:
+    - name: Download and extract k9s
+      ansible.builtin.unarchive:
+        src: "https://github.com/derailed/k9s/releases/download/{{ k9s.version }}/k9s_Linux_amd64.tar.gz"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/bin/"
+        include:
+          - k9s
+        remote_src: true
+        mode: "0755"
+    - name: Configure k9s
+      include_role:
+        name: k9s-configure

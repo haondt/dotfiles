@@ -18,7 +18,7 @@
     - name: Install .NET SDKs
       become: true
       dnf:
-        name: 
+        name:
           - "dotnet-sdk-{{ item }}.0"
           - "aspnetcore-runtime-{{ item }}.0"
         state: present
@@ -71,4 +71,17 @@
             if nuget_source_check.rc == 0
             else 'Local NuGet source added: ' + dev_tools.dotnet.nuget.local_packages
           }}
+
+- name: Set up Kubernetes
+  when: dev_tools.kubernetes.enabled
+  block:
+    - name: Install k9s
+      include_role:
+        name: k9s
+    - name: Install packages
+      become: true
+      package:
+        name:
+          - kubernetes-client
+
 

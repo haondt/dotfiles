@@ -139,3 +139,12 @@ VIRTUAL_ENV_DISABLE_PROMPT=1
 [ -s "/home/noah/.bun/_bun" ] && source "/home/noah/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# k9s
+
+{% if dev_tools.enabled and dev_tools.kubernetes.enabled %}
+K9S_CONFIG_DIR="$HOME/.config/k9s"
+{% if foot.enabled %}
+alias k9s="TERM=xterm-256color k9s"
+{% endif %}
+{% endif %}

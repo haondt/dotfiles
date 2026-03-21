@@ -10,3 +10,5 @@ role_defaults:
       local_packages: "{{ ansible_env.HOME }}/packages/nuget"
       local_source_name: local
       additional_sources: {}
+  kubernetes: {}
+

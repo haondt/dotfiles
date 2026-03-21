@@ -1,0 +1,14 @@
+- name: Deploy k9s aliases
+  template:
+    src: aliases.yaml.j2
+    dest: "{{ ansible_facts['user_dir'] }}/.config/k9s/aliases.yaml"
+
+- name: Deploy k9s config
+  template:
+    src: config.yaml.j2
+    dest: "{{ ansible_facts['user_dir'] }}/.config/k9s/config.yaml"
+
+- name: Deploy k9s theme
+  template:
+    src: skins/yae.yaml.j2
+    dest: "{{ ansible_facts['user_dir'] }}/.config/k9s/skins/yae.yaml"

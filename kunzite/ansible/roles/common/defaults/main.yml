@@ -17,12 +17,15 @@ common_role_defaults:
     enabled: false
   dev_tools:
     enabled: false
+    kubernetes:
+      enabled: true
   storage:
     enabled: true
   grub:
     enabled: true
   ly:
     enabled: true
+  k9s: {}
   colors:
     # special
     foreground: '#f3c6b1'
