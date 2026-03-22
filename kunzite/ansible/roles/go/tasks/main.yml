@@ -1,0 +1,29 @@
+---
+- name: Set role defaults
+  set_fact:
+    go: "{{ role_defaults | combine(go, recursive=True) }}"
+
+- name: Check if Go is already installed
+  ansible.builtin.stat:
+    path: /usr/local/go
+  register: go_installed
+
+- name: Install Go
+  when: not go_installed.stat.exists or base.force | bool
+  block:
+    - name: Remove existing Go installation (force)
+      ansible.builtin.file:
+        path: /usr/local/go
+        state: absent
+      when: base.force | bool
+      become: true
+
+    - name: Download and extract Go
+      become: true
+      ansible.builtin.unarchive:
+        src: "https://go.dev/dl/go{{ go.version }}.linux-amd64.tar.gz"
+        dest: /usr/local/
+        include:
+          - go
+        remote_src: true
+        mode: "0755"

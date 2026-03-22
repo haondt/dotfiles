@@ -28,6 +28,7 @@ common_role_defaults:
   sysctl:
     enabled: true
   k9s: {}
+  go: {}
   colors:
     # special
     foreground: '#f3c6b1'
