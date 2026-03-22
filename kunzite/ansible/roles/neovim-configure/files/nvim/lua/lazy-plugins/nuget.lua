@@ -19,7 +19,7 @@ return {
     ft = { "cs", "csproj", "solution", "razor" },
     config = function(_, opts)
         require("nuget").setup(opts)
-        vim.keymap.set("n", "<leader>na", function()
+        vim.keymap.set("n", "<leader>np", function()
             require("nuget.install")({ dotnet = { prerelease = true } })
         end, { desc = "Install a NuGet prerelease package" })
     end,

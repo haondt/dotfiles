@@ -1,0 +1,20 @@
+- name: Set role defaults
+  set_fact:
+    sysctl: "{{ role_defaults | combine(sysctl, recursive=True) }}"
+
+- name: Configure sysctl settings
+  become: true
+  ansible.posix.sysctl:
+    name: "{{ sysctl_key }}"
+    value: "{{ sysctl[sysctl_key] }}"
+    state: present
+    sysctl_file: /etc/sysctl.d/99-custom.conf
+    reload: true
+  vars:
+    allowed_sysctls:
+      - fs.inotify.max_user_watches
+      - fs.inotify.max_user_instances
+  loop: "{{ allowed_sysctls }}"
+  loop_control:
+    loop_var: sysctl_key
+  when: sysctl[sysctl_key] is defined

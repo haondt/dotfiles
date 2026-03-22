@@ -15,6 +15,7 @@ There are some things that are not included in the default `just install`, as th
 ```shell
 just install storage
 just install grub
+just install sysctl
 ```
 
 ## Other tools

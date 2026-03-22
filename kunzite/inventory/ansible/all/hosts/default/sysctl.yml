@@ -1,0 +1,2 @@
+fs.inotify.max_user_instances: 65536
+fs.inotify.max_user_watches: 16777216

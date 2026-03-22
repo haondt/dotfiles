@@ -25,6 +25,8 @@ common_role_defaults:
     enabled: true
   ly:
     enabled: true
+  sysctl:
+    enabled: true
   k9s: {}
   colors:
     # special
