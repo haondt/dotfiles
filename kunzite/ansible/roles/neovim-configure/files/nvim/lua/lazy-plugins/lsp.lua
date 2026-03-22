@@ -29,18 +29,22 @@ return {
             })
 
             vim.lsp.config['roslyn'] = {
-                filetypes = { "csproj", "solution", "cs", "razor" },
+                filetypes = { "cs", "razor" },
                 settings = {
                     ["csharp|inlay_hints"] = {
-                        csharp_enable_inlay_hints_for_implicit_object_creation = true,
                         csharp_enable_inlay_hints_for_implicit_variable_types = true,
-                        csharp_enable_inlay_hints_for_lambda_parameter_types = true
+                        csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+                        csharp_enable_inlay_hints_for_types = true,
                     },
                     ["csharp|code_lens"] = {
-                        dotnet_enable_references_code_lens = true,
+                        dotnet_enable_references_code_lens = false,
+                        dotnet_enable_tests_code_lens = false,
                     },
                     ["csharp|formatting"] = {
                         dotnet_organize_imports_on_format = true,
+                    },
+                    ["csharp|completion"] = {
+                        dotnet_show_completion_items_from_unimported_namespaces = true,
                     },
                     ["csharp|background_analysis"] = {
                         ["background_analysis.dotnet_analyzer_diagnostics_scope"] = "fullSolution",
@@ -165,6 +169,8 @@ return {
             'williamboman/mason.nvim',
             'neovim/nvim-lspconfig',
             'hrsh7th/cmp-nvim-lsp',
+            "seblyng/roslyn.nvim",
+            'Chaitanyabsprip/fastaction.nvim',
         },
         config = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -174,9 +180,12 @@ return {
                 lineFoldingOnly = true
             }
 
+
+
             vim.api.nvim_create_autocmd('LspAttach', {
                 callback = function(args)
                     local bufnr = args.buf
+
                     local map = function(keys, func, desc)
                         vim.keymap.set('n', keys, func, {
                             buffer = bufnr,
@@ -186,7 +195,7 @@ return {
                     end
                     map('<leader>c=', vim.lsp.buf.format, '[c]ode format (with lsp)')
                     map('<leader>cr', vim.lsp.buf.rename, '[c]ode [r]ename')
-                    map('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ctions')
+                    map('<leader>ca', function() require('fastaction').code_action() end, '[c]ode [a]ctions')
                     map('<leader>ch', vim.lsp.buf.hover, '[c]ode hover')
                     map('<leader>cs', vim.lsp.buf.signature_help, '[c]ode [s]ignature help')
 
@@ -197,6 +206,8 @@ return {
                         callback = function()
                             local ft = vim.bo[bufnr].filetype
                             if vim.tbl_contains(format_on_save_types, ft) then
+                                -- TODO: when https://github.com/neovim/neovim/issues/25259 and https://github.com/neovim/neovim/pull/22598 happen,
+                                -- i can hook into the async result of vim.lsp.buf.code_action and perform code actions on save
                                 vim.lsp.buf.format({ bufnr = bufnr })
                             end
                         end,

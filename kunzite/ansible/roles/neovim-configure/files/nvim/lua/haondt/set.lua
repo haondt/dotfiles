@@ -97,3 +97,4 @@ vim.filetype.add({
         pcss = "css"
     }
 })
+vim.lsp.inlay_hint.enable(true)

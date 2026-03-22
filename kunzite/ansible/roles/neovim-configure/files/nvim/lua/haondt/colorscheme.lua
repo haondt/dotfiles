@@ -29,6 +29,7 @@ vim.api.nvim_set_hl(0, "QuickFixLine", { fg = palette.color6 })
 vim.api.nvim_set_hl(0, "Question", { fg = palette.color6 })
 vim.api.nvim_set_hl(0, "SpecialKey", { fg = palette.color9 })
 vim.api.nvim_set_hl(0, "NonText", { fg = palette.color9 })
+vim.api.nvim_set_hl(0, "MoreMsg", { fg = palette.color6 })
 
 -- diagnostics
 vim.api.nvim_set_hl(0, "DiagnosticError", { fg = palette.error.bg })
@@ -93,6 +94,8 @@ vim.api.nvim_set_hl(0, "PreProc", { fg = palette.color8 })
 -- This.Is.The.Namespace
 vim.api.nvim_set_hl(0, "@lsp.type.namespace", { fg = palette.color0 })
 
+-- type hints (var string foo = "bar";)
+vim.api.nvim_set_hl(0, "LspInlayHint", { fg = palette.selected.bg })
 
 --vim.api.nvim_set_hl(0, "Typedef", { fg = palette.color15 })
 
