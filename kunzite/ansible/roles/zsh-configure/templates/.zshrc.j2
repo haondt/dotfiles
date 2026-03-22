@@ -79,7 +79,8 @@ alias vim='nvim'
 
 alias st='tmux source-file ~/.tmux.conf'
 alias et='$EDITOR ~/projects/dotfiles/kunzite/ansible/roles/tmux-configure'
-alias rt='(cd ~/projects/dotfiles/kunzite && just configure tmux)'
+alias vt='$EDITOR ~/.tmux.conf'
+alias rt='(cd ~/projects/dotfiles/kunzite && just configure tmux) && tmux source-file ~/.tmux.conf'
 
 alias ec='$EDITOR ~/projects/dotfiles/kunzite/ansible/roles/base-configure/files/scripts/cheat'
 alias rc='(cd ~/projects/dotfiles/kunzite && just configure base)'

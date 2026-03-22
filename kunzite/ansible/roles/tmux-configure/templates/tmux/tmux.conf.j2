@@ -33,6 +33,16 @@ bind-key -n M-d run-shell "tmux popup -w 80% -E ~/.config/tmux/scripts/tmux-dir-
 bind-key -n M-a run-shell "tmux popup -w 80% -E ~/.config/tmux/scripts/tmux-get-or-create-session.sh || true"
 bind-key -n M-6 switch-client -l
 
+bind-key -n M-1 run-shell "~/.config/tmux/scripts/tmux-switch-window.sh 0"
+bind-key -n M-2 run-shell "~/.config/tmux/scripts/tmux-switch-window.sh 2"
+bind-key -n M-3 run-shell "~/.config/tmux/scripts/tmux-switch-window.sh 3"
+bind-key -n M-4 run-shell "~/.config/tmux/scripts/tmux-switch-window.sh 4"
+bind-key -n M-5 run-shell "~/.config/tmux/scripts/tmux-switch-window.sh 5"
+
+bind-key -n M-! run-shell "~/.config/tmux/scripts/tmux-move-pane.sh 0"
+bind-key -n M-@ run-shell "~/.config/tmux/scripts/tmux-move-pane.sh 2"
+bind-key -n M-# run-shell "~/.config/tmux/scripts/tmux-move-pane.sh 3"
+
 set-window-option -g mode-keys vi
 bind -T copy-mode-vi v send-keys -X begin-selection
 bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -in -selection clipboard'
