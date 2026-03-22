@@ -20,14 +20,14 @@ local function create_window()
     local width = config.width or 60
     local height = config.height or 10
     local borderchars = config.borderchars or {
-            "─",
-            "│",
-            "─",
-            "│",
-            "┌",
-            "┐",
-            "┘",
-            "└",
+        "─",
+        "│",
+        "─",
+        "│",
+        "┌",
+        "┐",
+        "┘",
+        "└",
     }
 
     local bufnr = vim.api.nvim_create_buf(false, true)
@@ -41,7 +41,7 @@ local function create_window()
         minheight = height,
         borderchars = borderchars,
         cursorline = true,
-        padding = {0,0,0,0}
+        padding = { 0, 0, 0, 0 }
     })
 
     vim.api.nvim_win_set_option(
@@ -75,12 +75,11 @@ function M.nav_file(idx)
 
     local file_name = vim.fs.normalize(_mark.filename)
     local buf_id = get_or_create_buffer(file_name)
-    local set_pos = not vim.api.nvim_buf_is_loaded(buf_id)
     local old_bufnr = vim.api.nvim_get_current_buf()
 
     vim.api.nvim_set_current_buf(buf_id)
     vim.api.nvim_buf_set_option(buf_id, "buflisted", true)
-    if set_pos and _mark.row and _mark.col then
+    if _mark.row and _mark.col then
         vim.cmd(string.format(":call cursor(%d, %d)", _mark.row, _mark.col))
     end
 
@@ -112,9 +111,9 @@ function M.toggle_quick_menu()
     vim.cmd(
         string.format(
             "autocmd Filetype sticky "
-                .. "let path = '%s' | call clearmatches() | "
-                .. "call search('\\V'.path.'\\$') | "
-                .. "call matchadd('StickyCurrentFile', '\\V'.path.'\\$')",
+            .. "let path = '%s' | call clearmatches() | "
+            .. "call search('\\V'.path.'\\$') | "
+            .. "call matchadd('StickyCurrentFile', '\\V'.path.'\\$')",
             current:gsub("\\", "\\\\")
         )
     )
