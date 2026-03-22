@@ -32,24 +32,35 @@ return function(opts)
     else
         opts.cwd = vim.loop.cwd()
     end
-    local git_root, _         = utils.get_os_command_output({ 'git', 'rev-parse', '--show-toplevel' }, opts.cwd)
-    opts.cwd                  = git_root[1]
+    local git_root, _  = utils.get_os_command_output({ 'git', 'rev-parse', '--show-toplevel' }, opts.cwd)
+    opts.cwd           = git_root[1]
 
-    local delta               = previewers.new_termopen_previewer({
-        get_command = function(entry)
-            if entry.status and (entry.status == '??' or entry.status == 'A ') then
-                return { 'bat', entry.path, '--paging=never', '-p', '--theme=ansi' }
+    local side_by_side = false
+    local function make_previewer()
+        return previewers.new_termopen_previewer({
+            get_command = function(entry)
+                if entry.status and (entry.status == '??' or entry.status == 'A ') then
+                    return { 'bat', entry.path, '--paging=always', '-p', '--theme=ansi' }
+                end
+
+                return { 'git', '-c', 'core.pager=delta' ..
+                (side_by_side and ' --side-by-side' or ''),
+                    'diff', 'HEAD', '--', entry.path }
             end
-            return { 'git', 'diff', 'HEAD', '--', entry.path }
-        end
-    })
-
+        })
+    end
     local set_picker_strategy = function(_) end
     local get_picker_strategy = function() return nil end
 
     opts.initial_mode         = "normal"
-    opts.layout_strategy      = "vertical"
-    opts.previewer            = delta
+    opts.layout_strategy      = "flex"
+    opts.layout_config        = {
+        flip_columns = 180,
+        vertical = {
+            preview_height = 0.67
+        }
+    }
+    opts.previewer            = make_previewer()
     opts.attach_mappings      = function(prompt_bufnr, map)
         actions.git_staging_toggle:enhance {
             post = function()
@@ -75,6 +86,20 @@ return function(opts)
             end
         }
         map({ "i", "n" }, "<tab>", actions.git_staging_toggle)
+
+        map({ "n" }, "W", function()
+            local picker = action_state.get_current_picker(prompt_bufnr)
+            local selection_row = picker:get_selection_row()
+            local callbacks = { unpack(picker._completion_callbacks) }
+            picker:register_completion_callback(function(self)
+                self:set_selection(selection_row)
+                self._completion_callbacks = callbacks
+            end)
+            side_by_side = not side_by_side
+            picker.previewer = make_previewer()
+            picker:refresh(gen_new_finder(opts), { reset_prompt = false })
+        end)
+
         return true
     end
 
