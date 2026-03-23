@@ -142,11 +142,19 @@ VIRTUAL_ENV_DISABLE_PROMPT=1
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# k9s
-
 {% if dev_tools.enabled and dev_tools.kubernetes.enabled %}
+# k9s
 K9S_CONFIG_DIR="$HOME/.config/k9s"
 {% if foot.enabled %}
 alias k9s="TERM=xterm-256color k9s"
 {% endif %}
 {% endif %}
+
+{% if dev_tools.enabled and dev_tools.podman.enabled %}
+# podman
+{% if not dev_tools.docker.enabled %}
+export DOCKER_HOST=unix://${XDG_RUNTIME_DIR}/podman/podman.sock
+export TESTCONTAINERS_RYUK_DISABLED=true
+{% endif %}
+{% endif %}
+

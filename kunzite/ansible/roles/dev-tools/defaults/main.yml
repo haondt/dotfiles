@@ -2,13 +2,7 @@
 role_defaults:
   dotnet:
     enabled: true
-    versions:
-      - 10
-      - 8
-    nuget:
-      config: "{{ ansible_env.HOME }}/.nuget/NuGet/NuGet.Config"
-      local_packages: "{{ ansible_env.HOME }}/packages/nuget"
-      local_source_name: local
-      additional_sources: {}
+  docker: {}
+  podman: {}
   kubernetes: {}
 

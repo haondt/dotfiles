@@ -23,6 +23,10 @@ common_role_defaults:
       enabled: false
     kubernetes:
       enabled: true
+    docker:
+      enabled: false
+    podman:
+      enabled: false
   storage:
     enabled: true
   grub:
