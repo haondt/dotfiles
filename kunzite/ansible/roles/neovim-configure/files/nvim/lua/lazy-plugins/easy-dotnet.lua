@@ -4,7 +4,7 @@ return {
     opts = {
         test_runner = {
             icons = {
-                passed       = "=",
+                passed       = "o",
                 skipped      = "~",
                 failed       = "x",
                 success      = "o",
@@ -63,6 +63,13 @@ return {
     },
     ft = { "cs", "razor" },
     config = function(_, opts)
+        -- disable easy_dotnet diagnostics in favor of roslyn
+        local orig_diag = vim.lsp.handlers["textDocument/diagnostic"]
+        vim.lsp.handlers["textDocument/diagnostic"] = function(err, result, ctx, config)
+            local client = vim.lsp.get_client_by_id(ctx.client_id)
+            if client and client.name == "easy_dotnet" then return end
+            orig_diag(err, result, ctx, config)
+        end
         require('easy-dotnet').setup(opts)
 
         vim.api.nvim_create_autocmd("LspAttach", {
@@ -76,6 +83,7 @@ return {
                     client.server_capabilities.definitionProvider = nil
                     client.server_capabilities.referencesProvider = nil
                     client.server_capabilities.inlayHintProvider = nil
+                    client.server_capabilities.diagnosticProvider = nil
                 end
             end,
         })

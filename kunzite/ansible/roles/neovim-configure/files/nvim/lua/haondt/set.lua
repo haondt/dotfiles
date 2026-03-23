@@ -21,7 +21,7 @@ vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
-vim.opt.signcolumn = 'no'
+vim.opt.signcolumn = 'yes'
 vim.cmd('highlight SignColumn ctermbg=NONE guibg=NONE')
 
 vim.opt.updatetime = 50
@@ -99,3 +99,11 @@ vim.filetype.add({
 })
 vim.lsp.inlay_hint.enable(true)
 vim.o.winborder = 'single'
+vim.diagnostic.config({
+    underline = {
+        severity = { min = vim.diagnostic.severity.WARN }
+    },
+    virtual_text = {
+        severity = { min = vim.diagnostic.severity.INFO }
+    }
+})
