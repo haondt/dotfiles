@@ -37,9 +37,10 @@ local edit = function(node)
         return
     end
 
-    if node.nodes then
-        return
-    end
+    -- not needed when using oil.nvim
+    -- if node.nodes then
+    --     return
+    -- end
 
     local path = node.absolute_path
     if node.link_to then

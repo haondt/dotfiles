@@ -75,6 +75,7 @@ return {
                     client.server_capabilities.signatureHelpProvider = nil
                     client.server_capabilities.definitionProvider = nil
                     client.server_capabilities.referencesProvider = nil
+                    client.server_capabilities.inlayHintProvider = nil
                 end
             end,
         })
