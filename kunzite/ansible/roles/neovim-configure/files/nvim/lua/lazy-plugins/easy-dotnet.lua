@@ -84,6 +84,7 @@ return {
                     client.server_capabilities.referencesProvider = nil
                     client.server_capabilities.inlayHintProvider = nil
                     client.server_capabilities.diagnosticProvider = nil
+                    client.server_capabilities.renameProvider = nil
                 end
             end,
         })
