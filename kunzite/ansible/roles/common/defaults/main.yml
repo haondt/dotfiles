@@ -17,6 +17,10 @@ common_role_defaults:
     enabled: false
   dev_tools:
     enabled: false
+    dotnet:
+      enabled: true
+    go:
+      enabled: false
     kubernetes:
       enabled: true
   storage:
@@ -29,6 +33,7 @@ common_role_defaults:
     enabled: true
   k9s: {}
   go: {}
+  dotnet: {}
   colors:
     # special
     foreground: '#f3c6b1'

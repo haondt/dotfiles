@@ -1,0 +1,61 @@
+---
+- name: Set role defaults
+  set_fact:
+    dotnet: "{{ role_defaults | combine(dotnet, recursive=True) }}"
+
+- name: Install .NET SDKs
+  become: true
+  dnf:
+    name:
+      - "dotnet-sdk-{{ item }}.0"
+      - "aspnetcore-runtime-{{ item }}.0"
+    state: present
+  loop: "{{ dotnet.versions }}"
+- name: Ensure local nuget dir exists
+  file:
+    path: "{{ dotnet.nuget.local_packages }}"
+    state: directory
+- name: Check if local NuGet source is already registered
+  ansible.builtin.shell: >
+    dotnet nuget list source
+    --configfile {{ dotnet.nuget.config }}
+    --format short
+    | grep -F "{{ dotnet.nuget.local_packages }}"
+  register: nuget_source_check
+  changed_when: false
+  failed_when: false
+- name: Register local NuGet source
+  ansible.builtin.command: >
+    dotnet nuget add source {{ dotnet.nuget.local_packages }}
+    --configfile {{ dotnet.nuget.config }}
+    -n {{ dotnet.nuget.local_source_name }}
+  when: nuget_source_check.rc != 0
+  register: nuget_add_result
+- name: Register additional NuGet sources
+  block:
+    - name: Check if additional NuGet source is already registered
+      ansible.builtin.shell: >
+        dotnet nuget list source
+        --configfile {{ dotnet.nuget.config }}
+        --format short
+        | grep -F "{{ item.value }}"
+      register: nuget_additional_source_check
+      changed_when: false
+      failed_when: false
+      loop: "{{ dotnet.nuget.additional_sources | dict2items }}"
+    - name: Add additional NuGet source
+      ansible.builtin.command: >
+        dotnet nuget add source {{ item.item.value }}
+        --configfile {{ dotnet.nuget.config }}
+        -n "{{ item.item.key }}"
+      when: item.rc != 0
+      loop: "{{ nuget_additional_source_check.results }}"
+  when: dotnet.nuget.additional_sources | length > 0
+- name: Report result
+  ansible.builtin.debug:
+    msg: >-
+      {{
+        'Local NuGet source was already configured — nothing to do.'
+        if nuget_source_check.rc == 0
+        else 'Local NuGet source added: ' + dotnet.nuget.local_packages
+      }}

@@ -197,6 +197,7 @@ return {
                     map('<leader>cr', vim.lsp.buf.rename, '[c]ode [r]ename')
                     map('<leader>ca', function() require('fastaction').code_action() end, '[c]ode [a]ctions')
                     map('<leader>ch', vim.lsp.buf.hover, '[c]ode hover')
+                    map('K', vim.lsp.buf.hover)
                     map('<leader>cs', vim.lsp.buf.signature_help, '[c]ode [s]ignature help')
 
                     -- Format on save

@@ -34,3 +34,5 @@
       when: "'k9s' in components_list"
     - role: go
       when: "'go' in components_list"
+    - role: dotnet
+      when: "'dotnet' in components_list"

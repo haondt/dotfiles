@@ -1,0 +1,10 @@
+---
+role_defaults:
+  versions:
+    - 10
+    - 8
+  nuget:
+    config: "{{ ansible_facts['user_dir'] }}/.nuget/NuGet/NuGet.Config"
+    local_packages: "{{ ansible_facts['user_dir'] }}/packages/nuget"
+    local_source_name: local
+    additional_sources: {}

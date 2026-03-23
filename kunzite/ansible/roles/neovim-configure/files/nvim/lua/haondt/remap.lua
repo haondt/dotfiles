@@ -186,3 +186,13 @@ end, { desc = '[g]it [r]estore current file' })
 
 -- diff
 vim.api.nvim_create_user_command('DiffTool', function() vim.schedule(diff.difftool) end, {})
+
+vim.keymap.set("n", "<Esc>", function()
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+        local ok, config = pcall(vim.api.nvim_win_get_config, win)
+        if ok and config.relative ~= "" then
+            pcall(vim.api.nvim_win_close, win, false)
+        end
+    end
+    vim.cmd("nohlsearch")
+end, { desc = "Close floats" })

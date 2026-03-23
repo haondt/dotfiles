@@ -6,6 +6,7 @@ return {
     config = function()
         require('fidget').setup({
             notification = {
+                -- override_vim_notify = true,
                 window = {
                     -- border = "single",
                     winblend = 0,
@@ -20,7 +21,8 @@ return {
             }
         })
         require("telescope").load_extension("fidget")
-        -- TODO: set up this binding
-        -- require("telescope").extensions.fidget.fidget()
+        vim.keymap.set("n", "<leader>fn", function()
+            require("telescope").extensions.fidget.fidget()
+        end, { desc = "[f]idget [n]otifications" })
     end
 }

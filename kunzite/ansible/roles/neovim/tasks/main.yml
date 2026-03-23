@@ -48,6 +48,8 @@
           - git-delta
           - bat
           - tree-sitter-cli
+    - name: Install EasyDotnet server
+      ansible.builtin.command: dotnet tool install -g EasyDotnet
     - name: Configure Neovim
       include_role:
         name: neovim-configure

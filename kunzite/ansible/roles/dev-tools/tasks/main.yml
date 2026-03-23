@@ -14,63 +14,13 @@
 
 - name: Set up .NET
   when: dev_tools.dotnet.enabled
-  block:
-    - name: Install .NET SDKs
-      become: true
-      dnf:
-        name:
-          - "dotnet-sdk-{{ item }}.0"
-          - "aspnetcore-runtime-{{ item }}.0"
-        state: present
-      loop: "{{ dev_tools.dotnet.versions }}"
-    - name: Ensure local nuget dir exists
-      file:
-        path: "{{ dev_tools.dotnet.nuget.local_packages }}"
-        state: directory
-    - name: Check if local NuGet source is already registered
-      ansible.builtin.shell: >
-        dotnet nuget list source
-        --configfile {{ dev_tools.dotnet.nuget.config }}
-        --format short
-        | grep -F "{{ dev_tools.dotnet.nuget.local_packages }}"
-      register: nuget_source_check
-      changed_when: false
-      failed_when: false
-    - name: Register local NuGet source
-      ansible.builtin.command: >
-        dotnet nuget add source {{ dev_tools.dotnet.nuget.local_packages }}
-        --configfile {{ dev_tools.dotnet.nuget.config }}
-        -n {{ dev_tools.dotnet.nuget.local_source_name }}
-      when: nuget_source_check.rc != 0
-      register: nuget_add_result
-    - name: Register additional NuGet sources
-      block:
-        - name: Check if additional NuGet source is already registered
-          ansible.builtin.shell: >
-            dotnet nuget list source
-            --configfile {{ dev_tools.dotnet.nuget.config }}
-            --format short
-            | grep -F "{{ item.value }}"
-          register: nuget_additional_source_check
-          changed_when: false
-          failed_when: false
-          loop: "{{ dev_tools.dotnet.nuget.additional_sources | dict2items }}"
-        - name: Add additional NuGet source
-          ansible.builtin.command: >
-            dotnet nuget add source {{ item.item.value }}
-            --configfile {{ dev_tools.dotnet.nuget.config }}
-            -n "{{ item.item.key }}"
-          when: item.rc != 0
-          loop: "{{ nuget_additional_source_check.results }}"
-      when: dev_tools.dotnet.nuget.additional_sources | length > 0
-    - name: Report result
-      ansible.builtin.debug:
-        msg: >-
-          {{
-            'Local NuGet source was already configured — nothing to do.'
-            if nuget_source_check.rc == 0
-            else 'Local NuGet source added: ' + dev_tools.dotnet.nuget.local_packages
-          }}
+  include_role:
+    name: dotnet
+
+- name: Install go
+  when: dev_tools.go.enabled
+  include_role:
+    name: go
 
 - name: Set up Kubernetes
   when: dev_tools.kubernetes.enabled
@@ -85,9 +35,6 @@
           - kubernetes-client
           - helm
 
-- name: Install go
-  include_role:
-    name: go
 
 - name: Set up database tools
   block:
@@ -96,6 +43,10 @@
       package:
         name:
           - postgresql
+    # required for lazygit
+    - name: Install go
+      include_role:
+        name: go
     - name: Install lazysql via go install
       command: go install github.com/jorgerojas26/lazysql@latest
       args:
