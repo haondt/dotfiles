@@ -15,7 +15,7 @@ return {
                     require("oil.actions").preview.callback()
                 end, 200)
             end,
-            desc = "Open Oil"
+            desc = "[o]il"
         }
     },
     config = function()

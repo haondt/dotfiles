@@ -14,7 +14,6 @@ return {
         telescope.setup({
             defaults = {
                 scroll_strategy = "limit",
-                file_sorter = haondt.sorters.file_substr_matcher,
                 dynamic_preview_title = true,
                 prompt_prefix = '~ ',
                 selection_caret = ' ',

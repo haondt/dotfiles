@@ -57,7 +57,7 @@ M.setup = function()
     vim.keymap.set('n', '<leader>pm', builtin.lsp_workspace_symbols, {})
     vim.keymap.set('n', '<leader>pw',
         in_normal(function() builtin.diagnostics({ severity_bound = vim.diagnostic.severity.WARN }) end),
-        { desc = 'pick [p]roject [w]arnings' })
+        { desc = '[p]roject [w]arnings' })
     vim.keymap.set('n', '<leader>pe',
         in_normal(function() builtin.diagnostics({ severity_limit = vim.diagnostic.severity.ERROR }) end),
         { desc = 'pick [p]roject [e]rrors' })
@@ -72,17 +72,17 @@ M.setup = function()
             function() haondt.pickers.cheat({ path = "~/.local/bin/kunzite/cheat" }) end,
             { desc = 'cheat' })
         vim.keymap.set('n', '<leader>ph', function() haondt.pickers.cheat({ path = ".", use_cheat_window = false }) end,
-            {})
+            { desc = '[p]roject [h]elp (.md tags)' })
         vim.keymap.set('n', '<leader>ps', haondt.pickers.live_grep, { desc = '[p]roject [s]earch' })
-        vim.keymap.set('n', '<leader>pf', haondt.pickers.find_files, {})
+        vim.keymap.set('n', '<leader>pf', haondt.pickers.find_files, { desc = '[p]roject [f]iles' })
         vim.keymap.set('n', '<leader>pd', function() haondt.pickers.find_files({ haondt_search_directory = true }) end,
-            {})
+            { desc = '[p]roject [d]irectories' })
         vim.keymap.set('n', '<leader>pi', function()
             haondt.pickers.find_files({
                 haondt_search_directory = true,
                 find_command = { "fd", "--type", "f", "--color", "never", "--hidden", "--exclude", ".git", "-I", "-L" }
             })
-        end, {})
+        end, { desc = '[p]roject files ([i]nclude ignored)' })
 
         vim.keymap.set('n', '<leader>gs', haondt.pickers.git_status, { desc = '[g]it [s]tatus' })
     end
