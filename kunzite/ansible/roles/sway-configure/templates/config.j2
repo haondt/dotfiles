@@ -140,7 +140,7 @@ focus_follows_mouse no
 ################
 
 # reload the configuration file
-bindsym $mod+Shift+s reload
+bindsym $mod+Shift+r reload
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+q exec swaynag -t warning -m 'Exit sway?' -b 'Yes' 'swaymsg exit'
@@ -171,6 +171,9 @@ for_window [app_id="cheat-popup"] floating enable, resize set 900 600
 
 # window switching
 bindsym $mod+Tab exec "rofi -show window -display-window '[window]'"
+
+# screenshot
+bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy --type image/png
 
 #######################
 # auto start programs #
