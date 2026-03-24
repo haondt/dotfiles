@@ -53,3 +53,20 @@
   template:
     src: "{{ item.path }}"
     dest: "{{ ansible_facts['user_dir'] }}/.config/waybar/{{ item.path | regex_replace('^' + role_path + '/templates/waybar/', '') | regex_replace('.j2$', '') }}"
+
+- name: Ensure the swaylock configuration directory exists
+  file:
+    path: "{{ ansible_facts['user_dir'] }}/.swaylock"
+    state: directory
+- name: Get swaylock templates
+  find:
+    paths: "{{ role_path }}/templates/swaylock"
+    patterns: "*.j2"
+    recurse: true
+    file_type: file
+  register: template_files
+- name: Deploy swaylock config files
+  loop: "{{ template_files.files }}"
+  template:
+    src: "{{ item.path }}"
+    dest: "{{ ansible_facts['user_dir'] }}/.swaylock/{{ item.path | regex_replace('^' + role_path + '/templates/swaylock/', '') | regex_replace('.j2$', '') }}"

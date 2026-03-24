@@ -135,15 +135,12 @@ bindsym $mod+Shift+Right move right
 mouse_warping none
 focus_follows_mouse no
 
-##############
-# control i3 #
-##############
+################
+# control sway #
+################
 
 # reload the configuration file
 bindsym $mod+Shift+s reload
-
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+q exec swaynag -t warning -m 'Exit sway?' -b 'Yes' 'swaymsg exit'
@@ -183,7 +180,9 @@ bar {
 }
 
 # apply wallpapers & start compositor
-# exec --no-startup-id nitrogen --restore; sleep 1; picom -b --experimental-backends
+{% if sway.wallpaper %}
+output * bg {{ sway.wallpaper }} fit
+{% endif %}
 
 #######################
 # a e s t h e t i c s #
@@ -205,3 +204,18 @@ input * {
     accel_profile flat
     pointer_accel -0.25
 }
+
+############
+# behavior #
+############
+
+# killall is for when you are dialing this is in, quote:
+# When you reload your config, exec commands don't get re-executed. So if you edited the swayidle command and then reloaded the config, swayidle will not restart using the updated command. You will need to entirely restart Sway for the changes to take place.
+# Alternatively, you can use the exec_always command which does get executed on reload.
+exec_always killall swayidle; swayidle -w \
+    lock 'swaylock -f' \
+    timeout 300 'swaylock -f' \
+    timeout 600 'swaymsg "output * dpms off"' \
+    timeout 900 'systemctl suspend' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'swaylock -f'
