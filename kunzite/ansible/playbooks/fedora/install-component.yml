@@ -20,6 +20,8 @@
       when: "'sway' in components_list and sway.enabled | bool"
     - role: ly
       when: "'ly' in components_list and ly.enabled | bool"
+    - role: gaming
+      when: "'gaming' in components_list and gaming.enabled | bool"
 
     # Things that don't get called in the default "install all" playbook
     - role: storage

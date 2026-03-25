@@ -1,0 +1,70 @@
+---
+- name: Configure RPM Fusion and openh264 repositories
+  block:
+    - name: Get Fedora version
+      ansible.builtin.command:
+        cmd: rpm -E %fedora
+      register: fedora_version
+      changed_when: false
+
+    - name: Install RPM Fusion free and nonfree repositories
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version.stdout }}.noarch.rpm"
+          - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_version.stdout }}.noarch.rpm"
+        state: present
+        disable_gpg_check: true
+
+    - name: Check if fedora-cisco-openh264 is already enabled
+      ansible.builtin.command:
+        cmd: dnf repolist
+      register: repolist_check
+      changed_when: false
+      failed_when: false
+
+    - name: Enable fedora-cisco-openh264 repository (Fedora 41+)
+      become: true
+      ansible.builtin.command:
+        cmd: dnf config-manager setopt fedora-cisco-openh264.enabled=1
+      when:
+        - "'fedora-cisco-openh264' not in repolist_check.stdout"
+      changed_when: true
+
+- name: Configure multimedia codecs
+  block:
+    - name: Check if ffmpeg-free is installed
+      ansible.builtin.command:
+        cmd: rpm -q ffmpeg-free
+      register: ffmpeg_free_check
+      failed_when: false
+      changed_when: false
+
+    - name: Swap ffmpeg-free for full ffmpeg
+      become: true
+      ansible.builtin.command:
+        cmd: dnf swap -y ffmpeg-free ffmpeg --allowerasing
+      when: ffmpeg_free_check.rc == 0
+      changed_when: true
+
+    - name: Update multimedia group with additional codecs
+      become: true
+      ansible.builtin.dnf:
+        name: "@multimedia"
+        state: present
+        install_weak_deps: false
+        exclude: PackageKit-gstreamer-plugin
+
+    - name: Check if mesa-va-drivers (non-freeworld) is installed
+      ansible.builtin.command:
+        cmd: rpm -q mesa-va-drivers
+      register: mesa_check
+      failed_when: false
+      changed_when: false
+
+    - name: Swap mesa-va-drivers for freeworld variant
+      become: true
+      ansible.builtin.command:
+        cmd: dnf swap -y mesa-va-drivers mesa-va-drivers-freeworld --allowerasing
+      when: mesa_check.rc == 0
+      changed_when: true

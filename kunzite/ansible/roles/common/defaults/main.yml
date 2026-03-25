@@ -3,6 +3,8 @@ common_role_defaults:
     enabled: true
     scheme: dark
     force: false
+  gaming:
+    enabled: false
   neovim:
     enabled: false
   zsh:

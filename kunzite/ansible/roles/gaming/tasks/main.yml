@@ -1,0 +1,14 @@
+- name: Set role defaults
+  set_fact:
+    gaming: "{{ role_defaults | combine(gaming, recursive=True) }}"
+
+- name: Set up rpmfusion/multimedia
+  when: gaming.rpmfusion.enabled
+  import_tasks: rpmfusion.yml
+
+- name: Set up steam
+  when: gaming.steam.enabled
+  become: true
+  ansible.builtin.package:
+    name: steam
+    state: present

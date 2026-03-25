@@ -19,3 +19,5 @@
       when: sway.enabled | bool
     - role: dev-tools
       when: dev_tools.enabled | bool
+    - role: gaming
+      when: gaming.enabled | bool
