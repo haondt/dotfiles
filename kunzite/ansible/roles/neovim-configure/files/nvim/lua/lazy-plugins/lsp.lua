@@ -201,7 +201,7 @@ return {
                     map('<leader>cs', vim.lsp.buf.signature_help, '[c]ode [s]ignature help')
 
                     -- Format on save
-                    local format_on_save_types = { 'typescript', 'razor', 'cs', 'html', 'lua' }
+                    local format_on_save_types = { 'typescript', 'cs', 'html', 'lua' }
                     vim.api.nvim_create_autocmd('BufWritePre', {
                         buffer = bufnr,
                         callback = function()

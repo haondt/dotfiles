@@ -29,6 +29,8 @@ common_role_defaults:
       enabled: false
     podman:
       enabled: false
+    chromium:
+      enabled: false
   storage:
     enabled: true
   grub:

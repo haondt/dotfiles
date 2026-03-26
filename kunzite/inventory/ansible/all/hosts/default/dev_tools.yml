@@ -3,3 +3,5 @@ docker:
   enabled: false
 podman:
   enabled: true
+chromium:
+  enabled: true
