@@ -20,11 +20,13 @@ else
     if [[ "$set_dns" =~ ^[Yy]$ ]]; then
         echo "Setting DNS to $target_dns..."
         # Apply DNS to all active connections
-        for con in $(nmcli -t -f NAME c show --active); do
+        while IFS= read -r con; do
+            [[ -z "$con" ]] && continue
             echo "Updating DNS for connection: $con"
-            nmcli con mod "$con" ipv4.dns "$target_dns" ipv4.ignore-auto-dns yes
+            nmcli con mod "$con" ipv4.dns "$target_dns" ipv4.ignore-auto-dns yes \
+                          ipv6.dns "" ipv6.ignore-auto-dns yes
             nmcli con up "$con" >/dev/null
-        done
+        done < <(nmcli -t -f NAME c show --active)
         echo "DNS updated. Current DNS:"
         nmcli dev show | grep 'IP4.DNS'
     else
