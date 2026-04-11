@@ -4,7 +4,7 @@
   register: tmux_bin
 
 - name: Install and configure tmux
-  when: not tmux_bin.stat.exists
+  when: base.force or not tmux_bin.stat.exists
   block:
     - name: Install tmux
       dnf:

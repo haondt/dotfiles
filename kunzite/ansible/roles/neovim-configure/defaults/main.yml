@@ -1,2 +1,5 @@
 ---
-role_defaults: {}
+role_defaults:
+  dotnet:
+    roslyn:
+      enabled: true

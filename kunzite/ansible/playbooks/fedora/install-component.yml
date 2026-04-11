@@ -22,6 +22,8 @@
       when: "'ly' in components_list and ly.enabled | bool"
     - role: gaming
       when: "'gaming' in components_list and gaming.enabled | bool"
+    - role: tmux
+      when: "'tmux' in components_list and tmux.enabled | bool"
 
     # Things that don't get called in the default "install all" playbook
     - role: storage

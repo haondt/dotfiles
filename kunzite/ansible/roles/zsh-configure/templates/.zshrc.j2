@@ -12,7 +12,7 @@ export FCEDIT=nvim
 export EDITOR=nvim
 
 ## path addendums ##
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 export PATH=$PATH:~/.local/share/bob/nvim-bin
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/go/bin
@@ -70,25 +70,25 @@ cheat() {
 alias sz='. ~/.zshrc'
 alias ez='$EDITOR ~/projects/dotfiles/kunzite/ansible/roles/zsh-configure'
 alias vz='$EDITOR ~/.zshrc'
-alias rz='(cd ~/projects/dotfiles/kunzite && just configure zsh) && . ~/.zshrc'
+alias rz='(cd ~/projects/dotfiles/kunzite && just configure -t {{ inventory_hostname }} zsh) && . ~/.zshrc'
 
 alias ev='$EDITOR ~/projects/dotfiles/kunzite/ansible/roles/neovim-configure'
 alias vv='$EDITOR ~/.config/nvim'
-alias rv='(cd ~/projects/dotfiles/kunzite && just configure neovim)'
+alias rv='(cd ~/projects/dotfiles/kunzite && just configure -t {{ inventory_hostname }} neovim)'
 alias v='nvim'
 alias vim='nvim'
 
 alias st='tmux source-file ~/.tmux.conf'
 alias et='$EDITOR ~/projects/dotfiles/kunzite/ansible/roles/tmux-configure'
 alias vt='$EDITOR ~/.tmux.conf'
-alias rt='(cd ~/projects/dotfiles/kunzite && just configure tmux) && tmux source-file ~/.tmux.conf'
+alias rt='(cd ~/projects/dotfiles/kunzite && just configure -t {{ inventory_hostname }} tmux) && tmux source-file ~/.tmux.conf'
 
 alias ec='$EDITOR ~/projects/dotfiles/kunzite/ansible/roles/base-configure/files/scripts/cheat'
-alias rc='(cd ~/projects/dotfiles/kunzite && just configure base)'
+alias rc='(cd ~/projects/dotfiles/kunzite && just configure -t {{ inventory_hostname }} base)'
 
 alias md='medea --trim'
-alias clip='wl-copy'
 {% if sway.enabled %}
+alias clip='wl-copy'
 alias sclip="grim -g \"\$(slurp)\" - | wl-copy --type image/png"
 wclip() {
     grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | wl-copy

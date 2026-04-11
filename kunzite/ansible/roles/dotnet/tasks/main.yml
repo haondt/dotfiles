@@ -15,6 +15,9 @@
   file:
     path: "{{ dotnet.nuget.local_packages }}"
     state: directory
+- name: Ensure NuGet config directory exists
+  ansible.builtin.shell: >
+    dotnet nuget config paths
 - name: Check if local NuGet source is already registered
   ansible.builtin.shell: >
     dotnet nuget list source
