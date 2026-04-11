@@ -10,4 +10,3 @@ This repo contains my dotfiles and other configuration. It has evolved over the 
 - [Windows](./Windows): Some scripts for git-bash and VsVim.
 - [gypsum](./gypsum) (maintenance mode): Large config collection for various tools and colorschemes, mostly targeted at Debian i3 and Debian WSL with Neovim.
 - [kunzite](./kunzite): Evolution of gypsum, targeting Fedora Sway and Fedora WSL. Uses ansible for templating and deploying configuration.
-
