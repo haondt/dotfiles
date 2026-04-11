@@ -50,7 +50,7 @@ install force="false" target="default" *components="": ansible_inventory
         ANSIBLE_CONFIG={{ansible_directory}}/ansible.cfg {{ansible_playbook}} -i {{ansible_inventory}} \
             {{ansible_directory}}/playbooks/fedora/install.yml \
             -e target_hosts={{target}} \
-            -e '{"base": {"force": {{force}}}}' \
+            -e '{ "cli_vars": {"base": {"force": {{force}}}}}' \
             -v \
             --ask-become-pass
     else
@@ -58,7 +58,7 @@ install force="false" target="default" *components="": ansible_inventory
             {{ansible_directory}}/playbooks/fedora/install-component.yml \
             -e target_hosts={{target}} \
             -e components={{replace_regex(components, '\s+', ',')}} \
-            -e '{"base": {"force": {{force}}}}' \
+            -e '{ "cli_vars": {"base": {"force": {{force}}}}}' \
             -v \
             --ask-become-pass
     fi

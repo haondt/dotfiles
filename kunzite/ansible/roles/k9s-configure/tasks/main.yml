@@ -1,3 +1,8 @@
+- name: Ensure k9s config directory exists
+  file:
+    path: "{{ ansible_facts['user_dir'] }}/.config/k9s"
+    state: directory
+
 - name: Deploy k9s aliases
   template:
     src: aliases.yaml.j2
@@ -8,6 +13,11 @@
     src: config.yaml.j2
     dest: "{{ ansible_facts['user_dir'] }}/.config/k9s/config.yaml"
 
+- name: Ensure k9s skins directory exists
+  file:
+    path: "{{ ansible_facts['user_dir'] }}/.config/k9s/skins"
+    state: directory
+    
 - name: Deploy k9s theme
   template:
     src: skins/yae.yaml.j2

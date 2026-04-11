@@ -1,5 +1,14 @@
 ---
-- name: Set common role defaults
+- name: Merge common defaults with inventory overrides
   set_fact:
-    "{{ item.key }}": "{{ item.value | combine(hostvars[inventory_hostname][item.key] | default({}), recursive=True) }}"
-  loop: "{{ common_role_defaults | dict2items }}"
+    common: "{{ common_role_defaults | combine(hostvars[inventory_hostname]['inventory_vars'] | default({}), recursive=True) }}"
+
+- name: Apply CLI overrides
+  when: cli_vars is defined
+  set_fact:
+    common: "{{ common | combine(cli_vars, recursive=True) }}"
+
+- name: Expose common entries as top-level facts
+  set_fact:
+    "{{ item.key }}": "{{ item.value }}"
+  loop: "{{ common | dict2items }}"

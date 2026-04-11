@@ -4,13 +4,14 @@
   register: cargo_bin
 
 - name: Install Rust toolchain
-  when: not cargo_bin.stat.exists
+  when: base.force or not cargo_bin.stat.exists
   block:
     - name: Install build tools
       dnf:
         name:
           - gcc
           - gcc-c++
+          - gawk
         state: present
       become: true
     - name: Install Rust using rustup

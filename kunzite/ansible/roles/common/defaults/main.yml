@@ -20,11 +20,11 @@ common_role_defaults:
   dev_tools:
     enabled: false
     dotnet:
-      enabled: true
+      enabled: false
     go:
       enabled: false
     kubernetes:
-      enabled: true
+      enabled: false
     docker:
       enabled: false
     podman:
