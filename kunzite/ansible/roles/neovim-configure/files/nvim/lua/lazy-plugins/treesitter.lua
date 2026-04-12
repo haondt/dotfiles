@@ -26,7 +26,7 @@ return {
         end,
         init = function()
             vim.api.nvim_create_autocmd('FileType', {
-                pattern = { 'cs', 'razor', 'csproj' },
+                pattern = { 'cs', 'razor', 'csproj', 'python' },
                 callback = function() vim.treesitter.start() end,
             })
         end

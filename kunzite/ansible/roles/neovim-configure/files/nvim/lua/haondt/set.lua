@@ -9,6 +9,16 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 vim.opt.smartindent = true
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "python",
+    callback = function()
+        -- designed for c-like languages, and does stuff like removing indentation when you type '#'
+        vim.opt.smartindent = false
+        vim.opt.autoindent = true
+        -- i dunno man does all sorts of weird stuff e.g. `if some condition:` suddenly gets a ton of indentation when you type `:`
+        vim.opt_local.indentexpr = ""
+    end
+})
 vim.opt.wrap = false
 vim.opt.linebreak = true
 vim.opt.breakindent = true
