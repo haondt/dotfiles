@@ -42,6 +42,7 @@ common_role_defaults:
   k9s: {}
   go: {}
   dotnet: {}
+  docker: {}
   colors:
     # special
     foreground: '#f3c6b1'

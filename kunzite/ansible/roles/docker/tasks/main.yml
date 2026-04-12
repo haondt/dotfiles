@@ -1,0 +1,45 @@
+---
+- name: Set role defaults
+  set_fact:
+    docker: "{{ role_defaults | combine(docker, recursive=True) }}"
+
+- name: Install docker packages
+  become: true
+  block:
+    - name: Add Docker CE repository
+      command: >
+        dnf config-manager addrepo
+        --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
+      args:
+        creates: /etc/yum.repos.d/docker-ce.repo
+
+    - name: Install Docker packages
+      ansible.builtin.dnf:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+
+    - name: Start and enable Docker
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
+
+- name: Set up docker group
+  become: true
+  block:
+    - name: Create docker group
+      ansible.builtin.group:
+        name: docker
+        state: present
+
+    - name: Add user to docker group
+      ansible.builtin.user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: true
+

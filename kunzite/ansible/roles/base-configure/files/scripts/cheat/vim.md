@@ -169,6 +169,16 @@ open buffer in slot n
 
 see lsp syntax tree
 
+## <leader>hl
+#highlight
+
+see all highlight groups
+
+## :Inspect
+#highlight
+
+See highlight groups for word under cursor
+
 ## <C-h> <C-j> <C-k> <C-l>
 #move #windows #navigate
 change window focus

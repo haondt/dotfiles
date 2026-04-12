@@ -1,6 +1,8 @@
 enabled: true
 podman:
   enabled: true
+docker:
+  enabled: true
 chromium:
   enabled: true
 kubernetes:

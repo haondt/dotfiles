@@ -2,7 +2,8 @@
 role_defaults:
   dotnet:
     enabled: true
-  docker: {}
+  docker:
+    enabled: false
   podman: {}
   kubernetes: {}
 

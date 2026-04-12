@@ -1,2 +1,3 @@
 ansible_connection: local
 ansible_host: localhost
+ansible_user: "[[ secrets.default.ansible.user ]]"

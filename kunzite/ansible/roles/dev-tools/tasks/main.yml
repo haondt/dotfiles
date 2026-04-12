@@ -57,3 +57,11 @@
   become: true
   package:
     name: chromium
+
+- name: Install docker
+  when: dev_tools.docker.enabled
+  block:
+    - name: Install docker
+      include_role:
+        name: docker
+
