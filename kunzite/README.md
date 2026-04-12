@@ -2,6 +2,11 @@
 
 ```shell
 # set up minimal dependencies
+sudo dnf install git
+mkdir ~/projects
+cd ~/projects
+git clone https://github.com/haondt/dotfiles
+cd ~/projects/dotfiles
 ./bootstrap.sh
 
 # set up full config
