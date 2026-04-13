@@ -33,6 +33,7 @@ vim.api.nvim_set_hl(0, "MoreMsg", { fg = palette.color6 })
 
 -- diagnostics
 vim.api.nvim_set_hl(0, "DiagnosticError", { fg = palette.error.bg })
+vim.api.nvim_set_hl(0, "DiagnosticOk", { fg = palette.color10 })
 vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { sp = palette.error.bg, underline = true })
 vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = palette.color3 })
 vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { sp = palette.color3, underline = true })
@@ -163,3 +164,7 @@ vim.api.nvim_set_hl(0, "TabLineFill", { bg = palette.bg })
 vim.api.nvim_set_hl(0, "TabLineSel", { bg = palette.bg })
 vim.api.nvim_set_hl(0, "Winbar", { bg = palette.bg })
 vim.api.nvim_set_hl(0, "WinbarNC", { bg = palette.bg })
+
+-- athena
+vim.api.nvim_set_hl(0, "AthenaDimmed", { fg = palette.color8 })
+vim.api.nvim_set_hl(0, "AthenaError", { fg = palette.color9 })
