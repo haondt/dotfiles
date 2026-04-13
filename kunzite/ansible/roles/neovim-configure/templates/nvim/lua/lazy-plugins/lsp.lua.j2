@@ -1,6 +1,16 @@
 return {
     {
-        "neovim/nvim-lspconfig"
+        "neovim/nvim-lspconfig",
+        config = function()
+            -- readding some deprecated methods
+            local api, lsp = vim.api, vim.lsp
+            api.nvim_create_user_command('LspInfo', ':checkhealth vim.lsp', { desc = 'Alias to `:checkhealth vim.lsp`' })
+            api.nvim_create_user_command('LspLog', function()
+              vim.cmd(string.format('tabnew %s', lsp.log.get_filename()))
+            end, {
+              desc = 'Opens the Nvim LSP client log.',
+            })
+        end
     },
     {
         "mason-org/mason.nvim",
