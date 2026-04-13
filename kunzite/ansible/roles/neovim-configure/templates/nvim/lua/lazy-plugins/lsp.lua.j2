@@ -164,11 +164,6 @@ return {
                             end,
                         })
                     end
-
-                    -- assigne capabilities that can be handled by both pyright and jedi
-                    if client.name == "pyright" then
-                        client.server_capabilities.definitionProvider = false
-                    end
                 end,
             })
         end
@@ -231,7 +226,7 @@ return {
 
             require('mason-lspconfig').setup({
                 ensure_installed = {
-                    'lua_ls', 'rust_analyzer', 'jedi_language_server', 'pyright',
+                    'lua_ls', 'rust_analyzer', 'basedpyright',
                     'ansiblels', 'cssls', 'dockerls',
                     'docker_compose_language_service', 'eslint', 'html',
                     'jsonls', 'ts_ls', 'marksman', 'taplo', 'yamlls'
@@ -245,12 +240,22 @@ return {
                     }
                 }
             }
-            vim.lsp.config['pyright'] = {
+            vim.lsp.config['basedpyright'] = {
                 settings = {
-                    python = {
+                    -- see https://docs.basedpyright.com/v1.21.0/configuration/language-server-settings/
+                    basedpyright = {
                         analysis = {
                             diagnosticMode = "workspace",
-                            exclude = "**/venv/**/*"
+                            exclude = "**/venv/**/*",
+                            -- typeCheckingMode = "standard",
+                            -- see https://docs.basedpyright.com/v1.21.0/configuration/config-files/#type-check-diagnostics-settings
+                            diagnosticSeverityOverrides = {
+                                reportMissingTypeStubs = "none",
+                                -- reportUnknownParameterType = "none",
+                                -- reportUnknownArgumentType = "none",
+                                reportUnknownMemberType = "none",
+                                reportUnknownVariableType = "none",
+                            }
                         }
                     }
                 }

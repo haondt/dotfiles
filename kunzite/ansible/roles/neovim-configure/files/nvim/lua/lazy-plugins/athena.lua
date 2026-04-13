@@ -1,6 +1,6 @@
 return {
     "haondt/athena.nvim",
-    version = "31cb7c2b0672f0f6a089cae108377b2bf80868d9",
+    version = "7525ea36dd4c27ee26f2afc311ab84e152e9772a",
     -- dir = "~/projects/athena.nvim",
     dependencies = {
         "nvim-telescope/telescope.nvim",
