@@ -1,3 +1,4 @@
 enabled: true
 aliases:
   mw: "~/.local/bin/kunzite/user/wsl_mount.sh"
+  vw: "~/.local/bin/kunzite/user/copy_zz.sh"
