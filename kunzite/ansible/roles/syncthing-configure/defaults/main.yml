@@ -1,0 +1,4 @@
+---
+role_defaults:
+  folders: []
+  api_host: "127.0.0.1:8384"

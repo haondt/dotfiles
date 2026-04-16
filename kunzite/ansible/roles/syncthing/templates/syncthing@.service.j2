@@ -1,0 +1,19 @@
+#{{ ansible_managed }}
+[Unit]
+Description=Syncthing - Open Source Continuous File Synchronization for %I
+Documentation=http://docs.syncthing.net/
+After=network.target
+
+[Service]
+Environment=STNORESTART=yes
+User=%i
+{% if syncthing.service.browser %}
+ExecStart=syncthing -logflags=0
+{% else %}
+ExecStart=syncthing --no-browser --logflags=0
+{% endif %}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+

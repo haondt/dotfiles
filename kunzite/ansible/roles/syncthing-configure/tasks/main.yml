@@ -1,0 +1,76 @@
+- name: Set role defaults
+  set_fact:
+    syncthing: "{{ role_defaults | combine(syncthing, recursive=True) }}"
+
+- name: Set up folders
+  block:
+    - name: Ensure folder exists
+      file:
+        path: "{{ item.path }}"
+        state: directory
+      loop: "{{ syncthing.folders }}"
+
+- name: Get syncthing api key
+  shell: grep apikey {{ syncthing.data_dir }}/config.xml | sed -n 's:.*<apikey>\(.*\)</apikey>.*:\1:p'
+  register: syncthing_apikey_raw
+  changed_when: false
+
+- name: set syncthing_apikey
+  set_fact:
+    syncthing_apikey: "{{ syncthing_apikey_raw.stdout }}"
+
+- name: get system config
+  uri:
+    url: "http://{{syncthing.api_host}}/rest/system/config"
+    return_content: yes
+    headers:
+      X-API-Key: "{{syncthing_apikey}}"
+  register: syncthing_config_raw
+  check_mode: no
+
+- name: set syncthing_(config,my_id)
+  set_fact:
+    syncthing_config: "{{ syncthing_config_raw.content | from_json }}"
+    syncthing_my_id: "{{ syncthing_config_raw.x_syncthing_id }}"
+
+- name: Seed device list with local device
+  set_fact:
+    syncthing_devices_built: "{{ syncthing_config.devices | selectattr('deviceID', 'equalto', syncthing_my_id) | list }}"
+
+- name: Build device list from template
+  set_fact:
+    syncthing_devices_built: "{{ syncthing_devices_built + [lookup('template', 'device.yml.j2') | from_yaml] }}"
+  loop: "{{ syncthing.devices }}"
+
+- name: Replace devices in syncthing config
+  set_fact:
+    syncthing_config: "{{ syncthing_config | combine({'devices': syncthing_devices_built}) }}"
+
+- name: Build folder list from template
+  set_fact:
+    syncthing_folders_built: "{{ syncthing_folders_built | default([]) + [lookup('template', 'folder.yml.j2') | from_yaml] }}"
+  loop: "{{ syncthing.folders }}"
+
+- name: Replace folders in syncthing config
+  set_fact:
+    syncthing_config: "{{ syncthing_config | combine({'folders': syncthing_folders_built}) }}"
+
+- name: Push updated config to syncthing
+  uri:
+    url: "http://{{ syncthing.api_host }}/rest/system/config"
+    method: POST
+    body: "{{ syncthing_config | to_json }}"
+    body_format: json
+    return_content: true
+    headers:
+      X-API-Key: "{{ syncthing_apikey }}"
+      Content-Type: "application/json"
+    status_code: 200
+
+- name: Restart syncthing
+  uri:
+    url: "http://{{syncthing.api_host}}/rest/system/restart"
+    method: POST
+    return_content: yes
+    headers:
+      X-API-Key: "{{ syncthing_apikey }}"

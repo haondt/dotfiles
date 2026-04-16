@@ -24,6 +24,8 @@
       when: "'gaming' in components_list and gaming.enabled | bool"
     - role: tmux
       when: "'tmux' in components_list and tmux.enabled | bool"
+    - role: syncthing
+      when: "'syncthing' in components_list and syncthing.enabled | bool"
 
     # Things that don't get called in the default "install all" playbook
     - role: storage

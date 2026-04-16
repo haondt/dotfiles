@@ -1,0 +1,14 @@
+id: "{{ item.id }}"
+path: "{{ item.path }}"
+label: "{{ item.label | default(item.id) }}"
+type: "sendreceive"
+devices:
+  - deviceID: "{{ syncthing_my_id }}"
+    introducedBy: ""
+    encryptionPassword: ""
+{% for device in item.devices | default([]) %}
+  - deviceID: "{{ device.id }}"
+    introducedBy: ""
+    encryptionPassword: ""
+{% endfor %}
+autoNormalize: true

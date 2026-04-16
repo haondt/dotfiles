@@ -1,0 +1,12 @@
+enabled: true
+service:
+  systemd: true
+devices:
+  - name: marble
+    id: '5ZWFTNH-NMUK6QW-7LZLEBW-6JO7YCM-HXZ2IQ7-43S42BJ-DIKMOJ4-WTKTBAG'
+folders:
+  - label: notes
+    id: z8jjh-hqiir
+    path: ~/projects/notes
+    devices:
+      - id: '5ZWFTNH-NMUK6QW-7LZLEBW-6JO7YCM-HXZ2IQ7-43S42BJ-DIKMOJ4-WTKTBAG'

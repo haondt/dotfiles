@@ -1,0 +1,66 @@
+- name: Set role defaults
+  set_fact:
+    syncthing: "{{ role_defaults | combine(syncthing, recursive=True) }}"
+- name: Install syncthing
+  ansible.builtin.package:
+    name: syncthing
+    state: present
+  become: true
+
+- name: Install systemd service
+  become: true
+  when: syncthing.service.systemd
+  block:
+    - name: Install systemd service from template
+      ansible.builtin.template:
+        src: syncthing@.service.j2
+        dest: /etc/systemd/system/syncthing@.service
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Enable and start syncthing service
+      ansible.builtin.systemd:
+        name: syncthing@{{ ansible_user }}
+        enabled: true
+        state: started
+        daemon_reload: true
+      register: syncthing_service
+
+    - name: Wait for syncthing to start and generate config
+      ansible.builtin.wait_for:
+        path: "{{ syncthing.data_dir }}/config.xml"
+        state: present
+        timeout: 30
+      when: syncthing.service.systemd
+
+- name: Run syncthing briefly to generate config and device cert
+  when: not syncthing.service.systemd
+  block:
+    - name: Start syncthing
+      ansible.builtin.command:
+        cmd: syncthing --no-browser
+      async: 10
+      poll: 0
+      register: syncthing_bootstrap
+
+    - name: Wait for syncthing to generate config files
+      ansible.builtin.wait_for:
+        path: "{{ syncthing.data_dir }}/config.xml"
+        state: present
+        timeout: 30
+
+    - name: Stop syncthing bootstrap process
+      ansible.builtin.async_status:
+        jid: "{{ syncthing_bootstrap.ansible_job_id }}"
+        mode: cleanup
+
+    - name: Kill syncthing bootstrap process
+      ansible.builtin.command:
+        cmd: pkill -f "syncthing --no-browser"
+      become: true
+      failed_when: false
+
+- name: Configure syncthing
+  include_role:
+    name: syncthing-configure
