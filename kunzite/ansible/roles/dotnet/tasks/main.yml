@@ -62,3 +62,7 @@
         if nuget_source_check.rc == 0
         else 'Local NuGet source added: ' + dotnet.nuget.local_packages
       }}
+- name: Install tools
+  ansible.builtin.command: dotnet tool update -g {{ item.key }}
+  when: item.value
+  loop: "{{ dotnet.tools | dict2items }}"

@@ -8,3 +8,4 @@ role_defaults:
     local_packages: "{{ ansible_facts['user_dir'] }}/packages/nuget"
     local_source_name: local
     additional_sources: {}
+  tools: {}
