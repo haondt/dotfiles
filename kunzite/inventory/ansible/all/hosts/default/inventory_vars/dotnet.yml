@@ -3,4 +3,4 @@ nuget:
     gitlab: "https://gitlab.com/api/v4/projects/57154225/packages/nuget/index.json"
 
 tools:
-  dotnet-ef: ef
+  dotnet-ef: true
