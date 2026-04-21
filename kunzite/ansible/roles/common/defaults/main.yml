@@ -34,6 +34,8 @@ common_role_defaults:
       enabled: false
     chromium:
       enabled: false
+    azure:
+      enabled: false
   storage:
     enabled: true
   grub:
@@ -46,6 +48,7 @@ common_role_defaults:
   go: {}
   dotnet: {}
   docker: {}
+  azure: {}
   colors:
     # special
     foreground: '#f3c6b1'

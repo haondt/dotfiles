@@ -17,6 +17,11 @@
   include_role:
     name: dotnet
 
+- name: Azure
+  when: dev_tools.azure.enabled
+  include_role:
+    name: azure
+
 - name: Install go
   when: dev_tools.go.enabled
   include_role:

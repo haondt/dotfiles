@@ -42,3 +42,5 @@
       when: "'go' in components_list"
     - role: dotnet
       when: "'dotnet' in components_list"
+    - role: azure
+      when: "'azure' in components_list"

@@ -1,0 +1,21 @@
+- name: Set role defaults
+  set_fact:
+    azure: "{{ role_defaults | combine(azure | default({}), recursive=True) }}"
+
+- name: Ensure Microsoft package signing key is installed
+  become: true
+  ansible.builtin.rpm_key:
+    state: present
+    key: "{{ azure.gpg_key_url }}"
+
+- name: Install Microsoft package repository for Azure CLI
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ azure.repo_package_url }}"
+    state: present
+
+- name: Install Azure CLI
+  become: true
+  ansible.builtin.dnf:
+    name: azure-cli
+    state: present
