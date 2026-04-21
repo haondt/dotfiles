@@ -2,8 +2,8 @@ local Path = require("plenary.path")
 
 local M = {}
 
---local logpath = Path:new("/home/noah/foo.txt")
-local log = function (text)
+--local logpath = Path:new("/home/{{ ansible_user }}/foo.txt")
+local log = function(text)
     --logpath:write(text .. "\n", "a")
 end
 
@@ -11,8 +11,8 @@ local clean_path = function(path)
     local cleaned_path = path
     local cleaner_path = path:gsub("/%./", "/")
     while cleaner_path ~= cleaned_path do
-      cleaned_path = cleaner_path
-      cleaner_path = cleaned_path:gsub("/%./", "/")
+        cleaned_path = cleaner_path
+        cleaner_path = cleaned_path:gsub("/%./", "/")
     end
     return cleaned_path
 end
@@ -23,13 +23,12 @@ local make_path_absolute = function(base_path, path)
     if path:is_absolute() or #tostring(path) == 0 then
         return tostring(path)
     end
-    local s=  clean_path(tostring(base_path:joinpath(path)))
-        return s
+    local s = clean_path(tostring(base_path:joinpath(path)))
+    return s
 end
 
 
 local sync_windows = function(opts)
-
     local target_bufnr = opts.event.buf
     local target_windows = vim.fn.win_findbuf(target_bufnr)
     log(string.format("targeted windows: %s", vim.inspect(target_windows)))
@@ -54,16 +53,14 @@ local sync_windows = function(opts)
     local current_local_file = vim.api.nvim_buf_get_name(current_local_bufnr)
     local current_remote_file = vim.api.nvim_buf_get_name(current_remote_bufnr)
 
-        vim.fn.win_gotoid(opts.local_winid)
-        if current_local_file ~= local_file then
+    vim.fn.win_gotoid(opts.local_winid)
+    if current_local_file ~= local_file then
         vim.cmd('e ' .. local_file)
     end
     if current_remote_file ~= remote_file then
         vim.fn.win_gotoid(opts.remote_winid)
         vim.cmd('e ' .. remote_file)
     end
-
-
 end
 
 M.difftool = function()
@@ -109,7 +106,7 @@ M.difftool = function()
             in_callback = true
             log(string.format('event fired: %s', vim.inspect(event)))
             event.file = make_path_absolute(cwd, event.file)
-            vim.schedule(function ()
+            vim.schedule(function()
                 sync_windows({
                     event = event,
                     local_dir = local_dir,

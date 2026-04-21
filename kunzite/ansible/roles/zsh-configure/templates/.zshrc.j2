@@ -114,7 +114,7 @@ alias lla='ls -la'
 alias {{ k }}='{{ v }}'
 {% endfor %}
 
-alias gcloud="docker run --rm \
+alias gcloud='docker run --rm \
     -v $(pwd):/app \
     -it \
     --user $(id -u):$(id -g) \
@@ -123,7 +123,7 @@ alias gcloud="docker run --rm \
     -v ~/gcloud/certs/:/certs \
     -w /app \
     --entrypoint gcloud \
-    gcr.io/google.com/cloudsdktool/google-cloud-cli:alpine"
+    gcr.io/google.com/cloudsdktool/google-cloud-cli:alpine'
 
 ## bindings ##
 
@@ -138,7 +138,7 @@ bindkey -M vicmd ' ' undefined-key
 VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # bun
-[ -s "/home/noah/.bun/_bun" ] && source "/home/noah/.bun/_bun"
+[ -s "/home/{{ ansible_user }}/.bun/_bun" ] && source "/home/{{ ansible_user }}/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 

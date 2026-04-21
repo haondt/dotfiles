@@ -60,7 +60,7 @@ else
     echo "You can add it here: https://github.com/settings/keys"
 fi
 
-set +eo pipefail
+set +euo pipefail
 echo "Testing SSH connection to GitHub..."
 if ssh -o StrictHostKeyChecking=no -o BatchMode=yes -T git@github.com 2>&1 | grep -q "successfully authenticated"; then
     echo "SSH key is working with GitHub!"
