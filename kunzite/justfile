@@ -36,6 +36,7 @@ ansible_inventory: inventory
         yq eval '.all.vars.haondt.artifacts = "{{shell("pwd")}}/artifacts/ansible"' -> {{ansible_inventory}}
 
 [script]
+[arg("target", short="t", long="target")]
 update target="default": ansible_inventory
     ANSIBLE_CONFIG={{ansible_directory}}/ansible.cfg {{ansible_playbook}} -i {{ansible_inventory}} \
         {{ansible_directory}}/playbooks/fedora/update.yml \
