@@ -1,0 +1,46 @@
+- name: Set role defaults
+  set_fact:
+    azure: "{{ role_defaults | combine(azure | default({}), recursive=True) }}"
+
+- name: Set up aks
+  when: azure.aks.enabled
+  block:
+    - name: Check if kubelogin is installed
+      ansible.builtin.stat:
+        path: "{{ ansible_facts['user_dir'] }}/.local/bin/kubelogin"
+      register: kubelogin_bin
+
+    - name: Install kubelogin
+      when: base.force or not kubelogin_bin.stat.exists
+      block:
+        - name: Create temp dir for kubelogin
+          ansible.builtin.tempfile:
+            state: directory
+          register: kubelogin_tmp
+
+        - name: Download kubelogin zip
+          ansible.builtin.unarchive:
+            src: "https://github.com/Azure/kubelogin/releases/download/{{ azure.aks.kubelogin.version }}/kubelogin-linux-amd64.zip"
+            dest: "{{ kubelogin_tmp.path }}"
+            remote_src: true
+
+        - name: Install kubelogin binary
+          ansible.builtin.copy:
+            src: "{{ kubelogin_tmp.path }}/bin/linux_amd64/kubelogin"
+            dest: "{{ ansible_facts['user_dir'] }}/.local/bin/kubelogin"
+            mode: "0755"
+            remote_src: true
+
+        - name: Remove temp dir
+          ansible.builtin.file:
+            path: "{{ kubelogin_tmp.path }}"
+            state: absent
+
+    - name: Get AKS credentials
+      ansible.builtin.command:
+        cmd: "az aks get-credentials -g {{ item.value.resource_group }} -n {{ item.key }} --subscription {{ item.value.subscription_id }} --overwrite-existing"
+      loop: "{{ azure.aks.contexts | dict2items }}"
+
+    - name: Apply kubelogin
+      ansible.builtin.command:
+        cmd: kubelogin convert-kubeconfig -l azurecli

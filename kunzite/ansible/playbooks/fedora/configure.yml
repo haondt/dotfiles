@@ -17,6 +17,7 @@
       vars:
         always_configure_components:
           - k9s
+          - azure
       loop: "{{ components_list }}"
       loop_control:
         loop_var: loop_component

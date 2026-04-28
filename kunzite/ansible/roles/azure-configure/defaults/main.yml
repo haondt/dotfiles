@@ -1,0 +1,11 @@
+---
+role_defaults:
+  aks:
+    enabled: true
+    kubelogin:
+      version: v0.2.17
+    contexts: {}
+    # example config:
+    # my-cluster-name:
+    #   resource_group: My-Resource-Group
+    #   subscription_id: f1778f31-85cf-4da8-bc36-8a2c19ce1e93

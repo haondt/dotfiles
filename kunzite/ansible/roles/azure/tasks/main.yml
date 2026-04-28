@@ -19,3 +19,7 @@
   ansible.builtin.dnf:
     name: azure-cli
     state: present
+
+- name: Configure Azure CLI
+  include_role:
+    name: azure-configure
