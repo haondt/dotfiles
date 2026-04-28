@@ -36,6 +36,8 @@ common_role_defaults:
       enabled: false
     azure:
       enabled: false
+    gcloud:
+      enabled: false
   storage:
     enabled: true
   grub:
@@ -49,6 +51,7 @@ common_role_defaults:
   dotnet: {}
   docker: {}
   azure: {}
+  gcloud: {}
   colors:
     # special
     foreground: '#f3c6b1'

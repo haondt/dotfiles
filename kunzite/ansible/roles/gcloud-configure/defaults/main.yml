@@ -1,0 +1,10 @@
+---
+role_defaults:
+  gke:
+    enabled: true
+    contexts: {}
+    # example config:
+    # my-cluster-name:
+    #   region: us-central1
+    #   project: my-project
+    #   context_name: my-context # optional, to rename the kubectl context

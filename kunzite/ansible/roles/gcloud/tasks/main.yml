@@ -1,0 +1,33 @@
+- name: Set role defaults
+  set_fact:
+    gcloud: "{{ role_defaults | combine(gcloud | default({}), recursive=True) }}"
+
+- name: Add Google Cloud CLI repository
+  become: true
+  ansible.builtin.yum_repository:
+    name: google-cloud-cli
+    description: Google Cloud CLI
+    baseurl: "{{ gcloud.repo_base_url }}"
+    enabled: true
+    gpgcheck: true
+    repo_gpgcheck: false
+    gpgkey: "{{ gcloud.gpg_key_url }}"
+
+- name: Install gcloud CLI
+  become: true
+  ansible.builtin.dnf:
+    name: google-cloud-cli
+    state: present
+
+- name: Set up gke
+  become: true
+  when: gcloud.gke.enabled
+  block:
+    - name: Install gcloud auth plugin
+      ansible.builtin.dnf:
+        name: google-cloud-sdk-gke-gcloud-auth-plugin
+        state: present
+
+- name: Configure gcloud CLI
+  include_role:
+    name: gcloud-configure

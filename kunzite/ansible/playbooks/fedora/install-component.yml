@@ -44,3 +44,5 @@
       when: "'dotnet' in components_list"
     - role: azure
       when: "'azure' in components_list"
+    - role: gcloud
+      when: "'gcloud' in components_list"

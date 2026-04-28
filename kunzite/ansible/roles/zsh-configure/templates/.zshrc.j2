@@ -114,17 +114,6 @@ alias lla='ls -la'
 alias {{ k }}='{{ v }}'
 {% endfor %}
 
-alias gcloud='docker run --rm \
-    -v $(pwd):/app \
-    -it \
-    --user $(id -u):$(id -g) \
-    -v ~/gcloud/config/:/config/mygcloud \
-    -e CLOUDSDK_CONFIG=/config/mygcloud \
-    -v ~/gcloud/certs/:/certs \
-    -w /app \
-    --entrypoint gcloud \
-    gcr.io/google.com/cloudsdktool/google-cloud-cli:alpine'
-
 ## bindings ##
 
 zle -N cheat

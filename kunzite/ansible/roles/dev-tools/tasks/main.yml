@@ -22,6 +22,11 @@
   include_role:
     name: azure
 
+- name: Google Cloud
+  when: dev_tools.gcloud.enabled
+  include_role:
+    name: gcloud
+
 - name: Install go
   when: dev_tools.go.enabled
   include_role:

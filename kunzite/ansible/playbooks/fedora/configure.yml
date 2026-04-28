@@ -18,6 +18,7 @@
         always_configure_components:
           - k9s
           - azure
+          - gcloud
       loop: "{{ components_list }}"
       loop_control:
         loop_var: loop_component

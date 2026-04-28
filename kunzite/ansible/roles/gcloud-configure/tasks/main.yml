@@ -1,0 +1,51 @@
+- name: Set role defaults
+  set_fact:
+    gcloud: "{{ role_defaults | combine(gcloud | default({}), recursive=True) }}"
+
+- name: Configure GKE
+  when: gcloud.gke.enabled
+  block:
+    - name: Compute kube context names
+      set_fact:
+        gke_context_map: >-
+          {{
+            gke_context_map | default({}) |
+            combine({
+              item.key: {
+                "expected": "gke_" ~ item.value.project ~ "_" ~ item.value.region ~ "_" ~ item.key,
+                "final": item.value.context_name | default(item.key)
+              }
+            })
+          }}
+      loop: "{{ gcloud.gke.contexts | dict2items }}"
+
+    - name: Get existing kubectl contexts
+      ansible.builtin.command:
+        cmd: kubectl config get-contexts -o name
+      register: kube_contexts
+      changed_when: false
+
+    - name: Get GKE credentials
+      ansible.builtin.command:
+        cmd: >
+          gcloud container clusters get-credentials {{ item.key }}
+          --region {{ item.value.region }}
+          --project {{ item.value.project }}
+          {{ '--dns-endpoint' if item.value.dns_endpoint | default(false) else '' }}
+      loop: "{{ gcloud.gke.contexts | dict2items }}"
+      when:
+        - gke_context_map[item.key].final not in kube_contexts.stdout_lines
+        - gke_context_map[item.key].expected not in kube_contexts.stdout_lines
+      changed_when: true
+
+    - name: Rename kube context if needed
+      ansible.builtin.command:
+        cmd: >
+          kubectl config rename-context
+          {{ gke_context_map[item.key].expected }}
+          {{ gke_context_map[item.key].final }}
+      loop: "{{ gcloud.gke.contexts | dict2items }}"
+      when:
+        - item.value.context_name is defined
+        - gke_context_map[item.key].final not in kube_contexts.stdout_lines
+      changed_when: true
