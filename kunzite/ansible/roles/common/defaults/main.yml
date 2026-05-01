@@ -38,6 +38,8 @@ common_role_defaults:
       enabled: false
     gcloud:
       enabled: false
+    terraform:
+      enabled: false
   storage:
     enabled: true
   grub:
@@ -52,6 +54,7 @@ common_role_defaults:
   docker: {}
   azure: {}
   gcloud: {}
+  terraform: {}
   colors:
     # special
     foreground: '#f3c6b1'

@@ -22,10 +22,15 @@
   include_role:
     name: azure
 
-- name: Google Cloud
+- name: Set up Google Cloud
   when: dev_tools.gcloud.enabled
   include_role:
     name: gcloud
+
+- name: Set up Terraform
+  when: dev_tools.terraform.enabled
+  include_role:
+    name: terraform
 
 - name: Install go
   when: dev_tools.go.enabled

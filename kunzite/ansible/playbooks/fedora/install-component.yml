@@ -46,3 +46,5 @@
       when: "'azure' in components_list"
     - role: gcloud
       when: "'gcloud' in components_list"
+    - role: terraform
+      when: "'terraform' in components_list"
