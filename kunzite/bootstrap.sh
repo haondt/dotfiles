@@ -34,6 +34,31 @@ else
     fi
 fi
 
+###################
+# Resolved Setup  #
+###################
+resolved_conf="/etc/systemd/resolved.conf"
+desired_resolved="[Resolve]
+Domains=~.
+LLMNR=no
+ResolveUnicastSingleLabel=yes"
+
+current_resolved=$(cat "$resolved_conf" 2>/dev/null || true)
+if [[ "$current_resolved" == "$desired_resolved" ]]; then
+    echo "resolved.conf is already configured. Skipping..."
+else
+    echo "Do you want to configure systemd-resolved to forward to $target_dns? (y/N)"
+    read -r set_resolved
+    if [[ "$set_resolved" =~ ^[Yy]$ ]]; then
+        echo "Configuring systemd-resolved..."
+        echo "$desired_resolved" | sudo tee "$resolved_conf" > /dev/null
+        sudo systemctl restart systemd-resolved
+        echo "systemd-resolved configured."
+    else
+        echo "Skipping resolved setup."
+    fi
+fi
+
 #################
 # SSH key setup #
 #################

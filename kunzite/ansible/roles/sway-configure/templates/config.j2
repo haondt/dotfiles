@@ -187,6 +187,9 @@ bar {
 output * bg {{ sway.wallpaper }} fit
 {% endif %}
 
+# enable 144hz
+output * mode 3440x1440@144Hz
+
 #######################
 # a e s t h e t i c s #
 #######################
@@ -223,3 +226,6 @@ exec_always killall swayidle; swayidle -w \
     timeout 900 'systemctl suspend' \
         resume 'swaymsg "output * dpms on"' \
     before-sleep 'swaylock -f'
+
+# prevent lock when there is a full screen app open
+for_window [app_id="^.*"] inhibit_idle fullscreen
