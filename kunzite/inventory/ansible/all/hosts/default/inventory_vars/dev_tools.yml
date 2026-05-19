@@ -9,3 +9,5 @@ kubernetes:
   enabled: true
 dotnet:
   enabled: true
+python:
+  enabled: true

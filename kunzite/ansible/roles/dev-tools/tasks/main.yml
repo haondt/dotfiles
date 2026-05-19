@@ -17,6 +17,11 @@
   include_role:
     name: dotnet
 
+- name: Set up python
+  when: dev_tools.python.enabled
+  include_role:
+    name: python
+
 - name: Azure
   when: dev_tools.azure.enabled
   include_role:

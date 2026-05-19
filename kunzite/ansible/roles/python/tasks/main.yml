@@ -1,0 +1,18 @@
+---
+- name: Set role defaults
+  set_fact:
+    python: "{{ role_defaults | combine(python, recursive=True) }}"
+
+- name: Install uv
+  block:
+    - name: Check if uv is installed
+      command: uv --version
+      register: uv_check
+      changed_when: false
+      failed_when: false
+
+    - name: Install uv
+      community.general.cargo:
+        name: uv
+        locked: true
+      when: uv_check.rc != 0
