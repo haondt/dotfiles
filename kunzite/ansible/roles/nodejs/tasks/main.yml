@@ -1,0 +1,14 @@
+---
+- name: Set role defaults
+  set_fact:
+    nodejs: "{{ role_defaults | combine(nodejs, recursive=True) }}"
+
+- name: Install bun
+  shell: curl -fsSL https://bun.com/install | bash
+  args:
+    creates: "{{ ansible_facts['user_dir'] }}/.bun/bin/bun"
+
+- name: Install dcdn
+  shell: bun add -g https://gitlab.com/haondt/dcdn.git
+  args:
+    creates: "{{ ansible_facts['user_dir'] }}/.bun/bin/dcdn"

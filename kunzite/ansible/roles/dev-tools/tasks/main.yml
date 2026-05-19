@@ -2,15 +2,10 @@
   set_fact:
     dev_tools: "{{ role_defaults | combine(dev_tools, recursive=True) }}"
 
-- name: Install bun
-  shell: curl -fsSL https://bun.com/install | bash
-  args:
-    creates: "{{ ansible_facts['user_dir'] }}/.bun/bin/bun"
-
-- name: Install dcdn
-  shell: bun add -g https://gitlab.com/haondt/dcdn.git
-  args:
-    creates: "{{ ansible_facts['user_dir'] }}/.bun/bin/dcdn"
+- name: Set up Node.js
+  when: dev_tools.nodejs.enabled
+  include_role:
+    name: nodejs
 
 - name: Set up .NET
   when: dev_tools.dotnet.enabled

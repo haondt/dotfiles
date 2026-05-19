@@ -49,6 +49,8 @@
           - git-delta
           - bat
           - tree-sitter-cli
+    - name: Install Neovim Node dependencies
+      ansible.builtin.command: bun install -g @mermaid-js/mermaid-cli
     - name: Install EasyDotnet server
       ansible.builtin.command: dotnet tool install -g EasyDotnet
     - name: Configure Neovim

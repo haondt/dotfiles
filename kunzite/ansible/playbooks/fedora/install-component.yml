@@ -44,6 +44,8 @@
       when: "'dotnet' in components_list"
     - role: python
       when: "'python' in components_list"
+    - role: nodejs
+      when: "'nodejs' in components_list"
     - role: azure
       when: "'azure' in components_list"
     - role: gcloud

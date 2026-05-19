@@ -11,3 +11,5 @@ dotnet:
   enabled: true
 python:
   enabled: true
+nodejs:
+  enabled: true

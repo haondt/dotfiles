@@ -2,3 +2,4 @@
 dependencies:
   - role: bob-nvim
   - role: dotnet
+  - role: nodejs

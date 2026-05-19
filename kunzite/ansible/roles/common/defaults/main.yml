@@ -24,6 +24,8 @@ common_role_defaults:
     enabled: false
     python:
       enabled: false
+    nodejs:
+      enabled: false
     dotnet:
       enabled: false
     go:
@@ -51,6 +53,7 @@ common_role_defaults:
   sysctl:
     enabled: true
   k9s: {}
+  nodejs: {}
   go: {}
   python: {}
   dotnet: {}
