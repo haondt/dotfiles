@@ -8,7 +8,7 @@
   register: terraform_bin
 
 - name: Install Terraform
-  when: base.force or not terraform_bin.stat.exists
+  when: not terraform_bin.stat.exists
   block:
     - name: Install HashiCorp repository
       become: true
@@ -20,6 +20,5 @@
     - name: Install Terraform
       become: true
       ansible.builtin.dnf:
-        name: "terraform-{{ terraform.version }}"
+        name: terraform
         state: present
-        allow_downgrade: base.force
