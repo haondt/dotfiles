@@ -39,8 +39,12 @@
           - wget
           - clang-devel # needed for tree-sitter-cli
           - jq
+          - ImageMagick-devel
+          - luarocks
         state: present
       become: true
+    - name: Install Neovim Lua dependencies
+      ansible.builtin.command: luarocks --local install magick
     - name: Install Neovim Rust dependencies
       community.general.cargo:
         name:
