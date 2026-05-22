@@ -21,5 +21,7 @@
       when: dev_tools.enabled | bool
     - role: gaming
       when: gaming.enabled | bool
+    - role: ai
+      when: ai.enabled | bool
     - role: syncthing
       when: syncthing.enabled | bool

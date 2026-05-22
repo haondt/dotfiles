@@ -3,6 +3,10 @@ common_role_defaults:
     enabled: true
     scheme: dark
     force: false
+  ai:
+    enabled: false
+    spec_kit:
+      enabled: false
   gaming:
     enabled: false
   neovim:

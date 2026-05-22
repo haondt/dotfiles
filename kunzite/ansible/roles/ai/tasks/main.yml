@@ -1,0 +1,29 @@
+- name: Set role defaults
+  set_fact:
+    ai: "{{ role_defaults | combine(ai, recursive=True) }}"
+
+- name: Install Claude
+  when: ai.claude.enabled
+  block:
+    - name: Add Claude Code yum repo
+      become: true
+      ansible.builtin.yum_repository:
+        name: claude-code
+        description: Claude Code
+        baseurl: https://downloads.claude.ai/claude-code/rpm/stable
+        enabled: true
+        gpgcheck: true
+        gpgkey: https://downloads.claude.ai/keys/claude-code.asc
+    - name: Install claude-code
+      become: true
+      ansible.builtin.dnf:
+        name: claude-code
+        state: present
+
+- name: Install Spec-Kit
+  when: ai.spec_kit.enabled
+  shell: "uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v{{ ai.spec_kit.version }}"
+
+- name: Configure AI
+  include_role:
+    name: ai-configure

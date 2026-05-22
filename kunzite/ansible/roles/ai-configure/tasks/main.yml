@@ -1,0 +1,20 @@
+- name: Set role defaults
+  set_fact:
+    ai: "{{ role_defaults | combine(ai, recursive=True) }}"
+
+- name: Configure Claude
+  when: ai.claude.enabled
+  block:
+
+    - name: Install Claude settings
+      when: ai.claude.settings is defined
+      block:
+        - name: Ensure ~/.claude directory exists
+          ansible.builtin.file:
+            path: "{{ ansible_facts['user_dir'] }}/.claude"
+            state: directory
+        - name: Write Claude Code settings.json
+          ansible.builtin.copy:
+            content: "{{ ai.claude.settings | to_nice_json }}\n"
+            dest: "{{ ansible_env.HOME }}/.claude/settings.json"
+            mode: "0600"

@@ -1,0 +1,6 @@
+---
+role_defaults:
+  spec_kit:
+    version: 0.8.11
+  claude:
+    enabled: false

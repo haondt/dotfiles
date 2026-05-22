@@ -1,0 +1,4 @@
+---
+role_defaults:
+  claude:
+    enabled: false

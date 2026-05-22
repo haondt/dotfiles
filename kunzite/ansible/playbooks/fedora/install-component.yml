@@ -20,6 +20,8 @@
       when: "'sway' in components_list and sway.enabled | bool"
     - role: ly
       when: "'ly' in components_list and ly.enabled | bool"
+    - role: ai
+      when: "'ai' in components_list and ai.enabled | bool"
     - role: gaming
       when: "'gaming' in components_list and gaming.enabled | bool"
     - role: tmux
