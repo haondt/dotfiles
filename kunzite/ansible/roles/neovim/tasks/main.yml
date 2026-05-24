@@ -44,7 +44,7 @@
         state: present
       become: true
     - name: Install Neovim Lua dependencies
-      ansible.builtin.command: luarocks --local install magick
+      ansible.builtin.command: luarocks --local --lua-version=5.1 install magick
     - name: Install Neovim Rust dependencies
       community.general.cargo:
         name:
