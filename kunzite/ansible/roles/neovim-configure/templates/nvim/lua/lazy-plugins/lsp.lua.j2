@@ -271,7 +271,10 @@ return {
                             }
                         }
                     }
-                }
+                },
+                -- workaround to make diagnosticMode = "workspace" work
+                -- see https://github.com/neovim/neovim/issues/37150#issuecomment-4248816355
+                init_options = { disablePullDiagnostics = true },
             }
         end
     },
