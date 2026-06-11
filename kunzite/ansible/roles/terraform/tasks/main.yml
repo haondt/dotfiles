@@ -2,13 +2,20 @@
   set_fact:
     terraform: "{{ role_defaults | combine(terraform | default({}), recursive=True) }}"
 
-- name: Check if Terraform is installed
-  ansible.builtin.stat:
-    path: /usr/bin/terraform
-  register: terraform_bin
+- name: Check installed Terraform version
+  ansible.builtin.command: /usr/bin/terraform version -json
+  register: terraform_installed
+  changed_when: false
+  failed_when: false
+
+- name: Parse installed version
+  ansible.builtin.set_fact:
+    terraform_current_version: >-
+      {{ (terraform_installed.stdout | from_json).terraform_version
+         if terraform_installed.rc == 0 else '' }}
 
 - name: Install Terraform
-  when: base.force or not terraform_bin.stat.exists
+  when: base.force or terraform_current_version != terraform.version
   block:
     - name: Install HashiCorp repository
       become: true
@@ -22,4 +29,4 @@
       ansible.builtin.dnf:
         name: "terraform-{{ terraform.version }}"
         state: present
-        allow_downgrade: base.force
+        allow_downgrade: true
