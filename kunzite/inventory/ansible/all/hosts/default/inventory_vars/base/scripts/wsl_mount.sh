@@ -32,7 +32,7 @@ echo "Selected: $VHDX"
 sudo modprobe nbd
 sudo qemu-nbd -r -c /dev/nbd0 "$VHDX"
 sudo mkdir -p "$MOUNT"
-sudo mount -n /dev/nbd0 "$MOUNT"
+sudo mount -n -o ro,noload /dev/nbd0 "$MOUNT"
 
 echo "Mounted at $MOUNT. Press enter to unmount."
 read
