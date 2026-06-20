@@ -57,6 +57,8 @@
       ansible.builtin.command: bun install -g @mermaid-js/mermaid-cli
     - name: Install EasyDotnet server
       ansible.builtin.command: dotnet tool install -g EasyDotnet
+    - name: Install Roslyn server
+      ansible.builtin.command: dotnet tool install -g roslyn-language-server --prerelease --source https://pkgs.dev.azure.com/azure-public/vside/_packaging/vs-impl/nuget/v3/index.json
     - name: Configure Neovim
       include_role:
         name: neovim-configure
