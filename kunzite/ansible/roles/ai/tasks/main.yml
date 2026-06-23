@@ -20,6 +20,12 @@
         name: claude-code
         state: present
 
+- name: Install OpenCode
+  when: ai.opencode.enabled
+  shell: bun add -g opencode-ai
+  args:
+    creates: "{{ ansible_facts['user_dir'] }}/.bun/bin/opencode"
+
 - name: Install Spec-Kit
   when: ai.spec_kit.enabled
   shell: "uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v{{ ai.spec_kit.version }}"

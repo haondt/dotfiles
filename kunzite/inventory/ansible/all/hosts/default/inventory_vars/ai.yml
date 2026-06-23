@@ -6,3 +6,12 @@ claude:
     statusLine:
       type: command
       command: "jq -r '\"[\\(.model.display_name)] \\(.context_window.used_percentage // 0)% context\"'"
+opencode:
+  enabled: true
+  settings:
+    config:
+      shell: zsh
+    tui:
+      # see https://opencode.ai/docs/themes#built-in-themes
+      theme: tokyonight
+      mouse: false

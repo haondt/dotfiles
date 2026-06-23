@@ -2,3 +2,5 @@
 dependencies:
   - role: python
     when: ai.spec_kit.enabled
+  - role: nodejs
+    when: ai.opencode.enabled

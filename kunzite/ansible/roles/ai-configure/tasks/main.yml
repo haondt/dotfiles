@@ -18,3 +18,40 @@
             content: "{{ ai.claude.settings | to_nice_json }}\n"
             dest: "{{ ansible_env.HOME }}/.claude/settings.json"
             mode: "0600"
+
+- name: Configure OpenCode
+  when: ai.opencode.enabled
+  block:
+    - name: Install OpenCode settings
+      when: ai.opencode.settings is defined
+      block:
+        - name: Ensure ~/.config/opencode directory exists
+          ansible.builtin.file:
+            path: "{{ ansible_facts['user_dir'] }}/.config/opencode"
+            state: directory
+        - name: Write OpenCode config.json
+          when: ai.opencode.settings.config is not none
+          ansible.builtin.copy:
+            content: >-
+              {{
+                (
+                  {"$schema": "https://opencode.ai/config.json"}
+                  | combine(ai.opencode.settings.config)
+                )
+                | to_nice_json
+              }}
+            dest: "{{ ansible_env.HOME }}/.config/opencode/opencode.json"
+            mode: "0600"
+        - name: Write OpenCode tui.json
+          when: ai.opencode.settings.tui is not none
+          ansible.builtin.copy:
+            content: >-
+              {{
+                (
+                  {"$schema": "https://opencode.ai/tui.json"}
+                  | combine(ai.opencode.settings.tui)
+                )
+                | to_nice_json
+              }}
+            dest: "{{ ansible_env.HOME }}/.config/opencode/tui.json"
+            mode: "0600"

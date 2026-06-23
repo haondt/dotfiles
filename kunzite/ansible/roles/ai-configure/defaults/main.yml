@@ -2,3 +2,8 @@
 role_defaults:
   claude:
     enabled: false
+  opencode:
+    enabled: false
+    settings:
+      config: null
+      tui: null
