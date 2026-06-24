@@ -11,7 +11,35 @@ opencode:
   settings:
     config:
       shell: zsh
+      permission:
+        "*": ask
+        read: allow
+        webfetch: allow
+        glob: allow
+        task: allow
+        skill: allow
+        lsp: allow
+        question: allow
+        websearch: allow
+        bash:
+          "git diff *": allow
+          "git status *": allow
+          "git commit *": ask
+          "git push": deny
+          "git log *": deny
+          grep: allow
+      agent:
+        george:
+          description: george flies freely.
+          mode: primary
+          model: opencode-go/kimi-k2.7-code
+          permission:
+            edit: allow
+
     tui:
       # see https://opencode.ai/docs/themes#built-in-themes
       theme: tokyonight
       mouse: false
+      keybinds:
+        messages_page_down: ctrl+d
+        messages_page_up: ctrl+u
