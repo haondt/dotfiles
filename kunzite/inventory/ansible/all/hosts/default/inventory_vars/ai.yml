@@ -27,6 +27,7 @@ opencode:
           "git commit *": ask
           "git push": deny
           "git log *": deny
+          "git add *": allow
           grep: allow
       agent:
         george:
