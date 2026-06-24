@@ -28,14 +28,29 @@ opencode:
           "git push": deny
           "git log *": deny
           "git add *": allow
+          "ls *": allow
+          "find *": allow
+          "head *": allow
+          "echo *": allow
+          "wc *": allow
           grep: allow
       agent:
-        george:
-          description: george flies freely.
+        build:
+          model: opencode-go/kimi-k2.6
+        auto:
+          description: unrestricted edits
           mode: primary
           model: opencode-go/kimi-k2.7-code
           permission:
             edit: allow
+        fast:
+          description: A faster model
+          mode: primary
+          model: opencode/mimo-v2.5-free
+          permission:
+            edit: allow
+        plan:
+          disable: true
 
     tui:
       # see https://opencode.ai/docs/themes#built-in-themes
