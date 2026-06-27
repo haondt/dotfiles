@@ -1,0 +1,17 @@
+---
+- name: Set role defaults
+  set_fact:
+    microsoft_repo: "{{ role_defaults | combine(microsoft_repo | default({}), recursive=True) }}"
+
+- name: Ensure Microsoft package signing key is installed
+  become: true
+  ansible.builtin.rpm_key:
+    state: present
+    key: "{{ microsoft_repo.gpg_key_url }}"
+
+- name: Install Microsoft package repository
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ microsoft_repo.repo_package_url }}"
+    state: present
+    update_cache: true

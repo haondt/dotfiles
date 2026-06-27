@@ -21,6 +21,7 @@ opencode:
         lsp: allow
         question: allow
         websearch: allow
+        todowrite: allow
         bash:
           "git diff *": allow
           "git status *": allow
@@ -31,9 +32,16 @@ opencode:
           "ls *": allow
           "find *": allow
           "head *": allow
+          "tail *": allow
           "echo *": allow
+          "cat *": allow
+          "test *": allow
           "wc *": allow
-          grep: allow
+          "kanon todo *": allow
+          "kanon session *": allow
+          "dotnet build *": allow
+          "dotnet test *": allow
+        grep: allow
       agent:
         build:
           model: opencode-go/kimi-k2.6
@@ -43,15 +51,21 @@ opencode:
           model: opencode-go/kimi-k2.7-code
           permission:
             edit: allow
+            bash:
+              "mkdir *": allow
+              "rm *": allow
         fast:
           description: A faster model
           mode: primary
           model: opencode/mimo-v2.5-free
           permission:
             edit: allow
+            bash:
+              "mkdir *": allow
+              "rm *": allow
         plan:
           disable: true
-
+      lsp: true
     tui:
       # see https://opencode.ai/docs/themes#built-in-themes
       theme: tokyonight

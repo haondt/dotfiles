@@ -50,7 +50,6 @@
           - kubernetes-client
           - helm
 
-
 - name: Set up database tools
   block:
     - name: Install packages
@@ -79,4 +78,3 @@
     - name: Install docker
       include_role:
         name: docker
-
