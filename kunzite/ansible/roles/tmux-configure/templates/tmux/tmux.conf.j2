@@ -42,6 +42,8 @@ bind-key -n M-5 run-shell "~/.config/tmux/scripts/tmux-switch-window.sh 5"
 bind-key -n M-! run-shell "~/.config/tmux/scripts/tmux-move-pane.sh 0"
 bind-key -n M-@ run-shell "~/.config/tmux/scripts/tmux-move-pane.sh 2"
 bind-key -n M-# run-shell "~/.config/tmux/scripts/tmux-move-pane.sh 3"
+bind-key -n M-$ run-shell "~/.config/tmux/scripts/tmux-move-pane.sh 4"
+bind-key -n M-% run-shell "~/.config/tmux/scripts/tmux-move-pane.sh 5"
 
 set-window-option -g mode-keys vi
 bind -T copy-mode-vi v send-keys -X begin-selection
