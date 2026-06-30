@@ -27,11 +27,12 @@ opencode:
           "git status *": allow
           "git commit *": ask
           "git push": deny
-          "git log *": deny
+          "git log *": allow
           "git add *": allow
           "ls *": allow
           "find *": allow
           "head *": allow
+          "grep *": allow
           "tail *": allow
           "echo *": allow
           "cat *": allow

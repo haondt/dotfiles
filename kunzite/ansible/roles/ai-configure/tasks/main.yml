@@ -16,7 +16,7 @@
         - name: Write Claude Code settings.json
           ansible.builtin.copy:
             content: "{{ ai.claude.settings | to_nice_json }}\n"
-            dest: "{{ ansible_env.HOME }}/.claude/settings.json"
+            dest: "{{ ansible_facts['user_dir'] }}/.claude/settings.json"
             mode: "0600"
 
 - name: Configure OpenCode
@@ -40,7 +40,7 @@
                 )
                 | to_nice_json
               }}
-            dest: "{{ ansible_env.HOME }}/.config/opencode/opencode.json"
+            dest: "{{ ansible_facts['user_dir'] }}/.config/opencode/opencode.json"
             mode: "0600"
         - name: Write OpenCode tui.json
           when: ai.opencode.settings.tui is not none
@@ -53,5 +53,5 @@
                 )
                 | to_nice_json
               }}
-            dest: "{{ ansible_env.HOME }}/.config/opencode/tui.json"
+            dest: "{{ ansible_facts['user_dir'] }}/.config/opencode/tui.json"
             mode: "0600"

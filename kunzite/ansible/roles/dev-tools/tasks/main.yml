@@ -57,6 +57,7 @@
       package:
         name:
           - postgresql
+          - sqlitebrowser
     # required for lazygit
     - name: Install go
       include_role:
