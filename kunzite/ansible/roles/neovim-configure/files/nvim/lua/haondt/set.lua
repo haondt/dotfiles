@@ -108,3 +108,5 @@ vim.diagnostic.config({
         severity = { min = vim.diagnostic.severity.INFO }
     }
 })
+
+vim.o.tabline = "%!v:lua.require('haondt-tabs').render_tabline()"

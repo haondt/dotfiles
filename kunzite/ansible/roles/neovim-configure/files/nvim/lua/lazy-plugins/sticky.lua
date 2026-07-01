@@ -15,7 +15,7 @@ return {
             for i = 1, 8 do
                 vim.keymap.set("n", "<leader>s" .. i, function() mark.stick_current(i) end,
                     { desc = '[s]tick current to register [' .. i .. ']' })
-                vim.keymap.set("n", "<leader>" .. i, function() ui.nav_file(i) end,
+                vim.keymap.set("n", "<leader>g" .. i, function() ui.nav_file(i) end,
                     { desc = 'go to sticky register ' .. i })
             end
         end
