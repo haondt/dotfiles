@@ -42,6 +42,8 @@ vim.keymap.set('n', '<C-w><C-j>', '<C-w>J')
 vim.keymap.set('n', '<C-w><C-k>', '<C-w>K')
 vim.keymap.set('n', '<C-w><C-l>', '<C-w>L')
 
+vim.keymap.set('n', '<leader>6', 'g<Tab>')
+
 local open_scratch_buffer = function()
     local scratch_buffer = vim.api.nvim_create_buf(false, false)
     vim.api.nvim_buf_set_option(scratch_buffer, 'bufhidden', 'delete')
