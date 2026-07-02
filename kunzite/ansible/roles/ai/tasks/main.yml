@@ -26,6 +26,12 @@
   args:
     creates: "{{ ansible_facts['user_dir'] }}/.bun/bin/opencode"
 
+- name: Install Codex
+  when: ai.codex.enabled
+  shell: bun add -g @openai/codex
+  args:
+    creates: "{{ ansible_facts['user_dir'] }}/.bun/bin/codex"
+
 - name: Install Spec-Kit
   when: ai.spec_kit.enabled
   shell: "uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v{{ ai.spec_kit.version }}"

@@ -6,3 +6,5 @@ role_defaults:
     enabled: false
   opencode:
     enabled: false
+  codex:
+    enabled: false

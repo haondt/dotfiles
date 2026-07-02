@@ -5,7 +5,6 @@
 - name: Configure Claude
   when: ai.claude.enabled
   block:
-
     - name: Install Claude settings
       when: ai.claude.settings is defined
       block:
@@ -54,4 +53,20 @@
                 | to_nice_json
               }}
             dest: "{{ ansible_facts['user_dir'] }}/.config/opencode/tui.json"
+            mode: "0600"
+
+- name: Configure Codex
+  when: ai.codex.enabled
+  block:
+    - name: Install Codex settings
+      when: ai.codex.config is defined
+      block:
+        - name: Ensure ~/.codex directory exists
+          ansible.builtin.file:
+            path: "{{ ansible_facts['user_dir'] }}/.codex"
+            state: directory
+        - name: Write Codex config.toml
+          ansible.builtin.copy:
+            content: "{{ ai.codex.config }}\n"
+            dest: "{{ ansible_facts['user_dir'] }}/.claude/config.toml"
             mode: "0600"

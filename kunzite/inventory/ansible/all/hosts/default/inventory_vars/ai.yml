@@ -6,6 +6,14 @@ claude:
     statusLine:
       type: command
       command: "jq -r '\"[\\(.model.display_name)] \\(.context_window.used_percentage // 0)% context\"'"
+codex:
+  enabled: true
+  config: |
+    [features]
+    personality = "pragmatic"
+    [tui]
+    status_line = ["model", "context-remaining", "git-branch"]
+
 opencode:
   enabled: true
   settings:
