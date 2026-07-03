@@ -9,11 +9,9 @@ claude:
 codex:
   enabled: true
   config: |
-    [features]
-    personality = "pragmatic"
     [tui]
-    status_line = ["model", "context-remaining", "git-branch"]
-
+    status_line = ["five-hour-limit", "model-with-reasoning", "approval-mode", "context-used"]
+    status_line_use_colors = true
 opencode:
   enabled: true
   settings:

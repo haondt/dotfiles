@@ -68,5 +68,5 @@
         - name: Write Codex config.toml
           ansible.builtin.copy:
             content: "{{ ai.codex.config }}\n"
-            dest: "{{ ansible_facts['user_dir'] }}/.claude/config.toml"
+            dest: "{{ ansible_facts['user_dir'] }}/.codex/config.toml"
             mode: "0600"
