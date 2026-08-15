@@ -27,6 +27,8 @@ return {
                 peek_stack_trace_from_buffer = { lhs = "<leader>re", desc = "test [r]un [e]rrors" }
             }
         },
+        csproj_mappings = false,
+        fsproj_mappings = false,
         notifications = {
             handler = function(start_event)
                 local handle = require("fidget.progress.handle").create({
@@ -74,8 +76,25 @@ return {
         }
 {% endif %}
     },
+    config = function(_, opts)
+        -- csproj_mappings is disabled above since it hardcodes <leader>ar; expose it as ":Dotnet add reference" instead
+        require("easy-dotnet.commands").add.subcommands.reference = {
+            handle = function()
+                local file = vim.api.nvim_buf_get_name(0)
+                require("easy-dotnet.roslyn.root_finder").find_csproj_from_file(file, function(csproj)
+                    if not csproj then
+                        vim.notify("No .csproj found for " .. file, vim.log.levels.ERROR)
+                        return
+                    end
+                    require("easy-dotnet.csproj-mappings").add_project_reference(csproj)
+                end)
+            end,
+        }
+        require("easy-dotnet").setup(opts)
+    end,
     keys = {
         { '<leader>pt', '<cmd>Dotnet testrunner<cr>', desc = '[p]roject [t]ests' },
     },
+    cmd = { "Dotnet" },
     ft = { "cs", "razor" }
 }
