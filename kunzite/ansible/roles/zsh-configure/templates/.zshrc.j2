@@ -148,6 +148,11 @@ export TESTCONTAINERS_RYUK_DISABLED=true
 {% endif %}
 {% endif %}
 
+{% if ai.claude.enabled and ai.claude.sandbox.enabled and ai.claude.sandbox.environment == 'runtime' %}
+# claude code
+alias claude='bunx @anthropic-ai/sandbox-runtime claude'
+{% endif %}
+
 # user exports
 {% for k, v in zsh.exports.items() %}
 export {{ k }}={{ v }}

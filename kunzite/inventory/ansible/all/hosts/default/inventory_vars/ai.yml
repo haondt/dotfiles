@@ -1,6 +1,33 @@
 enabled: true
 claude:
   enabled: true
+  sandbox:
+    enabled: true
+    environment: runtime
+    runtime:
+      settings:
+        network:
+          allowedDomains:
+            - api.anthropic.com
+            - claude.ai
+            - platform.claude.com
+            - github.com
+            - '*.github.com'
+            - lfs.github.com
+            - api.github.com
+            - gitlab.com
+            - '*.gitlab.com'
+          deniedDomains: []
+        filesystem:
+          denyRead:
+            - ./**/secrets.yml
+          denyWrite: []
+          allowRead: []
+          allowWrite:
+            - .
+            - /tmp
+            - ~/.claude
+            - ~/.claude.json
   settings:
     theme: dark
     statusLine:

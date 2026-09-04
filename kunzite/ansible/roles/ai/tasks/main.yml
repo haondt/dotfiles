@@ -19,6 +19,14 @@
       ansible.builtin.dnf:
         name: claude-code
         state: present
+    - name: Install Claude Code Sandbox tools
+      when: ai.claude.sandbox.enabled and (ai.claude.sandbox.environment in ['bash', 'runtime'])
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - bubblewrap
+          - socat
+        state: present
 
 - name: Install OpenCode
   when: ai.opencode.enabled

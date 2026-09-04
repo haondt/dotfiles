@@ -7,6 +7,11 @@ common_role_defaults:
     enabled: false
     spec_kit:
       enabled: false
+    claude:
+      enabled: false
+      sandbox:
+        enabled: false
+        environment: bash
   gaming:
     enabled: false
   neovim:

@@ -3,4 +3,7 @@ dependencies:
   - role: python
     when: ai.spec_kit.enabled
   - role: nodejs
-    when: ai.opencode.enabled or ai.codex.enabled
+    when: >-
+      ai.opencode.enabled or ai.codex.enabled or
+      (ai.claude.enabled and ai.claude.sandbox.enabled and
+      ai.claude.sandbox.environment == 'runtime')

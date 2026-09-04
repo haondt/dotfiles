@@ -17,6 +17,17 @@
             content: "{{ ai.claude.settings | to_nice_json }}\n"
             dest: "{{ ansible_facts['user_dir'] }}/.claude/settings.json"
             mode: "0600"
+    - name: Install runtime settings
+      when: >-
+        ai.claude.sandbox.enabled and ai.claude.sandbox.environment == 'runtime'
+          and ai.claude.sandbox.runtime is defined
+          and ai.claude.sandbox.runtime.settings is defined
+      block:
+        - name: Write ~/.srt-settings.json
+          ansible.builtin.copy:
+            content: "{{ ai.claude.sandbox.runtime.settings | to_nice_json }}\n"
+            dest: "{{ ansible_facts['user_dir'] }}/.srt-settings.json"
+            mode: "0600"
 
 - name: Configure OpenCode
   when: ai.opencode.enabled
