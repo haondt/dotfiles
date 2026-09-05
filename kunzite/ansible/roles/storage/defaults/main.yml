@@ -1,3 +1,5 @@
 ---
 role_defaults:
   disks: []
+  samba:
+    shares: []

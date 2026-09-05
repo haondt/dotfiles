@@ -1,0 +1,58 @@
+- name: Ensure credentials directory exists
+  become: true
+  file:
+    path: /etc/samba/credentials
+    state: directory
+    owner: root
+    group: root
+    mode: '0700'
+
+- name: Write share credentials file
+  become: true
+  copy:
+    dest: "/etc/samba/credentials/{{ share.name }}"
+    owner: root
+    group: root
+    mode: '0600'
+    content: |
+      username={{ share.user }}
+      password={{ share.password }}
+
+- name: Ensure mount point exists
+  block:
+    - name: Check if mount point exists
+      stat:
+        path: "{{ share.mount }}"
+      register: share_mount_point
+
+    - name: Create mount point
+      become: true
+      file:
+        path: "{{ share.mount }}"
+        state: directory
+        owner: root
+        group: root
+        mode: '0555'
+      when: not share_mount_point.stat.exists
+
+- name: Mount share
+  become: true
+  mount:
+    path: "{{ share.mount }}"
+    src: "{{ share.src }}"
+    fstype: "{{ share.fstype | default('cifs') }}"
+    opts: "credentials=/etc/samba/credentials/{{ share.name }},{{ share.opts | default('defaults') }}"
+    state: mounted
+
+- name: Create subdirectories under mount
+  become: true
+  file:
+    path: "{{ share.mount }}/{{ dir_item.key }}"
+    state: directory
+    owner: "{{ dir_item.value.owner | default('root') }}"
+    group: "{{ dir_item.value.group | default('root') }}"
+    mode: "{{ dir_item.value.mode | default('0755') }}"
+  loop: "{{ share.create_dirs | default({}) | dict2items }}"
+  loop_control:
+    loop_var: dir_item
+  when: share.create_dirs | default({}) | length > 0

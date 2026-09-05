@@ -17,7 +17,6 @@ disks:
       2:
         <<: *windows_drive
         mount: /mnt/windows-3
-  
   - by_path: /dev/disk/by-path/pci-0000:01:00.1-ata-1
     partitions:
       1:
@@ -29,3 +28,12 @@ disks:
             group: 1000
             mode: '0775'
           files: *ownership
+
+samba:
+  shares:
+    - name: data
+      src: //192.168.1.214/Data
+      mount: /mnt/samba-data
+      user: samba
+      password: samba
+      opts: 'uid=1000,gid=1000,vers=3.0'

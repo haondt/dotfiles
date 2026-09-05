@@ -16,3 +16,18 @@
       loop: "{{ storage.disks | default([]) }}"
       loop_control:
         loop_var: disk
+
+- name: Set up shares
+  when: storage.samba.shares | length > 0
+  block:
+    - name: Ensure cifs-utils is installed
+      ansible.builtin.package:
+        name: cifs-utils
+        state: present
+      become: true
+
+    - name: Set up shares
+      include_tasks: share.yml
+      loop: "{{ storage.samba.shares | default([]) }}"
+      loop_control:
+        loop_var: share
