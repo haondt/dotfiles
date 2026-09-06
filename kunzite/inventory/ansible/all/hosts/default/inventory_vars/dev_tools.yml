@@ -13,3 +13,5 @@ python:
   enabled: true
 nodejs:
   enabled: true
+terraform:
+  enabled: true

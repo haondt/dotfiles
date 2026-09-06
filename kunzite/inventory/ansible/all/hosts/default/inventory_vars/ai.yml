@@ -17,6 +17,8 @@ claude:
             - api.github.com
             - gitlab.com
             - '*.gitlab.com'
+            - pypi.org
+            - '*.pythonhosted.org'
           deniedDomains: []
         filesystem:
           denyRead:
