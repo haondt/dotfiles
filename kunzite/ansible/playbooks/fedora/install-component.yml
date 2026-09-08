@@ -54,3 +54,6 @@
       when: "'gcloud' in components_list"
     - role: terraform
       when: "'terraform' in components_list"
+    - role: docker
+      when: "'docker' in components_list"
+
