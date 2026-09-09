@@ -12,6 +12,10 @@ common_role_defaults:
       sandbox:
         enabled: false
         environment: bash
+    opencode:
+      enabled: false
+    codex:
+      enabled: false
   gaming:
     enabled: false
   neovim:

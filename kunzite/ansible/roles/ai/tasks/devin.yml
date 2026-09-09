@@ -1,0 +1,49 @@
+- name: Set Devin CLI local bin directory
+  ansible.builtin.set_fact:
+    devin_local_bin_dir: "{{ ansible_facts['user_dir'] }}/.local/bin"
+
+- name: Set Devin CLI binary path
+  ansible.builtin.set_fact:
+    devin_bin_path: "{{ devin_local_bin_dir }}/devin"
+
+- name: Check installed Devin CLI version
+  ansible.builtin.command: "{{ devin_bin_path }} --version"
+  register: devin_installed
+  changed_when: false
+  failed_when: false
+
+- name: Parse installed Devin CLI version
+  ansible.builtin.set_fact:
+    devin_current_version: >-
+      {{ (devin_installed.stdout | regex_search('[0-9]+(\.[0-9]+)+'))
+         if devin_installed.rc == 0 else '' }}
+    devin_target_version: "{{ ai.devin.install.version | regex_replace('^v', '') }}"
+
+- name: Install Devin CLI
+  when: base.force or devin_current_version != devin_target_version
+  block:
+    - name: Run Devin CLI install script
+      ansible.builtin.shell: curl -fsSL https://cli.devin.ai/install.sh | bash
+      environment:
+        PINNED_VERSION: "{{ ai.devin.install.version }}"
+        DISTRIBUTION: "{{ ai.devin.install.distribution }}"
+      changed_when: true
+      # The installer chains into an interactive `devin setup` login flow at the
+      # end, which fails with "Login canceled" when run non-interactively (no
+      # TTY, e.g. under Ansible). The binary is already installed by that
+      # point, so success is verified separately below rather than trusting
+      # this command's exit code.
+      failed_when: false
+
+    - name: Re-check installed Devin CLI version
+      ansible.builtin.command: "{{ devin_bin_path }} --version"
+      register: devin_installed_after
+      changed_when: false
+      failed_when: false
+
+    - name: Fail if Devin CLI installation did not succeed
+      ansible.builtin.fail:
+        msg: "Devin CLI install did not produce the expected version {{ devin_target_version }}"
+      when: >-
+        devin_installed_after.rc != 0 or
+        (devin_installed_after.stdout | regex_search('[0-9]+(\.[0-9]+)+')) != devin_target_version

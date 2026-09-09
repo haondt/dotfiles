@@ -44,6 +44,13 @@
   when: ai.spec_kit.enabled
   shell: "uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v{{ ai.spec_kit.version }}"
 
+- name: Install Devin
+  when: ai.devin.enabled
+  block:
+    - name: Set up devin
+      include_tasks: devin.yml
+
 - name: Configure AI
   include_role:
     name: ai-configure
+

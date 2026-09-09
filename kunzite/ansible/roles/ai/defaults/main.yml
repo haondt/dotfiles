@@ -2,7 +2,11 @@
 role_defaults:
   spec_kit:
     version: 0.8.11
-  opencode:
+  devin:
     enabled: false
-  codex:
-    enabled: false
+    install:
+      # https://docs.devin.ai/cli/changelog/stable
+      version: v3000.6.14
+      # curl-bash, enterprise-portal, curl-bash-enterprise, curl-bash-windsurfcom, curl-bash-federal
+      distribution: curl-bash
+
