@@ -33,12 +33,12 @@
     name: terraform
 
 - name: Install go
-  when: dev_tools.go.enabled
+  when: dev_tools.go.enabled or dev_tools.databases.enabled or dev_tools.kind.enabled
   include_role:
     name: go
 
 - name: Set up Kubernetes
-  when: dev_tools.kubernetes.enabled
+  when: dev_tools.kubernetes.enabled or dev_tools.kind.enabled
   block:
     - name: Install k9s
       include_role:
@@ -51,6 +51,7 @@
           - helm
 
 - name: Set up database tools
+  when: dev_tools.databases.enabled
   block:
     - name: Install packages
       become: true
@@ -58,10 +59,6 @@
         name:
           - postgresql
           - sqlitebrowser
-    # required for lazygit
-    - name: Install go
-      include_role:
-        name: go
     - name: Install lazysql via go install
       command: go install github.com/jorgerojas26/lazysql@latest
       args:
@@ -74,8 +71,16 @@
     name: chromium
 
 - name: Install docker
-  when: dev_tools.docker.enabled
+  when: dev_tools.docker.enabled or dev_tools.kind.enabled
   block:
     - name: Install docker
       include_role:
         name: docker
+
+- name: Install KinD
+  when: dev_tools.kind.enabled
+  block:
+    - name: Install kind via go install
+      command: go install sigs.k8s.io/kind@v0.33.0
+      args:
+        creates: "{{ ansible_facts['user_dir'] }}/go/bin/kind"

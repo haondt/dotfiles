@@ -47,6 +47,8 @@ common_role_defaults:
       enabled: false
     docker:
       enabled: false
+    kind:
+      enabled: false
     podman:
       enabled: false
     chromium:
@@ -57,6 +59,8 @@ common_role_defaults:
       enabled: false
     terraform:
       enabled: false
+    databases:
+      enabled: true
   storage:
     enabled: true
   grub:
