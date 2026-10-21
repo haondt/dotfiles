@@ -70,6 +70,7 @@ common_role_defaults:
   sysctl:
     enabled: true
   k9s: {}
+  linkerd: {}
   nodejs: {}
   go: {}
   python: {}

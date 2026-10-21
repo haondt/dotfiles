@@ -43,6 +43,9 @@
     - name: Install k9s
       include_role:
         name: k9s
+    - name: Install linkerd
+      include_role:
+        name: linkerd
     - name: Install packages
       become: true
       package:

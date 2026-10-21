@@ -1,0 +1,4 @@
+---
+role_defaults:
+  version: edge-26.10.1
+  install_root: "{{ ansible_facts['user_dir'] }}/.linkerd2"

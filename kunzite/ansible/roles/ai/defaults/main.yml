@@ -4,9 +4,11 @@ role_defaults:
     version: 0.8.11
   devin:
     enabled: false
+    sandbox:
+      enabled: false
     install:
       # https://docs.devin.ai/cli/changelog/stable
-      version: v3000.6.14
+      version: v3000.11.92
       # curl-bash, enterprise-portal, curl-bash-enterprise, curl-bash-windsurfcom, curl-bash-federal
       distribution: curl-bash
 

@@ -23,9 +23,11 @@
   when: base.force or devin_current_version != devin_target_version
   block:
     - name: Run Devin CLI install script
-      ansible.builtin.shell: curl -fsSL https://cli.devin.ai/install.sh | bash
+      ansible.builtin.shell: >-
+        curl -fsSL
+        https://static.devin.ai/cli/{{ ai.devin.install.version | regex_replace('^v', '') }}/setup.sh
+        | bash
       environment:
-        PINNED_VERSION: "{{ ai.devin.install.version }}"
         DISTRIBUTION: "{{ ai.devin.install.distribution }}"
       changed_when: true
       # The installer chains into an interactive `devin setup` login flow at the
@@ -47,3 +49,11 @@
       when: >-
         devin_installed_after.rc != 0 or
         (devin_installed_after.stdout | regex_search('[0-9]+(\.[0-9]+)+')) != devin_target_version
+
+- name: Install Devin sandbox tools
+  when: ai.devin.sandbox.enabled
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - socat
+    state: present

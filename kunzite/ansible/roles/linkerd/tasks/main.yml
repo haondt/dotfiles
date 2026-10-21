@@ -1,0 +1,68 @@
+- name: Set role defaults
+  set_fact:
+    linkerd: "{{ role_defaults | combine(linkerd | default({}), recursive=True) }}"
+
+- name: Resolve download OS
+  set_fact:
+    linkerd_os: >-
+      {{
+        'windows.exe'
+        if ansible_facts['os_family'] == 'Windows'
+        else ansible_facts['system'] | lower
+      }}
+
+- name: Resolve download architecture
+  set_fact:
+    linkerd_arch: "{{ linkerd_arch_map[linkerd_os + ':' + ansible_facts['architecture']] }}"
+  vars:
+    linkerd_arch_map:
+      "darwin:x86_64": ""
+      "darwin:arm64": arm64
+      "linux:x86_64": amd64
+      "linux:amd64": amd64
+      "linux:aarch64": arm64
+      "linux:arm64": arm64
+      "linux:armv8l": arm64
+      "linux:armv7l": arm
+      "linux:armv6l": arm
+
+- name: Fail on unsupported platform
+  fail:
+    msg: >-
+      There is no linkerd support for {{ ansible_facts['system'] }}/
+      {{ ansible_facts['architecture'] }}. Please open an issue with your
+      platform details.
+  when: linkerd_arch is not defined
+
+- name: Set binary paths
+  set_fact:
+    linkerd_dstfile: "{{ linkerd.install_root }}/bin/linkerd-{{ linkerd.version }}"
+    linkerd_srcfile: >-
+      linkerd2-cli-{{ linkerd.version }}-{{ linkerd_os }}{% if linkerd_arch %}-{{ linkerd_arch }}{% endif %}
+
+- name: Ensure install directory exists
+  file:
+    path: "{{ linkerd.install_root }}/bin"
+    state: directory
+
+- name: Check if requested version is already downloaded
+  stat:
+    path: "{{ linkerd_dstfile }}"
+  register: linkerd_bin
+
+- name: Download linkerd CLI
+  when: base.force or not linkerd_bin.stat.exists
+  block:
+    - name: Download linkerd CLI release binary
+      ansible.builtin.get_url:
+        url: "https://github.com/linkerd/linkerd2/releases/download/{{ linkerd.version }}/{{ linkerd_srcfile }}"
+        dest: "{{ linkerd_dstfile }}"
+        mode: "0755"
+        force: "{{ base.force | bool }}"
+
+- name: Symlink linkerd to requested version
+  ansible.builtin.file:
+    src: "{{ linkerd_dstfile }}"
+    dest: "{{ linkerd.install_root }}/bin/linkerd"
+    state: link
+    force: true
