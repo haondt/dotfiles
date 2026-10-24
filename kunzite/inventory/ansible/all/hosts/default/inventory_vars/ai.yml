@@ -19,6 +19,7 @@ claude:
             - '*.gitlab.com'
             - pypi.org
             - '*.pythonhosted.org'
+            - cdn.jsdelivr.net
           deniedDomains: []
         filesystem:
           denyRead:
