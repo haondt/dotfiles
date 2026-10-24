@@ -1,1 +1,3 @@
 enabled: true
+obs:
+  enabled: true

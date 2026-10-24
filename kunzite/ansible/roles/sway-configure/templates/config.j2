@@ -74,6 +74,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 bindsym $mod+equal exec ~/.config/sway/scripts/sway-grid.sh
 bindsym $mod+m exec ~/.config/sway/scripts/sway-minor.sh
+bindsym $mod+Shift+a exec ~/.config/sway/scripts/sway-16-by-9-ify.sh
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1; workspace number $ws1
@@ -229,3 +230,15 @@ exec_always killall swayidle; swayidle -w \
 
 # prevent lock when there is a full screen app open
 for_window [app_id="^.*"] inhibit_idle fullscreen
+
+# OBS
+{% if gaming.enabled and gaming.obs.enabled %}
+# Set XDG_CURRENT_DESKTOP for proper Wayland support
+# exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+# Start xdg-desktop-portal services (ensure wlr starts first)
+# exec --no-startup-id /usr/libexec/xdg-desktop-portal-wlr &
+# exec --no-startup-id /usr/libexec/xdg-desktop-portal -r
+{% endif %}
+
+include /etc/sway/config.d/*

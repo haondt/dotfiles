@@ -18,6 +18,8 @@ common_role_defaults:
       enabled: false
   gaming:
     enabled: false
+    obs:
+      enabled: false
   neovim:
     enabled: false
   zsh:

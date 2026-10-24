@@ -12,3 +12,20 @@
   ansible.builtin.package:
     name: steam
     state: present
+
+- name: Set up OBS
+  when: gaming.obs.enabled
+  block:
+    - name: Install obs dnf deps
+      dnf:
+        name:
+          - xdg-desktop-portal
+          - xdg-desktop-portal-wlr
+        state: present
+      become: true
+    - name: Install OBS
+      community.general.flatpak:
+        name:
+          - com.obsproject.Studio
+        state: present
+      become: true
