@@ -1,2 +1,22 @@
 enabled: true
 email: code@mail.haondt.dev
+extensions:
+  ignore:
+    enabled: true
+    presets:
+      base:
+        includes: [claude-sandbox]
+      dcdn:
+        entries: |-
+          node_modules
+      kanon:
+        entries:
+          - CLAUDE.md
+          - .claude
+          - .opencode
+          - opencode.json
+      all:
+        includes:
+          - base
+          - bun
+          - python

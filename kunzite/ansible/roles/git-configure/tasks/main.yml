@@ -1,8 +1,37 @@
+- name: Load git ignore presets from files
+  set_fact:
+    ignore_file_presets: "{{ ignore_file_presets | default({}) | combine({(item | basename | splitext)[0]: {'entries': lookup('file', item)}}) }}"
+  loop: "{{ lookup('fileglob', role_path ~ '/files/ignore-presets/*.gitignore', wantlist=True) }}"
+
 - name: Set role defaults
   set_fact:
-    git: "{{ role_defaults | combine(git, recursive=True) }}"
+    git: "{{ {'extensions': {'ignore': {'presets': ignore_file_presets | default({})}}} | combine(role_defaults, git, recursive=True) }}"
 
 - name: Deploy .gitconfig
   template:
     src: gitconfig.j2
     dest: "{{ ansible_facts['user_dir'] }}/.gitconfig"
+
+- name: Deploy git ignore extension
+  when: git.extensions.ignore.enabled
+  block:
+    - name: Ensure the bin directory exists
+      file:
+        path: "{{ ansible_facts['user_dir'] }}/.local/bin"
+        state: directory
+
+    - name: Ensure the git-ignore config directory exists
+      file:
+        path: "{{ ansible_facts['user_dir'] }}/.config/git-ignore"
+        state: directory
+
+    - name: Deploy git-ignore
+      copy:
+        src: git-ignore
+        dest: "{{ ansible_facts['user_dir'] }}/.local/bin/git-ignore"
+        mode: '0755'
+
+    - name: Deploy git-ignore presets
+      copy:
+        content: "{{ git.extensions.ignore.presets | to_nice_json }}"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/git-ignore/presets.json"

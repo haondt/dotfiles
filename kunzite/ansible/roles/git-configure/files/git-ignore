@@ -1,0 +1,200 @@
+#!/usr/bin/env python3
+"""git ignore [-f] <preset>... - append named gitignore presets to the repo root .gitignore."""
+import argparse
+from collections.abc import Iterable
+import json
+import os
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any, Callable
+
+PRESETS_PATH = Path.home() / ".config/git-ignore/presets.json"
+
+CONDITIONS: dict[str, Callable[[Path, str], bool]] = {
+    "is_read_only": lambda root, entry: (path := root / entry.lstrip("/")).exists() and not os.access(path, os.W_OK),
+}
+
+
+def fail(message: str):
+    print(f"git ignore: {message}", file=sys.stderr)
+    sys.exit(1)
+
+
+def is_functional_entry(line: str):
+    stripped = line.strip()
+    return bool(stripped) and not stripped.startswith("#")
+
+
+def get_stripped_entries(preset: dict[str, Any]):
+    entries: Iterable[str] | str = preset.get("entries", [])
+    lines: list[str] = entries.split("\n") if isinstance(entries, str) else list(entries)
+    while lines and not lines[0].strip():
+        lines.pop(0)
+    while lines and not lines[-1].strip():
+        lines.pop()
+    return lines
+
+
+def validate_preset(name: str, preset: dict[str, Any]):
+    errors: list[str] = []
+    entries = preset.get("entries", [])
+    includes = preset.get("includes", [])
+    if isinstance(entries, str):
+        pass
+    elif not isinstance(entries, list) or not all(isinstance(e, str) for e in entries):
+        errors.append(f"preset '{name}': 'entries' must be a string or a list of strings")
+        entries = None
+    if not isinstance(includes, list) or not all(isinstance(i, str) for i in includes):
+        errors.append(f"preset '{name}': 'includes' must be a list of preset names")
+        includes = []
+    if entries is not None and not includes and not any(is_functional_entry(l) for l in get_stripped_entries({"entries": entries})):
+        errors.append(f"preset '{name}': 'entries' must contain at least one entry")
+    conditions = preset.get("conditions", [])
+    if isinstance(conditions, list):
+        for condition in conditions:
+            if condition not in CONDITIONS:
+                errors.append(
+                    f"preset '{name}': unknown condition '{condition}' " + \
+                    f"(known: {', '.join(sorted(CONDITIONS))})"
+                )
+    else:
+        errors.append(f"preset '{name}': 'conditions' must be a list")
+    return errors
+
+
+def determine_application_order(presets: dict[str, dict[str, Any]], names: list[str]):
+    order: list[str] = []
+    seen: set[str] = set()
+    errors: list[str] = []
+
+    def visit(name: str, stack: list[str]):
+        if name in stack:
+            errors.append("include cycle: " + " -> ".join([*stack, name]))
+            return
+        if name in seen:
+            return
+        preset = presets.get(name)
+        if not isinstance(preset, dict):
+            where = f" (included by '{stack[-1]}')" if stack else ""
+            errors.append(
+                f"unknown preset '{name}'{where} (available: {', '.join(sorted(presets))})"
+            )
+            return
+        seen.add(name)
+        errors.extend(validate_preset(name, preset))
+        order.append(name)
+        includes = preset.get("includes", [])
+        if isinstance(includes, list):
+            for child in includes:
+                if isinstance(child, str):
+                    visit(child, [*stack, name])
+
+    for name in names:
+        visit(name, [])
+    if errors:
+        fail("\n".join(errors))
+    return order
+
+
+def list_presets(presets: dict[str, Any]):
+    width = max((len(name) for name in presets), default=0)
+    for name in sorted(presets):
+        preset = presets[name] if isinstance(presets[name], dict) else {}
+        parts: list[str] = []
+        if isinstance(preset.get("description"), str):
+            parts.append(preset["description"])
+        includes = preset.get("includes")
+        if isinstance(includes, list) and includes:
+            parts.append(f"[includes: {', '.join(str(i) for i in includes)}]")
+        print(f"{name:<{width}}  {' '.join(parts)}".rstrip())
+
+
+def main():
+    parser = argparse.ArgumentParser(prog="git ignore")
+    parser.add_argument("presets", nargs="*", metavar="preset")
+    parser.add_argument(
+        "-f", "--force", action="store_true",
+        help="add a preset even if its header is already in .gitignore",
+    )
+    parser.add_argument(
+        "-l", "--list", action="store_true",
+        help="list the available presets and exit",
+    )
+    args = parser.parse_args()
+    if args.list and (args.presets or args.force):
+        parser.error("--list takes no preset names or other flags")
+    if not args.list and not args.presets:
+        parser.error("the following arguments are required: preset")
+
+    presets: dict[str, dict[str, Any]] = {}
+    try:
+        presets = json.loads(PRESETS_PATH.read_text())
+    except OSError as e:
+        fail(f"cannot read {PRESETS_PATH}: {e.strerror}")
+    except json.JSONDecodeError as e:
+        fail(f"cannot parse {PRESETS_PATH}: {e}")
+
+    if args.list:
+        list_presets(presets)
+        return
+
+    order = determine_application_order(presets, args.presets)
+
+    result = subprocess.run(
+        ["git", "rev-parse", "--show-toplevel"], capture_output=True, text=True
+    )
+    if result.returncode != 0:
+        fail("not inside a git repository")
+    root = Path(result.stdout.strip())
+
+    gitignore = root / ".gitignore"
+    content = gitignore.read_text() if gitignore.exists() else ""
+    lines = content.splitlines()
+    changed = False
+
+    for name in order:
+        preset = presets[name]
+        own = get_stripped_entries(preset)
+        if not own:
+            print(f"{name}: bundle, nothing of its own")
+            continue
+
+        header = f"# git-ignore: {name}"
+        if not args.force and any(
+            line == header or line.startswith(header + " - ") for line in lines
+        ):
+            print(f"{name}: already present, skipping")
+            continue
+
+        conditions = [CONDITIONS[c] for c in preset.get("conditions", [])]
+        kept = [
+            l for l in own
+            if not is_functional_entry(l) or all(cond(root, l) for cond in conditions)
+        ]
+        while kept and not kept[0].strip():
+            kept.pop(0)
+        while kept and not kept[-1].strip():
+            kept.pop()
+        count = sum(1 for l in kept if is_functional_entry(l))
+        if not count:
+            print(f"{name}: no entries apply, skipping")
+            continue
+
+        if preset.get("description"):
+            header += f" - {preset['description']}"
+        if content and not content.endswith("\n"):
+            content += "\n"
+        if content:
+            content += "\n"
+        content += "\n".join([header, *kept]) + "\n"
+        lines = content.splitlines()
+        changed = True
+        print(f"{name}: added {count} {'entry' if count == 1 else 'entries'}")
+
+    if changed or not gitignore.exists():
+        gitignore.write_text(content)
+
+
+if __name__ == "__main__":
+    main()

@@ -2,3 +2,13 @@
 role_defaults:
   email: code@mail.haondt.dev
   name: haondt
+  extensions:
+    ignore:
+      enabled: false
+      presets:
+        claude-sandbox:
+          description: placeholder files created by the claude sandbox
+          includes: [claude-sandbox-conditional]
+          entries: "/.claude/"
+        claude-sandbox-conditional:
+          conditions: [is_read_only]
