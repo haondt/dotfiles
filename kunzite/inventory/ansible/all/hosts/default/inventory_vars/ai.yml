@@ -20,6 +20,7 @@ claude:
             - pypi.org
             - '*.pythonhosted.org'
             - cdn.jsdelivr.net
+            - "*.claude.com"
           deniedDomains: []
         filesystem:
           denyRead:
